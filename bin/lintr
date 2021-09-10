@@ -1,0 +1,21 @@
+#!/usr/local/bin/bash
+#
+LINT_FILE=$HOME/lib/R/lintr.R
+
+usage() {
+  echo "USAGE: $0 SRC.R" 
+  echo "  Lint the R file SRC.R, printint to STDOUT"
+}
+
+if [[ "$1:" == ":" ]]; then
+  usage
+  exit 0
+elif [[ -f "$1" ]]; then
+  Rscript "$LINT_FILE" "$1"
+else
+  usage
+  exit 1
+fi
+
+# vim: ft=sh
+

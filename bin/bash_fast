@@ -1,0 +1,2 @@
+#!/bin/sh
+FAST_STARTUP=1 exec /usr/local/bin/bash -i

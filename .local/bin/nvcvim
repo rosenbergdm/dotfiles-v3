@@ -1,0 +1,6 @@
+#!/bin/sh
+
+export NVCHAD_CONFIG_DIR="/Users/davidrosenberg/.config/nvim.ch"
+export NVCHAD_RUNTIME_DIR="/Users/davidrosenberg/.local/nvim.ch"
+
+exec nvim -u "$HOME/.config/nvchadInit.lua" "$@"

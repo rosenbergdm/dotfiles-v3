@@ -1,0 +1,24 @@
+#!/usr/local/bin/bash
+#
+STYLE_FILE=$HOME/lib/R/styler.R
+
+usage() {
+  echo "USAGE: $0 SRC.R" 
+  echo "  Sends the styled SRC.R file to STDOUT"
+}
+
+if [[ "$1:" == ":" ]]; then
+  usage
+  exit 0
+elif [[ "$1" == "--in-place" ]] || [[ "$1" == "-i" ]]; then
+  Rscript "$STYLE_FILE" "-i" "$2"
+elif [ -f "$1" ]; then
+  Rscript "$STYLE_FILE" "$1"
+else
+  usage
+  exit 1
+fi
+
+
+
+# vim: ft=sh

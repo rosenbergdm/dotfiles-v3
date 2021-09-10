@@ -128,7 +128,6 @@ lvim.lang.lua.formatters = {
 }
 lvim.lang.lua.linters = { { exe = "luacheck" } }
 lvim.lang.sh.formatters = { { exe = "shfmt", args = {} } }
-
 lvim.lang.sh.linters = { { exe = "shellcheck", args = {} } }
 -- --
 -- Additional Plugins

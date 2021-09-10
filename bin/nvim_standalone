@@ -1,0 +1,23 @@
+#!/bin/sh
+
+PATH="$HOME/bin:/usr/local/bin:/usr/local/sbin:$PATH"
+PATH=/usr/local/share/python:$PATH
+PATH=/usr/local/share/npm/bin:$PATH
+PATH=/usr/local/Cellar/qt5/5.7.0/bin:$PATH
+PATH="$HOME/.cargo/bin:$PATH"
+PATH=$PATH:/Users/davidrosenberg/.local/bin
+PATH=$PATH:/usr/local/Cellar/perl/5.30.1/bin
+PATH=$PATH:$HOME/edirect
+PATH=$PATH:$HOME/go/bin:/usr/local/go/bin
+PATH=$PATH:$HOME/src/flutter/bin
+PATH=$PATH:/Library/Frameworks/R.framework/Versions/Current/Resources/bin
+PATH="/Library/Java/JavaVirtualMachines/jdk1.8.0_112.jdk/Contents/Home/bin:$PATH"
+export PATH
+
+# source $HOME/.nvm/nvm.sh
+# nvm use --delete-prefix v16.0 >/dev/null 2>&1
+
+exec /usr/local/bin/nvim $*
+
+
+# vim: set ft=sh:
