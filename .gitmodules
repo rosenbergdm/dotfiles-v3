@@ -1,0 +1,6 @@
+[submodule "/Users/davidrosenberg/.config/nvim.ch"]
+	path = /Users/davidrosenberg/.config/nvim.ch
+	url = git@github.com:NvChad/NvChad.git
+[submodule "/Users/davidrosenberg/.local/share/lunarvim/lvim"]
+	path = /Users/davidrosenberg/.local/share/lunarvim/lvim
+	url = git@github.com:lunarvim/lunarvim.git
