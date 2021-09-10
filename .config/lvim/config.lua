@@ -8,35 +8,31 @@ lvim.colorscheme = "tokyonight"
 -- options
 local M = {}
 M.load_options = function()
-	local LVIM_CACHE_DIR = os.getenv("HOME") .. "/.cache/lvim"
-	local myopts = {
-		completeopt = { "menuone", "noselect" },
-		autochdir = true,
-		backupdir = LVIM_CACHE_DIR .. "/backup",
-		undodir = LVIM_CACHE_DIR .. "/undo", -- set an undo directory
-		undofile = true, -- enable persistent undo
-		directory = LVIM_CACHE_DIR .. "/swap",
-		writebackup = true, -- if a file is being edited by another program (or was written to file while editing with another program), it is not allowed to be edited
-		spell = true,
-	}
-	vim.cmd("set wildmode=longest,list")
-	vim.cmd("set wildignore+=*/.idea/*")
-	vim.cmd("set wildignore+=*/.git/*")
-	vim.cmd("set wildignore+=*/.svn/*")
-	vim.cmd("set wildignore+=*/vendor/*")
-	vim.cmd("set wildignore+=*/node_modules/*")
-	vim.cmd("set wildmode=longest,list")
+    local LVIM_CACHE_DIR = os.getenv "HOME" .. "/.cache/lvim"
+    local myopts = {
+        completeopt = {"menuone", "noselect"},
+        autochdir = true,
+        backupdir = LVIM_CACHE_DIR .. "/backup",
+        undodir = LVIM_CACHE_DIR .. "/undo", -- set an undo directory
+        undofile = true, -- enable persistent undo
+        directory = LVIM_CACHE_DIR .. "/swap",
+        writebackup = true, -- if a file is being edited by another program (or was written to file while editing with another program), it is not allowed to be edited
+        spell = true
+    }
+    vim.cmd "set wildmode=longest,list"
+    vim.cmd "set wildignore+=*/.idea/*"
+    vim.cmd "set wildignore+=*/.git/*"
+    vim.cmd "set wildignore+=*/.svn/*"
+    vim.cmd "set wildignore+=*/vendor/*"
+    vim.cmd "set wildignore+=*/node_modules/*"
+    vim.cmd "set wildmode=longest,list"
 
-	for k, v in pairs(myopts) do
-		vim.opt[k] = v
-	end
+    for k, v in pairs(myopts) do vim.opt[k] = v end
 end
 
 M.load_options()
 
-lvim.puts = function(varname)
-	print(vim.inspect(varname))
-end
+lvim.puts = function(varname) print(vim.inspect(varname)) end
 
 -- keymappings [view all the defaults by pressing <leader>Lk]
 lvim.leader = "space"
@@ -51,30 +47,35 @@ lvim.keys.normal_mode[",nt"] = ":NvimTreeToggle<CR>"
 
 -- Change Telescope navigation to use j and k for navigation and n and p for history in both input and normal mode.
 lvim.builtin.telescope.on_config_done = function()
-	local actions = require("telescope.actions")
-	-- for input mode
-	lvim.builtin.telescope.defaults.mappings.i["<C-j>"] = actions.move_selection_next
-	lvim.builtin.telescope.defaults.mappings.i["<C-k>"] = actions.move_selection_previous
-	lvim.builtin.telescope.defaults.mappings.i["<C-n>"] = actions.cycle_history_next
-	lvim.builtin.telescope.defaults.mappings.i["<C-p>"] = actions.cycle_history_prev
-	-- for normal mode
-	lvim.builtin.telescope.defaults.mappings.n["<C-j>"] = actions.move_selection_next
-	lvim.builtin.telescope.defaults.mappings.n["<C-k>"] = actions.move_selection_previous
+    local actions = require "telescope.actions"
+    -- for input mode
+    lvim.builtin.telescope.defaults.mappings.i["<C-j>"] =
+        actions.move_selection_next
+    lvim.builtin.telescope.defaults.mappings.i["<C-k>"] =
+        actions.move_selection_previous
+    lvim.builtin.telescope.defaults.mappings.i["<C-n>"] =
+        actions.cycle_history_next
+    lvim.builtin.telescope.defaults.mappings.i["<C-p>"] =
+        actions.cycle_history_prev
+    -- for normal mode
+    lvim.builtin.telescope.defaults.mappings.n["<C-j>"] =
+        actions.move_selection_next
+    lvim.builtin.telescope.defaults.mappings.n["<C-k>"] =
+        actions.move_selection_previous
 end
 
 -- Use which-key to add extra bindings with the leader-key prefix
 lvim.builtin.which_key.mappings["P"] = {
-	"<cmd>Telescope projects<CR>",
-	"Projects",
+    "<cmd>Telescope projects<CR>", "Projects"
 }
 lvim.builtin.which_key.mappings["t"] = {
-	name = "+Trouble",
-	r = { "<cmd>Trouble lsp_references<cr>", "References" },
-	f = { "<cmd>Trouble lsp_definitions<cr>", "Definitions" },
-	d = { "<cmd>Trouble lsp_document_diagnostics<cr>", "Diagnosticss" },
-	q = { "<cmd>Trouble quickfix<cr>", "QuickFix" },
-	l = { "<cmd>Trouble loclist<cr>", "LocationList" },
-	w = { "<cmd>Trouble lsp_workspace_diagnostics<cr>", "Diagnosticss" },
+    name = "+Trouble",
+    r = {"<cmd>Trouble lsp_references<cr>", "References"},
+    f = {"<cmd>Trouble lsp_definitions<cr>", "Definitions"},
+    d = {"<cmd>Trouble lsp_document_diagnostics<cr>", "Diagnosticss"},
+    q = {"<cmd>Trouble quickfix<cr>", "QuickFix"},
+    l = {"<cmd>Trouble loclist<cr>", "LocationList"},
+    w = {"<cmd>Trouble lsp_workspace_diagnostics<cr>", "Diagnosticss"}
 }
 
 -- TODO: User Config for predefined plugins
@@ -116,38 +117,37 @@ lvim.builtin.treesitter.highlight.enabled = false
 -- end
 
 -- set a formatter if you want to override the default lsp one (if it exists)
-lvim.lang.python.formatters = { { exe = "black", args = {} } }
-lvim.lang.python.linters = { { exe = "flake8", args = {} } }
+lvim.lang.python.formatters = {{exe = "black", args = {}}}
+lvim.lang.python.linters = {{exe = "flake8", args = {}}}
 
-lvim.lang.lua.formatters = { { exe = "stylua" }, { exe = "lua_format" } }
-lvim.lang.lua.linters = { { exe = "luacheck" } }
+lvim.lang.lua.formatters = {{exe = "stylua"}, {exe = "lua_format"}}
+lvim.lang.lua.linters = {{exe = "luacheck"}}
 
-lvim.lang.sh.formatters = { { exe = "shfmt", args = {} } }
-lvim.lang.sh.linters = { { exe = "shellcheck", args = {} } }
+lvim.lang.sh.formatters = {{exe = "shfmt", args = {}}}
+lvim.lang.sh.linters = {{exe = "shellcheck", args = {}}}
 
-lvim.lang.javascript.formatters = { { exe = "prettier" } }
-lvim.lang.javascript.linters = { { exe = "eslint" } }
+lvim.lang.javascript.formatters = {{exe = "prettier"}}
+lvim.lang.javascript.linters = {{exe = "eslint"}}
 lvim.lang.javascriptreact.formatters = lvim.lang.javascript.formatters
 lvim.lang.javascriptreact.linters = lvim.lang.javascript.linters
 
 --
 -- Additional Plugins
 lvim.plugins = {
-	{ "folke/tokyonight.nvim" },
-	{ "folke/trouble.nvim", cmd = "TroubleToggle" },
-	--   {
-	--     "ray-x/lsp_signature.nvim",
-	--     config = function()
-	--       require("lsp_signature").on_attach()
-	--     end,
-	--     event = "InsertEnter",
-	--   }
-	-- },
-	-- {
-	-- 	    "ackyshake/Spacegray.vim",
-	--	    config = function() vim.cmd "Spacegray.vim".on_attach() end,
-	--     	    event = "InsertEnter"
-	-- },
+    {"folke/tokyonight.nvim"}, {"folke/trouble.nvim", cmd = "TroubleToggle"}
+    --   {
+    --     "ray-x/lsp_signature.nvim",
+    --     config = function()
+    --       require("lsp_signature").on_attach()
+    --     end,
+    --     event = "InsertEnter",
+    --   }
+    -- },
+    -- {
+    -- 	    "ackyshake/Spacegray.vim",
+    --	    config = function() vim.cmd "Spacegray.vim".on_attach() end,
+    --     	    event = "InsertEnter"
+    -- },
 }
 
 -- Autocommands (https://neovim.io/doc/user/autocmd.html)

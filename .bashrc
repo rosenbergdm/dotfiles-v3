@@ -1,4 +1,4 @@
-  #!/usr/local/bin/bash
+#!/usr/local/bin/bash
 # shellcheck disable=SC1090
 # SC1090: Not all references will be resolvable
 
@@ -23,14 +23,14 @@ export DEBUG_STARTUP=${DEBUG_STARTUP-${file_dbg_startup-0}}
 
 export FAST_STARTUP=${FAST_STARTUP-0}
 if [ -a $HOME/FAST_STARTUP ]; then
-	printf "%s\n\n" "Fast startup enabled by file '$HOME/FAST_STARTUP'"
+	printf "%s\n\n" "Fast startup enabled by environment variable '\$FAST_STARTUP'"
 	if [[ "$(cat $HOME/FAST_STARTUP | head -n1)" == "" ]]; then
 		file_fast_startup=1
 	else
-		file_fast_startup=$(cat $HOME/FAST_STARTUP | head -n1)
+		file_fast_startup=$(cat "$HOME/FAST_STARTUP" | head -n1)
 	fi
 	FAST_STARTUP=$file_fast_startup
-elif [ ${FAST_STARTUP-0} -gt 0 ]; then
+elif [ "${FAST_STARTUP-0}" -gt 0 ]; then
 	printf "%s\n\n" "Fast startup enabled by file '$HOME/FAST_STARTUP'"
 else
 	read -n1 -t0.1 -s _startfast || true
@@ -48,9 +48,9 @@ declare -a STARTUP_SOURCED=()
 declare -a MY_FUNCTIONS=()
 STARTUP_SOURCED+=("$HOME/bashrc")
 set_iterm_title "Loading '$HOME/.commands'"
-source $HOME/.commands
+source "$HOME/.commands"
 # This is where we get "$PRINTF", etc
-STARTUP_SOURCED+=($HOME/.commands)
+STARTUP_SOURCED+=("$HOME/.commands")
 declare -A thresholds=([4]="4" [3]="3" [2]="2" [1]="1" [0]="0"
 	[trace]="4" [info]="3" [warn]="2" [error]="1" [always]="0")
 export MY_FUNCTIONS
@@ -76,7 +76,7 @@ _dbg() {
 	if [ -z "$1" ]; then
 		gprintf "%s\n" "$_usage"
 		return 1
-	elif [ ! -z "$2" ]; then
+	elif [ -n "$2" ]; then
 		if [ -z "${thresholds[$2]}" ]; then
 			echo "ERROR: level doesn't correspond to a correct level"
 			gprintf "%s\n" "$_usage"
@@ -90,7 +90,7 @@ _dbg() {
 		local newline='\n'
 	fi
 
-	if [ "${DEBUG_STARTUP-0}" -ge $thresh ]; then
+	if [ "${DEBUG_STARTUP-0}" -ge "$thresh" ]; then
 		gprintf "%s$newline" "$1"
 	fi
 }
@@ -166,8 +166,8 @@ if [[ $FAST_STARTUP == 0 ]]; then
 		#   Eagerly loaded completions should be loaded by $HOME/.config/bash/completion
 		#   In the end completions stored in $HOME/.bash_completion will be executed
 		source_and_log /usr/local/etc/profile.d/bash_completion.sh
-    ___git_complete dfg __git_main
-  fi
+		___git_complete dfg __git_main
+	fi
 	set_iterm_title "bash"
 fi
 
