@@ -119,17 +119,18 @@ lvim.builtin.treesitter.highlight.enabled = false
 lvim.lang.python.formatters = { { exe = "black", args = {} } }
 lvim.lang.python.linters = { { exe = "flake8", args = {} } }
 
-lvim.lang.lua.formatters = {
-	{ exe = "stylua" },
-	{
-		exe = "lua_format",
-		-- args = { "-s", "-"},
-	},
-}
+lvim.lang.lua.formatters = { { exe = "stylua" }, { exe = "lua_format" } }
 lvim.lang.lua.linters = { { exe = "luacheck" } }
+
 lvim.lang.sh.formatters = { { exe = "shfmt", args = {} } }
 lvim.lang.sh.linters = { { exe = "shellcheck", args = {} } }
--- --
+
+lvim.lang.javascript.formatters = { { exe = "prettier" } }
+lvim.lang.javascript.linters = { { exe = "eslint" } }
+lvim.lang.javascriptreact.formatters = lvim.lang.javascript.formatters
+lvim.lang.javascriptreact.linters = lvim.lang.javascript.linters
+
+--
 -- Additional Plugins
 lvim.plugins = {
 	{ "folke/tokyonight.nvim" },
