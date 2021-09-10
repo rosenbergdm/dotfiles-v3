@@ -1,0 +1,234 @@
+#
+
+#DEFAULTS
+#
+#VI Insert Mode functions
+#"C-D"  vi-eof-maybe
+#"C-H"  backward-delete-char
+#"C-I"  complete
+#"C-J"  accept-line
+#"C-M"  accept-line
+#"C-R"  reverse-search-history
+#"C-S"  forward-search-history
+#"C-T"  transpose-chars
+#"C-U"  unix-line-discard
+#"C-V"  quoted-insert
+#"C-W"  unix-word-rubout
+#"C-Y"  yank
+#"C-["  vi-movement-mode
+#"C-_"  undo
+#" " to "~"  self-insert
+#"C-?"  backward-delete-char
+#
+#VI Command Mode functions
+#
+#"C-D"  vi-eof-maybe
+#"C-E"  emacs-editing-mode
+#"C-G"  abort
+#"C-H"  backward-char
+#"C-J"  accept-line
+#"C-K"  kill-line
+#"C-L"  clear-screen
+#"C-M"  accept-line
+#"C-N"  next-history
+#"C-P"  previous-history
+#"C-Q"  quoted-insert
+#"C-R"  reverse-search-history
+#"C-S"  forward-search-history
+#"C-T"  transpose-chars
+#"C-U"  unix-line-discard
+#"C-V"  quoted-insert
+#"C-W"  unix-word-rubout
+#"C-Y"  yank
+#"C-_"  vi-undo
+#" "  forward-char
+#"#"  insert-comment
+#"$"  end-of-line
+#"%"  vi-match
+#"&"  vi-tilde-expand
+#"*"  vi-complete
+#"+"  next-history
+#","  vi-char-search
+#"-"  previous-history
+#"."  vi-redo
+#"/"  vi-search
+#"0"  beginning-of-line
+#"1" to "9"  vi-arg-digit
+#";"  vi-char-search
+#"="  vi-complete
+#"?"  vi-search
+#"A"  vi-append-eol
+#"B"  vi-prev-word
+#"C"  vi-change-to
+#"D"  vi-delete-to
+#"E"  vi-end-word
+#"F"  vi-char-search
+#"G"  vi-fetch-history
+#"I"  vi-insert-beg
+#"N"  vi-search-again
+#"P"  vi-put
+#"R"  vi-replace
+#"S"  vi-subst
+#"T"  vi-char-search
+#"U"  revert-line
+#"W"  vi-next-word
+#"X"  backward-delete-char
+#"Y"  vi-yank-to
+#"\"  vi-complete
+#"^"  vi-first-print
+#"_"  vi-yank-arg
+#"`"  vi-goto-mark
+#"a"  vi-append-mode
+#"b"  vi-prev-word
+#"c"  vi-change-to
+#"d"  vi-delete-to
+#"e"  vi-end-word
+#"f"  vi-char-search
+#"h"  backward-char
+#"i"  vi-insertion-mode
+#"j"  next-history
+#"k"  prev-history
+#"l"  forward-char
+#"m"  vi-set-mark
+#"n"  vi-search-again
+#"p"  vi-put
+#"r"  vi-change-char
+#"s"  vi-subst
+#"t"  vi-char-search
+#"u"  vi-undo
+#"w"  vi-next-word
+#"x"  vi-delete
+#"y"  vi-yank-to
+#"|"  vi-column
+#"~"  vi-change-case
+
+
+#Settings
+set mark-directories On
+set horizontal-scroll-mode Off
+set visible-stats on
+set colored-stats on
+set editing-mode vi
+set keymap vi-insert
+set bell-style none
+set show-all-if-ambiguous on
+# Immediately add a trailing slash when autocompleting symlinks to directories
+set mark-symlinked-directories on
+
+# Be more intelligent when autocompleting by also looking at the text after
+# the cursor. For example, when the current line is "cd ~/src/mozil", and
+# the cursor is on the "z", pressing Tab will not autocomplete it to "cd
+# ~/src/mozillail", but to "cd ~/src/mozilla". (This is supported by the
+# Readline used by Bash 4.)
+set skip-completed-text on
+
+# Allow UTF-8 input and output, instead of showing stuff like $'\0123\0456'
+set input-meta on
+set output-meta on
+set convert-meta off
+
+set print-completions-horizontally off
+set match-hidden-files on
+set completion-ignore-case off
+set completion-map-case on
+set page-completions on
+
+"\e[A": history-search-backward
+"\e[B": history-search-forward
+Space: magic-space
+
+
+
+set show-mode-in-prompt
+set editing-mode vi
+
+$if mode=vi
+  set keymap vi-command
+  "P": yank
+  "p": "l\P"
+  #alternate kill ring
+  "y": yank-pop
+  # To work with yiw/W
+  "gy": vi-yank-to 
+  "dd": kill-whole-line
+  "cc": "ddi"
+  "|": "A | "
+
+  #Useful
+  "k": history-search-backward
+  "j": history-search-forward
+  "\C-i": re-read-init-file
+
+  #############
+  #  Extras c #
+  #############
+  #Give me a bash Variable
+  "gv": "lmtbi${\eea}\e`tl"
+  #Give me a bash Array
+  "ga": "bi${\eea[]}\ehi"
+  #Give me an Echo
+  "ge": "iecho \"\"\ei"
+
+
+  "gg": beginning-of-history
+  "G": end-of-history
+
+
+
+  # Ctrl-{left,right} to jump over words
+  $if Bash
+    "\e[1;5C": shell-forward-word
+    "\e[1;5D": shell-backward-word
+    "\e[5C": shell-forward-word
+    "\e[5D": shell-backward-word
+  $else
+    "\e[1;5C": forward-word
+    "\e[1;5D": backward-word
+    "\e[5C": forward-word
+    "\e[5D": backward-word
+  $endif
+  "\e[A": history-search-backward
+  "\e[B": history-search-forward
+  "/": vi-char-search
+  "?": vi-char-search
+
+  set keymap vi-insert
+  $if Bash
+    "\e[1;5C": shell-forward-word
+    "\e[1;5D": shell-backward-word
+    "\e[5C": shell-forward-word
+    "\e[5D": shell-backward-word
+  $else
+    "\e[1;5C": forward-word
+    "\e[1;5D": backward-word
+    "\e[5C": forward-word
+    "\e[5D": backward-word
+  $endif
+  $if R
+    Space: " "
+  $endif
+  $if psql
+    Space: " "
+  $endif
+  "\e[A": history-search-backward
+  "\e[B": history-search-forward
+  "\C-r": re-read-init-file
+
+  #Go back in history and replay step one by one ... :)
+  Control-o: operate-and-get-next
+
+  Control-L: clear-screen
+  Control-l: clear-screen
+  Control-b: beginning-of-line
+  Control-e: end-of-line
+  #Same than TAB but put the completion on the cli (inline)
+  #breaks tab completion ¿?
+  #Control-Tab: menu-complete
+  #Complete filename against complete history!
+  # but should work with substrings :(
+  Control-n: dynamic-complete-history
+$endif
+
+set keymap vi-insert
+
+

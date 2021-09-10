@@ -1,0 +1,36 @@
+#!/usr/local/bin/bash
+[[ "$DEBUG_STARTUP:" == "1:" ]] && echo "RUNNING $HOME/.extra"
+
+# Tricks to minimize startup time for infrequently used functions
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && source_and_log "$HOME/.rvm/scripts/rvm"
+set_iterm_title "Setting ruby version"
+rvm use ruby-3.0.0 >/dev/null 2>&1
+# _rvm_first() {
+#   [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" 
+#   # eval "$(echo '_old_rvm()'; typeset -f rvm | tail -n212)"
+#   rvm use ruby-3.0.0 >/dev/null
+#   rvm $@
+# }
+
+# rvm() {
+#   unset rvm
+#   _rvm_first "$@"
+# }
+
+# _nvm_first() {
+#   unalias nvm
+#   [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+#   nvm "$@"
+# }
+# alias nvm=_nvm_first
+[ -s "$NVM_DIR/nvm.sh" ] && source_and_log "$NVM_DIR/nvm.sh"  # This loads nvm
+set_iterm_title "setting node version"
+nvm use --delete-prefix v16.0 >/dev/null 2>&1
+
+source_and_log "$HOME/.iterm2_shell_integration.bash"
+[ -e $HOME/.iterm2/it2api ] && export PATH="$PATH:$HOME/.iterm2"
+source_and_log "$HOME/.ghcup/env" # ghcup-env
+
+dedupe_pathvar
+
+# vim: set ft=sh

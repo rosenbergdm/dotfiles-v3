@@ -1,0 +1,22 @@
+[[ "$DEBUG_STARTUP:" == "1:" ]] && echo "RUNNING $HOME/.exports"
+
+export NIX_IGNORE_SYMLINK_STORE=1
+export FULL_GHC_PACKAGE_PATH=/Users/davidrosenberg/.ghcup/ghc/8.8.3/lib/ghc-8.8.3/package.conf.d:/Users/davidrosenberg/.cabal/store/ghc-8.8.3/package.db
+export GLOBAL_PACKAGE_PATH=/Users/davidrosenberg/.ghcup/ghc/8.8.3/lib/ghc-8.8.3/package.conf.d
+export USER_PACKAGE_PATH=/Users/davidrosenberg/.cabal/store/ghc-8.8.3/package.db
+export URXVT_PERL_LIB=/usr/local/lib/urxvt/perl
+export extra_cabal_flags="'--package-db=/Users/davidrosenberg/.ghcup/ghc/8.8.3/lib/ghc-8.8.3/package.conf.d' '--package-db=/Users/davidrosenberg/.cabal/store/ghc-8.8.3/package.db' --extra-lib-dirs='/usr/X11/lib' --ghc-options='-L/usr/X11/lib'"
+export VISUAL=/usr/local/bin/nvim
+export EDITOR=/usr/local/bin/nvim
+export GOPATH=$HOME/go
+export BKPATH=/Volumes/LaptopBackup2/uic-backups
+export APACHEHOME=/usr/local/var/www
+export APACHECONFIG=/usr/local/etc/httpd
+export NVM_DIR="$HOME/.nvm"
+export ROH=/Users/davidrosenberg/src/radonchub
+export NVIM_LOG_FILE="$HOME/.config/nvim/nvimlog.txt"
+export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_112.jdk/Contents/Home
+export ANDROID_HOME=/Users/davidrosenberg/Library/Android/sdk
+export MY_FUNCTIONS
+
+# vim: ft=sh

@@ -1,0 +1,15 @@
+
+# eval "$(stack --bash-completion-script stack)"
+# eval "$(pandoc --bash-completion)"
+
+
+# for f in $HOME/bash_completion.d/*; do
+#     source "$f"
+# done
+
+# complete -o default -F _pip_completion pip
+# complete -o default -F _pip_completion pip2
+# complete -o default -F _pip_completion pip3
+
+
+
