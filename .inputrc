@@ -210,6 +210,13 @@ $if mode=vi
   $if psql
     Space: " "
   $endif
+  $if resty-cli
+    Space: " "
+  $endif 
+  $if resty-repl
+    Space: " "
+  $endif 
+
   "\e[A": history-search-backward
   "\e[B": history-search-forward
   "\C-r": re-read-init-file

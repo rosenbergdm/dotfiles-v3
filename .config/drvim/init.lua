@@ -36,15 +36,18 @@ vim.opt.rtp:append(_G.CONFIG_PATH .. "/site/after")
 vim.opt.rtp:remove(vim.fn.old_stdpath "config")
 vim.opt.rtp:remove(vim.fn.old_stdpath "config" .. "/after")
 vim.opt.rtp:prepend(_G.CONFIG_PATH)
+vim.opt.rtp:append(_G.RUNTIME_PATH)
+vim.opt.rtp:append(_G.RUNTIME_PATH .. '/site')
 vim.opt.rtp:append(_G.CONFIG_PATH)
 vim.opt.rtp:append(_G.CONFIG_PATH .. "/after")
 
 vim.cmd [[let &packpath = &runtimepath]]
 
+drvim.packer = require('core.packer')
+
 drvim.core_modules = {
   "core.options",
   "core.builtins",
-  "core.packer",
   "core.plugins",
   "core.mappings",
 }
