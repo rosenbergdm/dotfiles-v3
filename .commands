@@ -6,8 +6,8 @@ export DATE=/usr/local/bin/gdate
 export DIRNAME=/usr/local/bin/gdirname
 export FIND=/usr/local/bin/gfind
 export GIT=/usr/local/bin/git
-export GUNZIP=/usr/bin/gunzip
-export GZIP=/usr/bin/gzip
+# export GUNZIP=/usr/bin/gunzip
+# export GZIP=/usr/bin/gzip
 export MKTEMP=/usr/local/bin/gmktemp
 export PERL=/usr/local/bin/perl
 export PG_DUMP=/usr/local/bin/pg_dump
@@ -21,9 +21,8 @@ export CURL=/usr/bin/curl
 export REALPATH=/usr/local/bin/grealpath
 export STAT=/usr/local/bin/gstat
 export TOUCH=/usr/local/bin/gtouch
-export commands=( AWK BASENAME DATE DIRNAME FIND GIT GUNZIP GZIP \
-  MKTEMP PERL PG_DUMP PSQL READLINK SED ECHO PRINTF WHICH CURL \
-  STAT REALPATH TOUCH )
-
+export commands=(AWK BASENAME DATE DIRNAME FIND GIT GUNZIP GZIP
+	MKTEMP PERL PG_DUMP PSQL READLINK SED ECHO PRINTF WHICH CURL
+	STAT REALPATH TOUCH)
 
 # vim: set ft=sh:

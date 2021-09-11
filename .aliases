@@ -1,10 +1,10 @@
 #!/usr/local/bin/bash
 [[ "$DEBUG_STARTUP:" == "1:" ]] && echo "RUNNING $HOME/.aliases"
 # Detect which `ls` flavor is in use
-if ls --color > /dev/null 2>&1; then # GNU `ls`
-  colorflag="--color"
+if ls --color >/dev/null 2>&1; then # GNU `ls`
+	colorflag="--color"
 else # OS X `ls`
-  colorflag="-G"
+	colorflag="-G"
 fi
 
 alias ll='ls -lh'
@@ -17,9 +17,10 @@ export LS_COLORS='no=00:fi=00:di=01;34:ln=01;36:pi=40;33:so=01;35:do=01;35:bd=40
 alias grep='/usr/local/bin/ggrep --color=auto'
 alias fgrep='/usr/local/bin/gfgrep --color=auto'
 alias egrep='/usr/local/bin/gegrep --color=auto'
+alias pgrep='/usr/local/bin/grep -P --color=auto'
 # alias ovim='/usr/local/bin/nvim'
 # alias vim="$HOME/bin/lvim"
-alias vim=/Users/davidrosenberg/.local/bin/lvim
+alias vim=lvim
 alias mvim='/Users/davidrosenberg/bin/vimr'
 alias vimdiff='/usr/local/bin/nvim -d'
 # enforcing correct gmvault execution
@@ -40,4 +41,12 @@ alias osxflush="dscacheutil -flushcache && killall -HUP mDNSResponder"
 alias spotoff="sudo mdutil -a -i off"
 # Enable Spotlight
 alias spoton="sudo mdutil -a -i on"
+
+outlook() {
+	open "/Applications/Microsoft Outlook.app"
+}
+rdp() {
+	open "/Applications/Microsoft Remote Desktop Beta.app"
+}
+
 # vim: ft=sh

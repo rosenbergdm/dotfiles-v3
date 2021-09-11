@@ -22,18 +22,18 @@ fi
 export DEBUG_STARTUP=${DEBUG_STARTUP-${file_dbg_startup-0}}
 
 export FAST_STARTUP=${FAST_STARTUP-0}
-if [ -a $HOME/FAST_STARTUP ]; then
+if [ -a "$HOME/FAST_STARTUP" ]; then
 	printf "%s\n\n" "Fast startup enabled by environment variable '\$FAST_STARTUP'"
-	if [[ "$(cat $HOME/FAST_STARTUP | head -n1)" == "" ]]; then
+	if [[ "$(head -n30 "$HOME/FAST_STARTUP")" == "" ]]; then
 		file_fast_startup=1
 	else
-		file_fast_startup=$(cat "$HOME/FAST_STARTUP" | head -n1)
+		file_fast_startup="$(head -n1 "$HOME/FAST_STARTUP")"
 	fi
 	FAST_STARTUP=$file_fast_startup
 elif [ "${FAST_STARTUP-0}" -gt 0 ]; then
 	printf "%s\n\n" "Fast startup enabled by file '$HOME/FAST_STARTUP'"
 else
-	read -n1 -t0.1 -s _startfast || true
+	read -n1 -r -t0.1 -s _startfast || true
 	if [[ "$_startfast" == "f" ]] || [[ "$_startfast" == "F" ]]; then
 		printf "%s\n\n" "Fast starup enabled by keypress"
 		FAST_STARTUP=1
@@ -120,7 +120,7 @@ source_and_log() {
 				_dbg " FAIL.  Error sourcing." error
 			else
 				_dbg " Success."
-				STARTUP_SOURCED+=($($BASENAME "$cmdfile"))
+				STARTUP_SOURCED+=("$($BASENAME "$cmdfile")")
 				if [ -e $completionfile ]; then
 					set_iterm_title "Loading completions for '$completionfile'"
 					source "$completionfile"
@@ -172,7 +172,7 @@ if [[ $FAST_STARTUP == 0 ]]; then
 fi
 
 if [[ $FAST_STARTUP == 0 ]]; then
-	source_and_log $HOME/.extra
+	source_and_log "$HOME/.extra"
 	[ -f ~/.fzf.bash ] && source_and_log ~/.fzf.bash
 else
 	_dbg "Skipping $HOME/.extra and fzf loading for speed"

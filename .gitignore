@@ -1,0 +1,7 @@
+*.pyc
+__pycache*
+
+*.log
+**/plugin/_p
+**/plugin/packer_compiled.lua
+**/lunarvim/cache
