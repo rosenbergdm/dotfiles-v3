@@ -48,5 +48,8 @@ outlook() {
 rdp() {
 	open "/Applications/Microsoft Remote Desktop Beta.app"
 }
+anki() {
+	open "/Applications/Anki.app"
+}
 
 # vim: ft=sh
