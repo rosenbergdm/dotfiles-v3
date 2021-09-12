@@ -1,5 +1,5 @@
 -- Bootstrap the configuration process
-drvim = {}
+drvim = {builtin = {}, plugins = {}}
 
 _G.HOME_PATH = vim.loop.os_homedir()
 _G.DATA_PATH = vim.loop.os_getenv "DRVIM_DATA_PATH"
@@ -40,16 +40,27 @@ vim.opt.rtp:append(_G.RUNTIME_PATH)
 vim.opt.rtp:append(_G.RUNTIME_PATH .. "/site")
 vim.opt.rtp:append(_G.CONFIG_PATH)
 vim.opt.rtp:append(_G.CONFIG_PATH .. "/after")
+vim.opt.rtp:append(_G.DATA_PATH .. "/site")
 
 vim.cmd [[let &packpath = &runtimepath]]
 
+drvim.options = require "core.options"
+drvim.options:load_options()
+vim.fn("colorscheme tokyonight")
 drvim.packer = require "core.packerInit"
-
 drvim.packer.init()
+drvim.builtins = require "core.builtins"
 
 drvim.core_modules = {
-    "core.options", "core.builtins", "core.plugins", "core.mappings"
+    -- "core.options",
+    -- "core.builtins",
+    "core.plugins", "core.mappings"
 }
+drvim.p = function(x)
+  print(vim.inspect(x))
+end
+
+
 
 for _, module in ipairs(drvim.core_modules) do
     local ok, err = pcall(require, module)

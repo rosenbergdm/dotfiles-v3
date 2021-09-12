@@ -65,3 +65,4 @@ M.load_options = function()
 end
 
 M.load_options()
+return M
