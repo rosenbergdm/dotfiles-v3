@@ -349,4 +349,26 @@ toggle_citrix() {
 		sudo /bin/launchctl $1 ${prefix}com.citrix.AuthManager_Mac
 	fi
 }
+
+add_missing_startup() {
+	set_iterm_title "Loading completions"
+	if [ -f /usr/local/etc/profile.d/bash_completion.sh ]; then
+		# This will end up sourcing "${XDG_CONFIG_HOME:-$HOME/.config}/bash_completion"
+		# Then it will read from the following dirs for commands of the form 'cmd', 'cmd.bash' or '_cmd':
+		#   ${BASH_COMPLETION_USER_DIR:-${XDG_DATA_HOME:-$HOME/.local/share}/bash-completion}/completions
+		#   ${XDG_DATA_DIRS:-/usr/local/share:/usr/share}/*/bash-completion/completions
+		#   ${BASH_SOURCE%/}/completions (for scripts) or ./completions (for not being in a script)
+		# For each of these it will load the completion when the command is required
+		# TLDR
+		#   Dynamically loaded completions go in  $HOME/.local/share/bash-completion/completions
+		#   Eagerly loaded completions should be loaded by $HOME/.config/bash/completion
+		#   In the end completions stored in $HOME/.bash_completion will be executed
+		source_and_log /usr/local/etc/profile.d/bash_completion.sh
+		___git_complete dfg __git_main
+	fi
+	source_and_log "$HOME/.extra"
+	[ -f ~/.fzf.bash ] && source_and_log ~/.fzf.bash
+	set_iterm_title "bash"
+}
+
 # vim: ft=sh

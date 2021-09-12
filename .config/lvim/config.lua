@@ -11,6 +11,7 @@ M.load_options = function()
   local LVIM_CACHE_DIR = os.getenv "HOME" .. "/.cache/lvim"
   local myopts = {
     completeopt = { "menuone", "noselect" },
+    hlsearch = false,
     autochdir = true,
     backupdir = LVIM_CACHE_DIR .. "/backup",
     undodir = LVIM_CACHE_DIR .. "/undo", -- set an undo directory

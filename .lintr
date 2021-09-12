@@ -1,0 +1,10 @@
+linters: with_defaults(
+  line_length_linter(120),
+  object_usage_linter = NULL,
+  object_name_linter = NULL,
+  commented_code_linter = NULL
+  )
+exclude: "# Exclude linting"
+exclude_start: "# Begin Exclude Linting"
+exclude_stop: "# End Exclude Linting"
+

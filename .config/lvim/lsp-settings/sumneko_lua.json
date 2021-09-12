@@ -2,6 +2,7 @@
   "Lua.runtime.version": "LuaJIT",
   "Lua.diagnostics.enable": true,
   "Lua.diagnostics.globals": [
+    "drvim",
     "lvim",
     "vim",
     "describe",
@@ -10,6 +11,8 @@
     "after_each"
   ],
   "Lua.diagnostics.disable": [
+    "accessing-undefined-variable",
+    "undefined-global",
     "unused-local",
     "unused-vararg",
     "lowercase-global",
