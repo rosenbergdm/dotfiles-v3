@@ -46,7 +46,7 @@ vim.cmd [[let &packpath = &runtimepath]]
 
 drvim.options = require "core.options"
 drvim.options:load_options()
-vim.fn("colorscheme tokyonight")
+vim.cmd("colorscheme tokyonight")
 drvim.packer = require "core.packerInit"
 drvim.packer.init()
 drvim.builtins = require "core.builtins"
