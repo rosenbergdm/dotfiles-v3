@@ -1,0 +1,55 @@
+# vim: ft=sh
+rsync -ahp /Users/davidrosenberg/Box/ /Volumes/LaptopBackup2/uic-backups/Box
+ls ~/bin/
+# Start a tmux session group
+# In iterm window 1:
+tmux new-session -s left
+# In iterm window 2: 
+tmux new-session -t left -s right
+
+
+################## osx root commands to speed up
+
+  504  sudo spctl --master-disable
+  506  sudo defaults write /Library/Preferences/com.apple.security.libraryvalidation.plist DisableLibraryValidation -bool true
+
+###############################
+
+DEBUG_RCLONE=1 gdrive-backup-runner.sh 
+/usr/bin/rsync -arvh /Users/davidrosenberg/Box/ /Volumes/LaptopBackup2/uic-backups/Boxtmectl info
+tmutil listlocalsnapshots /
+echo "$PATHVAR=$(perl -e "print join(':', grep { not \$seen{\$_}++ } split(/:/, \$ENV{$PATHVAR}))")"
+stack --bash-completion-script stack >> ~/bash_completion.d/stack
+pandoc  --bash-completion  >> ~/bash_completion.d/pandoc
+dotfiles add $(dotfiles status | grep '[modified|deleted]' | grep '^\W' | grep -v '<file>' | perl -p -e 's/^\W+\w+: +//g' )
+sudo launchctl limit maxfiles 65536 200000
+csrutil status
+git remote add origin dmr@gauss:/git/davidrosenberg.me.git
+named-compilezone -f raw -F text -o ~/davidrosenberg.me.zone.text davidrosenberg.me /var/cache/bind/slaves/davidrosenberg.me.zone
+sudo killall -HUP mDNSResponder
+sudo killall -HUP mDNSResponder
+certbot certonly --manual --preferred-challenge=dns --email=dmr@davidrosenberg.me --server https://acme-v02.api.letsencrypt.org/directory --agree-tos -d *.davidrosenberg.me
+./configure --enable-BLAS-shlib -x-libraries=/opt/X11/lib --x-include=/opt/X11/include --enable-R-framework --enable-R-shlib --enable-java --enable-prebuilt-html --enable-shared --with-aqua --with-blas --with-jpeglib --with-lapack --with-libpng --with-pcre2 --with-readline --with-recommended-packages --with-tcltk --with-x --with-cairo CC=gcc LDFLAGS=-L/usr/local/opt/readline/lib -L/usr/local/lib -I/usr/local/opt/cairo/include CPPFLAGS=-I/usr/local/opt/readline/include -I/usr/local/include -I/usr/local/cairo/include CXX=g++ 
+CPPFLAGS="-I/usr/local/opt/readline/include -I/usr/local/include -I/usr/local/cairo/include" \
+  LDFLAGS="-L/usr/local/opt/readline/lib -L/usr/local/lib -I/usr/local/opt/cairo/include" \
+  ./configure --enable-BLAS-shlib -x-libraries=/opt/X11/lib --x-include=/opt/X11/include --enable-R-framework --enable-R-shlib --enable-java --enable-prebuilt-html --enable-shared --with-aqua --with-blas --with-jpeglib --with-lapack --with-libpng --with-pcre2 --with-readline --with-recommended-packages --with-tcltk --with-x --with-cairo \
+  CPPFLAGS="-I/usr/local/opt/readline/include -I/usr/local/include -I/usr/local/cairo/include -I/opt/X11/include/cairo" \
+  LDFLAGS="-L/usr/local/opt/readline/lib -L/usr/local/lib -I/usr/local/opt/cairo/include -I/opt/X11/include/cairo/cairo-xlib.h -L/opt/X11/lib"
+docker exec -ti  photoprism_photoprism_1 photoprism --import-path=/host-share/importer import
+ docker start photoprism_mariadb_1 photoprism_photoprism_1
+"update service set type='NF9132' where name like 'STR%'" | PGPASSWORD=lwAXvfd9emIyBpYQk8 psql -U signout signout
+cat dbsettings.json | sed -e 's/\t/  /g' | jq  -rM '.' | cat > x
+git config --global merge.tool vimdiff && git config --global merge.conflictstyle diff3 && git config --global mergetool.prompt false
+# if [[ ${STARTUP_SOURCED[*]} =~ (^|[[:space:]])"$($BASENAME "$cmdfile")"($|[[:space:]]) ]]; then
+/Users/davidrosenberg/Library/Android/sdk/emulator/emulator @Pixel_3a_API_30_x86
+gpg --encrypt --sign --armor -r RECIPIENT@EXAMPLE.COM FILENAME
+convert +append image1.jpg image2.jpg  -resize x650 combined.jpg
+ pbpaste | grep -B1 -A1 Gleason | grep -v volume | sed -e 's/.*grade \(.*\) (Gr.*/\1/g' |  sed -e 's/.).*Prostate, \(.*\)\;.*$/\1/g' | sed -e 's/-.*\([0-9] of [0-9]\).*/\1/g' | grep -v -ssh -c 3des-cbc dmr@192.168.1.11ssh -c 3des-cbc dmr@192.168.1.11copy running-config scp://dmr@192.168.1.26//share/config/sw01.davidrosenberg.meoutlook () 
+{ 
+    open /Applications/Microsoft\ Outlook.app/
+}
+excel () 
+{ 
+    open /Applications/Microsoft\ Excel.app
+}
+for f in *00??.pdf; do echo  | essentials_dl.sh ; done
