@@ -12,7 +12,7 @@ brew=/usr/local/bin/brew
 # nvim=/usr/local/bin/nvim
 lvim=$HOME/.local/bin/lvim
 Rscript=/usr/local/bin/Rscript
-rustup=/Users/davidrosenberg/.cargo/bin/rustup
+rustup=$HOME/.cargo/bin/rustup
 
 $brew update
 $brew upgrade

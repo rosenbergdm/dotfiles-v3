@@ -8,7 +8,6 @@
 
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
 
-export PATH="$HOME/.cargo/bin:$PATH"
 
 PATH="$HOME/bin:/usr/local/bin:$PATH"
 export PATH
@@ -44,3 +43,4 @@ rvm use 3.0
 export NVM_DIR=$HOME/.nvm
 [ -s "$NVM_DIR/nvm.sh" ] && source_and_log "$NVM_DIR/nvm.sh"  # This loads nvm
 nvm use 16.0
+. "$HOME/.cargo/env"

@@ -4,3 +4,8 @@ if [ -z "$BASHRC_RUN" ]; then
 	# bash_rc has been run
 	source $HOME/.bashrc
 fi
+
+test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"
+
+. "$HOME/.cargo/env"
+[[ -f ~/.bashrc ]] && source ~/.bashrc # ghcup-env

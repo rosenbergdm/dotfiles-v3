@@ -154,19 +154,23 @@ done
 if [[ $FAST_STARTUP == 0 ]]; then
   set_iterm_title "Loading completions"
   if [ -f /usr/local/etc/profile.d/bash_completion.sh ]; then
-    # This will end up sourcing "${XDG_CONFIG_HOME:-$HOME/.config}/bash_completion"
-    # Then it will read from the following dirs for commands of the form 'cmd', 'cmd.bash' or '_cmd':
-    #   ${BASH_COMPLETION_USER_DIR:-${XDG_DATA_HOME:-$HOME/.local/share}/bash-completion}/completions
-    #   ${XDG_DATA_DIRS:-/usr/local/share:/usr/share}/*/bash-completion/completions
-    #   ${BASH_SOURCE%/}/completions (for scripts) or ./completions (for not being in a script)
-    # For each of these it will load the completion when the command is required
-    # TLDR
-    #   Dynamically loaded completions go in  $HOME/.local/share/bash-completion/completions
-    #   Eagerly loaded completions should be loaded by $HOME/.config/bash/completion
-    #   In the end completions stored in $HOME/.bash_completion will be executed
-    source_and_log /usr/local/etc/profile.d/bash_completion.sh
-    ___git_complete dfg __git_main
+    bc_script=/usr/local/etc/profile.d/bash_completion.sh
+  elif [ -f /opt/homebrew/Cellar/bash-completion@2/2.11/etc/profile.d/bash_completion.sh ]; then
+    bc_script=/opt/homebrew/Cellar/bash-completion@2/2.11/etc/profile.d/bash_completion.sh
   fi
+  source_and_log "$bc_script"
+  ___git_complete dfg __git_main
+
+  # This will end up sourcing "${XDG_CONFIG_HOME:-$HOME/.config}/bash_completion"
+  # Then it will read from the following dirs for commands of the form 'cmd', 'cmd.bash' or '_cmd':
+  #   ${BASH_COMPLETION_USER_DIR:-${XDG_DATA_HOME:-$HOME/.local/share}/bash-completion}/completions
+  #   ${XDG_DATA_DIRS:-/usr/local/share:/usr/share}/*/bash-completion/completions
+  #   ${BASH_SOURCE%/}/completions (for scripts) or ./completions (for not being in a script)
+  # For each of these it will load the completion when the command is required
+  # TLDR
+  #   Dynamically loaded completions go in  $HOME/.local/share/bash-completion/completions
+  #   Eagerly loaded completions should be loaded by $HOME/.config/bash/completion
+  #   In the end completions stored in $HOME/.bash_completion will be executed
   set_iterm_title "bash"
 fi
 
@@ -178,3 +182,9 @@ else
 fi
 
 # vim: ft=sh :
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+. "$HOME/.cargo/env"
+[ -f "/Users/dmr/.ghcup/env" ] && source "/Users/dmr/.ghcup/env" # ghcup-env

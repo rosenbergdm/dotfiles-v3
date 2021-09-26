@@ -1,5 +1,5 @@
 # vim: ft=sh
-rsync -ahp /Users/davidrosenberg/Box/ /Volumes/LaptopBackup2/uic-backups/Box
+rsync -ahp $HOME/Box/ /Volumes/LaptopBackup2/uic-backups/Box
 ls ~/bin/
 # Start a tmux session group
 # In iterm window 1:
@@ -16,7 +16,7 @@ tmux new-session -t left -s right
 ###############################
 
 DEBUG_RCLONE=1 gdrive-backup-runner.sh 
-/usr/bin/rsync -arvh /Users/davidrosenberg/Box/ /Volumes/LaptopBackup2/uic-backups/Boxtmectl info
+/usr/bin/rsync -arvh $HOME/Box/ /Volumes/LaptopBackup2/uic-backups/Boxtmectl info
 tmutil listlocalsnapshots /
 echo "$PATHVAR=$(perl -e "print join(':', grep { not \$seen{\$_}++ } split(/:/, \$ENV{$PATHVAR}))")"
 stack --bash-completion-script stack >> ~/bash_completion.d/stack
@@ -41,7 +41,7 @@ docker exec -ti  photoprism_photoprism_1 photoprism --import-path=/host-share/im
 cat dbsettings.json | sed -e 's/\t/  /g' | jq  -rM '.' | cat > x
 git config --global merge.tool vimdiff && git config --global merge.conflictstyle diff3 && git config --global mergetool.prompt false
 # if [[ ${STARTUP_SOURCED[*]} =~ (^|[[:space:]])"$($BASENAME "$cmdfile")"($|[[:space:]]) ]]; then
-/Users/davidrosenberg/Library/Android/sdk/emulator/emulator @Pixel_3a_API_30_x86
+$HOME/Library/Android/sdk/emulator/emulator @Pixel_3a_API_30_x86
 gpg --encrypt --sign --armor -r RECIPIENT@EXAMPLE.COM FILENAME
 convert +append image1.jpg image2.jpg  -resize x650 combined.jpg
  pbpaste | grep -B1 -A1 Gleason | grep -v volume | sed -e 's/.*grade \(.*\) (Gr.*/\1/g' |  sed -e 's/.).*Prostate, \(.*\)\;.*$/\1/g' | sed -e 's/-.*\([0-9] of [0-9]\).*/\1/g' | grep -v -ssh -c 3des-cbc dmr@192.168.1.11ssh -c 3des-cbc dmr@192.168.1.11copy running-config scp://dmr@192.168.1.26//share/config/sw01.davidrosenberg.meoutlook () 

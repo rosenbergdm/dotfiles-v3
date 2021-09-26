@@ -18,7 +18,7 @@ TARGETS_SHARED=( "Texts/Phase 2/" "Texts/M2 Google Drive/")
 SOURCES_NONSHARED=( "/syncable/" )
 TARGETS_NONSHARED=( "MyDrive/syncable/" )
 SHARED_ARGS='--drive-shared-with-me'
-ARGS='--drive-formats "docx,xlsx,pdf" -v --update --exclude-from "/Users/davidrosenberg/.config/rclone/M2_exclusions.txt"'
+ARGS='--drive-formats "docx,xlsx,pdf" -v --update --exclude-from "$HOME/.config/rclone/M2_exclusions.txt"'
 
 scriptlog="$(mktemp -t gdbkrun)"
 LOGFILE=/var/log/rclone.log

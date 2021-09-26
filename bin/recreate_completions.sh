@@ -39,7 +39,7 @@ script_status=$((script_status+$?))
 
 #pandoc
 
-/Users/davidrosenberg/.cabal/bin/pandoc --bash-completion > "$tmpfile" 2>/dev/null && \
+$HOME/.cabal/bin/pandoc --bash-completion > "$tmpfile" 2>/dev/null && \
   mv "$tmpfile" "$COMPLETION_DIR/pandoc"  && \
   echo "$(date): Recreated pandoc completion script" | tee -a "$LOGFILE" || \
   echo "$(date): Unable to regenerate pandoc completion script" | tee -a "$LOGFILE" > /dev/stderr && \
@@ -55,7 +55,7 @@ script_status=$((script_status+$?))
 script_status=$((script_status+$?))
 
 #npm
-#/Users/davidrosenberg/.nvm/versions/node/v16.0.0/bin/npm completion bash > "$tmpfile" 2>/dev/null && \
+#$HOME/.nvm/versions/node/v16.0.0/bin/npm completion bash > "$tmpfile" 2>/dev/null && \
 /usr/local/bin/npm completion bash > "$tmpfile" 2>/dev/null && \
   mv "$tmpfile" "$COMPLETION_DIR/npm" && \
   echo "$(date): Recreated npm completion script" | tee -a "$LOGFILE" || \

@@ -1,26 +1,32 @@
 # System safe copmmands
 
-export AWK=/usr/local/bin/gawk
-export BASENAME=/usr/local/bin/gbasename
-export DATE=/usr/local/bin/gdate
-export DIRNAME=/usr/local/bin/gdirname
-export FIND=/usr/local/bin/gfind
-export GIT=/usr/local/bin/git
+[[ -e /opt/homebrew/bin/brew ]] && export PATH=/opt/homebrew/bin:$PATH
+
+
+export HOMEBREW_PREFIX=$(brew config | grep PREFIX | awk '{print $2}')
+
+
+export AWK=$HOMEBREW_PREFIX/bin/gawk
+export BASENAME=$HOMEBREW_PREFIX/bin/gbasename
+export DATE=$HOMEBREW_PREFIX/bin/gdate
+export DIRNAME=$HOMEBREW_PREFIX/bin/gdirname
+export FIND=$HOMEBREW_PREFIX/bin/gfind
+export GIT=$HOMEBREW_PREFIX/bin/git
 # export GUNZIP=/usr/bin/gunzip
 # export GZIP=/usr/bin/gzip
-export MKTEMP=/usr/local/bin/gmktemp
-export PERL=/usr/local/bin/perl
-export PG_DUMP=/usr/local/bin/pg_dump
-export PSQL=/usr/local/bin/psql
-export READLINK=/usr/local/bin/greadlink
-export SED=/usr/local/bin/gsed
-export ECHO=/usr/local/bin/gecho
-export PRINTF=/usr/local/bin/gprintf
-export WHICH=/usr/local/bin/gwhich
+export MKTEMP=$HOMEBREW_PREFIX/bin/gmktemp
+export PERL=$HOMEBREW_PREFIX/bin/perl
+export PG_DUMP=$HOMEBREW_PREFIX/bin/pg_dump
+export PSQL=$HOMEBREW_PREFIX/bin/psql
+export READLINK=$HOMEBREW_PREFIX/bin/greadlink
+export SED=$HOMEBREW_PREFIX/bin/gsed
+export ECHO=$HOMEBREW_PREFIX/bin/gecho
+export PRINTF=$HOMEBREW_PREFIX/bin/gprintf
+export WHICH=$HOMEBREW_PREFIX/bin/gwhich
 export CURL=/usr/bin/curl
-export REALPATH=/usr/local/bin/grealpath
-export STAT=/usr/local/bin/gstat
-export TOUCH=/usr/local/bin/gtouch
+export REALPATH=$HOMEBREW_PREFIX/bin/grealpath
+export STAT=$HOMEBREW_PREFIX/bin/gstat
+export TOUCH=$HOMEBREW_PREFIX/bin/gtouch
 export commands=(AWK BASENAME DATE DIRNAME FIND GIT GUNZIP GZIP
 	MKTEMP PERL PG_DUMP PSQL READLINK SED ECHO PRINTF WHICH CURL
 	STAT REALPATH TOUCH)
