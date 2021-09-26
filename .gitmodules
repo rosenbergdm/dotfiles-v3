@@ -7,3 +7,7 @@
 [submodule "/Users/davidrosenebrg/.local/share/lunarvim/site/pack/packer/start/packer.nvim"]
 	path = /Users/davidrosenberg/.local/share/lunarvim/site/pack/packer/start/packer.nvim
 	url = https://github.com/wbthomason/packer.nvim
+[submodule "lunarvim"]
+	path = /Users/dmr/.local/share/lunarvim/lvim
+	url = git@github.com:lunarvim/lunarvim.git
+	branch = rolling
