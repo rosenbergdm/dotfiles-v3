@@ -4,7 +4,7 @@
 
 # set -E
 # set -o functrace
-  shopt -s autocd
+shopt   -s autocd
 
 set_iterm_title() {
   if [[ "${TERM_PROGRAM}p" == "iTerm.appp" ]]; then

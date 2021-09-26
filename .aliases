@@ -2,9 +2,9 @@
 [[ "$DEBUG_STARTUP:" == "1:" ]] && echo "RUNNING $HOME/.aliases"
 # Detect which `ls` flavor is in use
 if ls --color >/dev/null 2>&1; then # GNU `ls`
-	colorflag="--color"
+  colorflag="--color"
 else # OS X `ls`
-	colorflag="-G"
+  colorflag="-G"
 fi
 
 alias ll='ls -lh'
@@ -20,9 +20,10 @@ alias egrep='/usr/local/bin/gegrep --color=auto'
 alias pgrep='/usr/local/bin/grep -P --color=auto'
 # alias ovim='/usr/local/bin/nvim'
 # alias vim="$HOME/bin/lvim"
-alias vim=lvim
-alias mvim='/Users/davidrosenberg/bin/vimr'
-alias vimdiff='/usr/local/bin/nvim -d'
+alias vim=$HOME/.local/bin/lvim
+alias vimdiff="$HOME/.local/bin/lvim -d"
+# alias mvim='/Users/davidrosenberg/bin/vimr'
+# alias vimdiff='/usr/local/bin/nvim -d'
 # enforcing correct gmvault execution
 alias gmvault=/usr/local/bin/gmvault
 
@@ -41,15 +42,5 @@ alias osxflush="dscacheutil -flushcache && killall -HUP mDNSResponder"
 alias spotoff="sudo mdutil -a -i off"
 # Enable Spotlight
 alias spoton="sudo mdutil -a -i on"
-
-outlook() {
-	open "/Applications/Microsoft Outlook.app"
-}
-rdp() {
-	open "/Applications/Microsoft Remote Desktop Beta.app"
-}
-anki() {
-	open "/Applications/Anki.app"
-}
 
 # vim: ft=sh

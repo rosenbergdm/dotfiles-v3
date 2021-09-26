@@ -6,7 +6,7 @@
 set_iterm_title "Setting ruby version"
 rvm use ruby-3.0.0 >/dev/null 2>&1
 # _rvm_first() {
-#   [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" 
+#   [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
 #   # eval "$(echo '_old_rvm()'; typeset -f rvm | tail -n212)"
 #   rvm use ruby-3.0.0 >/dev/null
 #   rvm $@

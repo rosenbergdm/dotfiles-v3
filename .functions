@@ -4,224 +4,224 @@
 MY_FUNCTIONS=()
 
 set_perl() {
-	if [ "$(echo $1 | tr a-z A-Z)" == "SYSTEM" ] || [ "$1" = "5.18" ]; then
-		export PERLLIB=/Library/Perl/5.18:/Library/Perl/5.18/darwin-thread-multi-2level:/System/Library/Perl/5.18:/System/Library/Perl/5.18/darwin-thread-multi-2level:/System/Library/Perl/Extras/5.18:/System/Library/Perl/Extras/5.18/darwin-thread-multi-2level
-		export PERL5LIB=$PERLLIB
-		export PERL=/usr/bin/perl
-		alias perl=/usr/bin/perl
-	elif [ "$1" == "5.28" ]; then
-		export PERLLIB=/Library/Perl/5.28:/Library/Perl/5.28/darwin-thread-multi-2level:/System/Library/Perl/5.28:/System/Library/Perl/5.28/darwin-thread-multi-2level:/System/Library/Perl/Extras/5.28:/System/Library/Perl/Extras/5.28/darwin-thread-multi-2level
-		export PERL5LIB=$PERLLIB
-		export PERL=/usr/bin/perl5.28
-		alias perl=/usr/bin/perl5.28
-	elif [ "$(echo $1 | tr a-z A-Z)" == "HOMEBREW" ] || [ "$1" == "5.30" ]; then
-		export PERLLIB=/usr/local/Cellar/perl/5.30.1/lib/perl5/site_perl/5.30.1/darwin-thread-multi-2level:/usr/local/Cellar/perl/5.30.1/lib/perl5/site_perl/5.30.1:/usr/local/Cellar/perl/5.30.1/lib/perl5/5.30.1/darwin-thread-multi-2level:/usr/local/Cellar/perl/5.30.1/lib/perl5/5.30.1:/usr/local/lib/perl5/5.30.1:/usr/local/lib/perl5/5.30.1/darwin-thread-multi-2level
-		export PERL5LIB=$PERLLIB
-		export PERL=/usr/local/bin/perl
-		alias perl=/usr/local/bin/perl
-	elif [ "$(echo $1 | tr a-z A-Z)" == "NONE" ]; then
-		unset PERL
-		unset PERL5LIB
-		unset PERLLIB
-		unalias perl
-	else
-		echo "USAGE: set_perl [SYSTEM|HOMEBREW|5.18|5.14|5.30|NONE]"
-	fi
+  if [ "$(echo $1 | tr a-z A-Z)" == "SYSTEM" ] || [ "$1" = "5.18" ]; then
+    export PERLLIB=/Library/Perl/5.18:/Library/Perl/5.18/darwin-thread-multi-2level:/System/Library/Perl/5.18:/System/Library/Perl/5.18/darwin-thread-multi-2level:/System/Library/Perl/Extras/5.18:/System/Library/Perl/Extras/5.18/darwin-thread-multi-2level
+    export PERL5LIB=$PERLLIB
+    export PERL=/usr/bin/perl
+    alias perl=/usr/bin/perl
+  elif [ "$1" == "5.28" ]; then
+    export PERLLIB=/Library/Perl/5.28:/Library/Perl/5.28/darwin-thread-multi-2level:/System/Library/Perl/5.28:/System/Library/Perl/5.28/darwin-thread-multi-2level:/System/Library/Perl/Extras/5.28:/System/Library/Perl/Extras/5.28/darwin-thread-multi-2level
+    export PERL5LIB=$PERLLIB
+    export PERL=/usr/bin/perl5.28
+    alias perl=/usr/bin/perl5.28
+  elif [ "$(echo $1 | tr a-z A-Z)" == "HOMEBREW" ] || [ "$1" == "5.30" ]; then
+    export PERLLIB=/usr/local/Cellar/perl/5.30.1/lib/perl5/site_perl/5.30.1/darwin-thread-multi-2level:/usr/local/Cellar/perl/5.30.1/lib/perl5/site_perl/5.30.1:/usr/local/Cellar/perl/5.30.1/lib/perl5/5.30.1/darwin-thread-multi-2level:/usr/local/Cellar/perl/5.30.1/lib/perl5/5.30.1:/usr/local/lib/perl5/5.30.1:/usr/local/lib/perl5/5.30.1/darwin-thread-multi-2level
+    export PERL5LIB=$PERLLIB
+    export PERL=/usr/local/bin/perl
+    alias perl=/usr/local/bin/perl
+  elif [ "$(echo $1 | tr a-z A-Z)" == "NONE" ]; then
+    unset PERL
+    unset PERL5LIB
+    unset PERLLIB
+    unalias perl
+  else
+    echo "USAGE: set_perl [SYSTEM|HOMEBREW|5.18|5.14|5.30|NONE]"
+  fi
 }
 MY_FUNCTIONS+=("set_perl")
 
 set_python() {
-	if [ "$1" == "2" ]; then
-		export PYTHONPATH=/usr/local/lib/python2.7/site-packages:~/Library/Python/2.7/lib/python/site-packages
-		alias ipython="$(which ipython2)"
-		alias python="$(which python2.7)"
-		alias pip="$(which pip2.7)"
-	elif [ "$1" == "3" ]; then
-		unset PYTHONPATH
-		alias ipython="$(which ipython3)"
-		alias python="$(which python3)"
-		alias pip="$(which pip3)"
-	else
-		echo "USAGE: set_python [2|3]"
-	fi
+  if [ "$1" == "2" ]; then
+    export PYTHONPATH=/usr/local/lib/python2.7/site-packages:~/Library/Python/2.7/lib/python/site-packages
+    alias ipython="$(which ipython2)"
+    alias python="$(which python2.7)"
+    alias pip="$(which pip2.7)"
+  elif [ "$1" == "3" ]; then
+    unset PYTHONPATH
+    alias ipython="$(which ipython3)"
+    alias python="$(which python3)"
+    alias pip="$(which pip3)"
+  else
+    echo "USAGE: set_python [2|3]"
+  fi
 }
 MY_FUNCTIONS+=("set_python")
 
 adialog() {
-	if [[ -z "$1" ]]; then
-		echo "USAGE: adialog MESSAGE"
-		return 1
-	fi
-	message="$*"
-	{
-		osascript -e "tell app \"System Events\" to display dialog \"$message\"" >/dev/null 2>&1 && echo 0
-	} || {
-		echo 1
-	}
+  if [[ -z $1  ]]; then
+    echo "USAGE: adialog MESSAGE"
+    return 1
+  fi
+  message="$*"
+  {
+    osascript -e "tell app \"System Events\" to display dialog \"$message\"" >/dev/null 2>&1 && echo 0
+  } || {
+    echo 1
+  }
 }
 MY_FUNCTIONS+=("adialog")
 
 function logtimesplit() {
-	t1="$(tail -n2 $HOME/mytasks.txt | head -n1 | perl -p -e 's/^.*\047 at //g')"
-	t2="$(tail -n1 $HOME/mytasks.txt | perl -p -e 's/^.*\047 at //g')"
-	ddiff "$t1" "$t2" -f '%H %M'
+  t1="$(tail -n2 $HOME/mytasks.txt | head -n1 | perl -p -e 's/^.*\047 at //g')"
+  t2="$(tail -n1 $HOME/mytasks.txt | perl -p -e 's/^.*\047 at //g')"
+  ddiff "$t1" "$t2" -f '%H %M'
 }
 MY_FUNCTIONS+=("logtimesplit")
 
 function logtask() {
-	if [[ $# -eq 0 ]]; then
-		tail -n20 $HOME/mytasks.txt
-		echo
-		echo "USAGE: logtask TASKNAME [start|stop]"
-		echo "   Logs start/stops to file $HOME/mytasks.txt"
-	else
-		taskname="$1"
-		startstop="${2:-start}"
-		echo "${startstop[*]^} task '$taskname' at $(date +'%Y-%m-%d %H:%M:%S')" | tee -a $HOME/mytasks.txt
-		if [ $startstop == "stop" ]; then
-			logtimesplit
-			logtimesplit | sed -e 's/ /:/g' >>$HOME/mytimes.txt
-			sum_times.py $HOME/mytimes.txt
-		fi
-	fi
+  if [[ $# -eq 0 ]]; then
+    tail -n20 $HOME/mytasks.txt
+    echo
+    echo "USAGE: logtask TASKNAME [start|stop]"
+    echo "   Logs start/stops to file $HOME/mytasks.txt"
+  else
+    taskname="$1"
+    startstop="${2:-start}"
+    echo "${startstop[*]^} task '$taskname' at $(date +'%Y-%m-%d %H:%M:%S')" | tee -a $HOME/mytasks.txt
+    if [ $startstop == "stop" ]; then
+      logtimesplit
+      logtimesplit | sed -e 's/ /:/g' >>$HOME/mytimes.txt
+      sum_times.py $HOME/mytimes.txt
+    fi
+  fi
 }
 MY_FUNCTIONS+=("logtask")
 
 function logstart() {
-	if [[ $# -eq 0 ]]; then
-		echo "USAGE: logstart TASKNAME"
-	else
-		logtask "$*" start
-	fi
+  if [[ $# -eq 0 ]]; then
+    echo "USAGE: logstart TASKNAME"
+  else
+    logtask "$*" start
+  fi
 }
 MY_FUNCTIONS+=("logstart")
 
 function logstop() {
-	if [[ $# -eq 0 ]]; then
-		echo "USAGE: logstop TASKNAME"
-	else
-		logtask "$*" stop
-	fi
+  if [[ $# -eq 0 ]]; then
+    echo "USAGE: logstop TASKNAME"
+  else
+    logtask "$*" stop
+  fi
 }
 MY_FUNCTIONS+=("logstop")
 
 function settruecolor() {
-	if [[ -z "$1" ]]; then
-		echo "USAGE: settruecolor RED GREEN BLUE"
-		echo "  Ex: \$ > echo \"\$(settruecolor 100 200 50)Hello\""
-		printf "         \x1b[38;2;100;200;50mHello\n"
-		return 1
-	fi
-	red="$1"
-	green="$2"
-	blue="$3"
-	printf "\x1b[38;2;%d;%d;%dm" $red $green $blue
+  if [[ -z $1  ]]; then
+    echo "USAGE: settruecolor RED GREEN BLUE"
+    echo '  Ex: $ > echo "$(settruecolor 100 200 50)Hello"'
+    printf "         \x1b[38;2;100;200;50mHello\n"
+    return 1
+  fi
+  red="$1"
+  green="$2"
+  blue="$3"
+  printf "\x1b[38;2;%d;%d;%dm" $red $green $blue
 }
 MY_FUNCTIONS+=("settruecolor")
 
 function resettruecolor() {
-	printf "\x1b[0m"
+  printf "\x1b[0m"
 }
 MY_FUNCTIONS+=("resettruecolor")
 
 function gitignore() {
-	if [[ -z "$1" ]]; then
-		echo "USAGE: gitignore FILES"
-		echo "Adds FILES to the local .gitignore listing"
-	fi
-	arg=("$@")
-	ignorefile=""
-	testfile=".gitignore"
-	for ((i = 0; i < 5; i++)); do
-		if [[ -f "$testfile" ]]; then
-			ignorefile="$testfile"
-			break
-		else
-			testfile="../$testfile"
-		fi
-	done
-	if [[ -z "$ignorefile" ]]; then
-		echo "ERROR: .gitignore could not be found!"
-		return 1
-	fi
-	for ((i = 0; i < $#; i++)); do
-		if [[ -f "${arg[i]}" ]]; then
-			# this is an actual file
-			tgtfile="$(realpath --relative-to=$ignorefile "${arg[i]}" | sed -e 's/^\.\.\///g')"
-			echo "$tgtfile" >>"$ignorefile"
-		else
-			# this is a patterny thing
-			if [[ "$ignorefile" == ".gitignore" ]]; then
-				echo "${arg[i]}" >>"$ignorefile"
-			else
-				echo "ERROR: Nonfile target and not in same directory as .gitignore is not supported... not adding '${arg[i]}'"
-				return 1
-			fi
-		fi
-	done
+  if [[ -z $1  ]]; then
+    echo "USAGE: gitignore FILES"
+    echo "Adds FILES to the local .gitignore listing"
+  fi
+  arg=("$@")
+  ignorefile=""
+  testfile=".gitignore"
+  for ((i = 0; i < 5; i++)); do
+    if [[ -f $testfile ]]; then
+      ignorefile="$testfile"
+      break
+    else
+      testfile="../$testfile"
+    fi
+  done
+  if [[ -z $ignorefile  ]]; then
+    echo "ERROR: .gitignore could not be found!"
+    return 1
+  fi
+  for ((i = 0; i < $#; i++)); do
+    if [[ -f ${arg[i]} ]]; then
+      # this is an actual file
+      tgtfile="$(realpath --relative-to=$ignorefile "${arg[i]}" | sed -e 's/^\.\.\///g')"
+      echo "$tgtfile" >>"$ignorefile"
+    else
+      # this is a patterny thing
+      if [[ $ignorefile == ".gitignore" ]]; then
+        echo "${arg[i]}" >>"$ignorefile"
+      else
+        echo "ERROR: Nonfile target and not in same directory as .gitignore is not supported... not adding '${arg[i]}'"
+        return 1
+      fi
+    fi
+  done
 }
 MY_FUNCTIONS+=("gitignore")
 
 function save_last_command() {
-	function_file=${1:-$HOME/saved_commands.txt}
-	if [[ "$1" == "--help" || "$1" == "-help" || "$1" == "-h" ]]; then
-		echo "USAGE: $FUNCNAME [FUNCTION_FILE]"
-		echo "  Default FUNCTIONFILE is \$HOME/saved_commands.txt"
-		echo "  Saves the last entered to 'FUNCTION_FILE'"
-		return 0
-	fi
-	lastcommand="$(history | tail -n2 | head -n1 | perl -p -e 's/^\W*\d+\W+//g')"
-	function_file=${1:-$HOME/saved_commands.txt}
-	if [[ ! -f "$function_file" ]]; then
-		echo "Function file $function_file does not exist!"
-	else
-		echo "$lastcommand" >>"$function_file"
-		echo "Wrote '$lastcommand' to '$function_file'"
-	fi
+  function_file=${1:-$HOME/saved_commands.txt}
+  if [[ $1 == "--help" || $1 == "-help" || $1 == "-h"      ]]; then
+    echo "USAGE: $FUNCNAME [FUNCTION_FILE]"
+    echo '  Default FUNCTIONFILE is $HOME/saved_commands.txt'
+    echo "  Saves the last entered to 'FUNCTION_FILE'"
+    return 0
+  fi
+  lastcommand="$(history | tail -n2 | head -n1 | perl -p -e 's/^\W*\d+\W+//g')"
+  function_file=${1:-$HOME/saved_commands.txt}
+  if [[ ! -f $function_file  ]]; then
+    echo "Function file $function_file does not exist!"
+  else
+    echo "$lastcommand" >>"$function_file"
+    echo "Wrote '$lastcommand' to '$function_file'"
+  fi
 }
 MY_FUNCTIONS+=("save_last_command")
 
 function dotfiles() {
-	if [[ "$1" == "--help" || "$1" == "-help" || "$1" == "-h" ]]; then
-		cat <<EOF
+  if [[ $1 == "--help" || $1 == "-help" || $1 == "-h"      ]]; then
+    cat <<EOF
 USAGE: $FUNCNAME ARGS
   Run GIT commands on one's HOME directory 
   This is the same as running 'git --git-dir=$HOME/dotfiles-new.git/ --work-tree=$HOME "\$@"'
 EOF
-		return 0
-	fi
-	pushd $HOME >/dev/null
-	/usr/local/bin/git --git-dir=$HOME/dotfiles-new.git/ --work-tree=$HOME "$@"
-	popd >/dev/null
+    return 0
+  fi
+  pushd $HOME >/dev/null
+  /usr/local/bin/git --git-dir=$HOME/dotfiles-new.git/ --work-tree=$HOME "$@"
+  popd >/dev/null
 }
 MY_FUNCTIONS+=("dotfiles")
 
 function dfg() {
-	if [[ "$1" == "--help" || "$1" == "-help" || "$1" == "-h" ]]; then
-		cat <<EOF
+  if [[ $1 == "--help" || $1 == "-help" || $1 == "-h"      ]]; then
+    cat <<EOF
 USAGE: $FUNCNAME ARGS
   Run GIT commands on one's HOME directory 
   This is the same as running 'git --git-dir=$HOME/src/dotfiles-v3.git/ --work-tree=$HOME "\$@"'
 EOF
-		return 0
-	fi
-	git --git-dir $HOME/src/dotfiles-v3.git --work-tree=$HOME "$@"
+    return 0
+  fi
+  git --git-dir $HOME/src/dotfiles-v3.git --work-tree=$HOME "$@"
 }
 
 MY_FUNCTIONS+=("dfg")
 
 function pathappend() {
-	for ARG in "$@"; do
-		if [ -d "$ARG" ] && [[ ":$PATH:" != *":$ARG:"* ]]; then
-			PATH="${PATH:+"$PATH:"}$ARG"
-		fi
-	done
+  for ARG in "$@"; do
+    if [ -d "$ARG" ] && [[ ":$PATH:" != *":$ARG:"* ]]; then
+      PATH="${PATH:+"$PATH:"}$ARG"
+    fi
+  done
 }
 MY_FUNCTIONS+=("pathappend")
 
 function pathlistappend() {
-	if [[ "$1" == "--help" || "$1" == "-help" || "$1" == "-h" || $# -ne 2 ]]; then
-		cat <<EOF
+  if [[ $1 == "--help" || $1 == "-help" || $1 == "-h" || $# -ne 2      ]]; then
+    cat <<EOF
 USAGE: $FUNCNAME VARLIST NEWPATH
   VARLIST               -- the name of a ':' separated path list, such as PATH, MANPATH, or PYTHONPTH
   NEWPATH               -- new filepath to append to the END of the list if it isn't already included
@@ -231,34 +231,34 @@ USAGE: $FUNCNAME VARLIST NEWPATH
      \$ > echo \$MANPATH
     /usr/share/man:/usr/local/share/man:$HOME/share/man
 EOF
-		if [[ "$1" == "--help" || "$1" == "-help" || "$1" == "-h" ]]; then
-			return 0
-		else
-			return 1
-		fi
-	fi
-	PATHLIST="$1"
-	ARG="$2"
-	current_pathlist="$(eval "echo \$$(echo $PATHLIST)")"
-	if [ -d "$ARG" ] && [[ ":current_pathlist:" != *":$ARG:"* ]]; then
-		eval "$PATHLIST=$ARG:${current_pathlist:+"$current_pathlist"}"
-	fi
+    if [[ $1 == "--help" || $1 == "-help" || $1 == "-h"     ]]; then
+      return 0
+    else
+      return 1
+    fi
+  fi
+  PATHLIST="$1"
+  ARG="$2"
+  current_pathlist="$(eval "echo \$$(echo $PATHLIST)")"
+  if [ -d "$ARG" ] && [[ ":current_pathlist:" != *":$ARG:"* ]]; then
+    eval "$PATHLIST=$ARG:${current_pathlist:+"$current_pathlist"}"
+  fi
 }
 MY_FUNCTIONS+=("pathlistappend")
 
 function pathprepend() {
-	for ((i = $#; i > 0; i--)); do
-		ARG=${!i}
-		if [ -d "$ARG" ] && [[ ":$PATH:" != *":$ARG:"* ]]; then
-			PATH="$ARG${PATH:+":$PATH"}"
-		fi
-	done
+  for ((i = $#; i > 0; i--)); do
+    ARG=${!i}
+    if [ -d "$ARG" ] && [[ ":$PATH:" != *":$ARG:"* ]]; then
+      PATH="$ARG${PATH:+":$PATH"}"
+    fi
+  done
 }
 MY_FUNCTIONS+=("pathprepend")
 
 function dedupe_pathvar() {
-	if [[ "$1" == "--help" || "$1" == "-help" || "$1" == "-h" ]]; then
-		cat <<EOF
+  if [[ $1 == "--help" || $1 == "-help" || $1 == "-h"      ]]; then
+    cat <<EOF
 USAGE: $FUNCNAME VAR
   Remove duplicates from the list in variable \$VAR; default is \$PATH
   Example:
@@ -269,106 +269,155 @@ USAGE: $FUNCNAME VAR
     /usr/bin:/usr/local/bin:/usr/sbin:/usr/local/sbin
 
 EOF
-		return 0
-	fi
-	PATHVAR="${1:-PATH}"
-	if [[ -z "$(eval "echo \$$PATHVAR")" ]]; then
-		echo "$PATHVAR is not set or is empty!"
-		return 1
-	else
-		export ${PATHVAR}="$(perl -e "print join(':', grep { not \$seen{\$_}++ } split(/:/, \$ENV{$PATHVAR}))")"
-	fi
+    return 0
+  fi
+  PATHVAR="${1:-PATH}"
+  if [[ -z "$(eval "echo \$$PATHVAR")" ]]; then
+    echo "$PATHVAR is not set or is empty!"
+    return 1
+  else
+    export ${PATHVAR}="$(perl -e "print join(':', grep { not \$seen{\$_}++ } split(/:/, \$ENV{$PATHVAR}))")"
+  fi
 }
 MY_FUNCTIONS+=("dedupe_pathvar")
 
 function randomwords() {
-	thewords=""
-	for i in $(seq $1); do
-		thewords="$thewords $(cat /usr/share/dict/words | head -n $(echo 'print int(rand() * 235886)' | perl) | tail -n1)"
-	done
-	echo $thewords
+  thewords=""
+  for i in $(seq $1); do
+    thewords="$thewords $(cat /usr/share/dict/words | head -n $(echo 'print int(rand() * 235886)' | perl) | tail -n1)"
+  done
+  echo $thewords
 }
 MY_FUNCTIONS+=("randomwords")
 
 function doiify() {
-	echo "https://dx.doi.org/$(pbpaste)" | pbcopy
+  echo "https://dx.doi.org/$(pbpaste)" | pbcopy
 }
 MY_FUNCTIONS+=("doiify")
 
 pubmedify() {
-	echo "https://pubmed.ncbi.nlm.nih.gov/$(pbpaste)/" | pbcopy
+  echo "https://pubmed.ncbi.nlm.nih.gov/$(pbpaste)/" | pbcopy
 }
 MY_FUNCTIONS+=("pubmedify")
 
 fmtsql() {
-	ws="$(pbpaste | head -n1 | perl -p -e 's/^(\s*).*$/$1/g')"
-	sqlformat -a -k upper -i lower <(pbpaste) | /usr/bin/perl -p -e "s/^/$ws/g" | pbcopy
-	pbpaste
+  ws="$(pbpaste | head -n1 | perl -p -e 's/^(\s*).*$/$1/g')"
+  sqlformat -a -k upper -i lower <(pbpaste) | /usr/bin/perl -p -e "s/^/$ws/g" | pbcopy
+  pbpaste
 }
 MY_FUNCTIONS+=("fmtsql")
 
 ansi2text() {
-	while IFS= read -r LINE; do
-		printf "%s\n" "$LINE" | perl -pe 's/\x1b\[[0-9;]*[mG]//g' | col -b
-	done
+  while IFS= read -r LINE; do
+    printf "%s\n" "$LINE" | perl -pe 's/\x1b\[[0-9;]*[mG]//g' | col -b
+  done
 }
 MY_FUNCTIONS+=("ansi2txt")
 
 twilio() {
-	if [[ "$@" == "" ]] || [[ "$1" == "-h" ]] || [[ "$1" == "--help" ]]; then
-		local usage="\$ twilio api:core:messages:create --body \"Message body here\" --from \"+19388882701\" --to \"+17732403395\""
-		printf "\n\nUSAGE:\n\n\t%s\n\n" "$usage"
-	else
-		npx twilio-cli "$@"
-	fi
+  if [[ $@ == ""  ]] || [[ $1 == "-h"   ]] || [[ $1 == "--help"   ]]; then
+    local usage='$ twilio api:core:messages:create --body "Message body here" --from "+19388882701" --to "+17732403395"'
+    printf "\n\nUSAGE:\n\n\t%s\n\n" "$usage"
+  else
+    npx twilio-cli "$@"
+  fi
 }
 MY_FUNCTIONS+=("twilio")
 
 toggle_citrix() {
-	if [[ "$@" == "" ]] || [[ "$1" == "-h" ]] || [[ "$1" == "--help" ]]; then
-		local usage="\$ toggle_citrix [disable|enable|start|stop] "
-		printf "\n\nUSAGE:\n\n\t%s\n\n" "$usage"
-	else
-		if [[ "$1" == enable ]]; then
-			prefix="system/"
-		elif [[ "$1" == disable ]]; then
-			prefix="system/"
-		elif [[ "$1" == "start" ]]; then
-			prefix=""
-		elif [[ "$1" == "stop" ]]; then
-			prefix=""
-		else
-			printf "\n\nERROR: command '%s' not found\n\n" "$1"
-			return 1
-		fi
-		echo "sudo /bin/launchctl $1 ${prefix}com.citrix.ServiceRecords"
-		echo "sudo /bin/launchctl $1 ${prefix}com.citrix.ReceiverHelper"
-		echo "sudo /bin/launchctl $1 ${prefix}com.citrix.AuthManager_Mac"
-		sudo /bin/launchctl $1 ${prefix}com.citrix.ServiceRecords
-		sudo /bin/launchctl $1 ${prefix}com.citrix.ReceiverHelper
-		sudo /bin/launchctl $1 ${prefix}com.citrix.AuthManager_Mac
-	fi
+  if [[ $@ == ""  ]] || [[ $1 == "-h"   ]] || [[ $1 == "--help"   ]]; then
+    local usage='$ toggle_citrix [disable|enable|start|stop] '
+    printf "\n\nUSAGE:\n\n\t%s\n\n" "$usage"
+  else
+    if [[ $1 == enable ]]; then
+      prefix="system/"
+    elif [[ $1 == disable ]]; then
+      prefix="system/"
+    elif [[ $1 == "start" ]]; then
+      prefix=""
+    elif [[ $1 == "stop" ]]; then
+      prefix=""
+    else
+      printf "\n\nERROR: command '%s' not found\n\n" "$1"
+      return 1
+    fi
+    echo "sudo /bin/launchctl $1 ${prefix}com.citrix.ServiceRecords"
+    echo "sudo /bin/launchctl $1 ${prefix}com.citrix.ReceiverHelper"
+    echo "sudo /bin/launchctl $1 ${prefix}com.citrix.AuthManager_Mac"
+    sudo /bin/launchctl $1 ${prefix}com.citrix.ServiceRecords
+    sudo /bin/launchctl $1 ${prefix}com.citrix.ReceiverHelper
+    sudo /bin/launchctl $1 ${prefix}com.citrix.AuthManager_Mac
+  fi
 }
+MY_FUNCTIONS+=("toggle_citrix")
 
 add_missing_startup() {
-	set_iterm_title "Loading completions"
-	if [ -f /usr/local/etc/profile.d/bash_completion.sh ]; then
-		# This will end up sourcing "${XDG_CONFIG_HOME:-$HOME/.config}/bash_completion"
-		# Then it will read from the following dirs for commands of the form 'cmd', 'cmd.bash' or '_cmd':
-		#   ${BASH_COMPLETION_USER_DIR:-${XDG_DATA_HOME:-$HOME/.local/share}/bash-completion}/completions
-		#   ${XDG_DATA_DIRS:-/usr/local/share:/usr/share}/*/bash-completion/completions
-		#   ${BASH_SOURCE%/}/completions (for scripts) or ./completions (for not being in a script)
-		# For each of these it will load the completion when the command is required
-		# TLDR
-		#   Dynamically loaded completions go in  $HOME/.local/share/bash-completion/completions
-		#   Eagerly loaded completions should be loaded by $HOME/.config/bash/completion
-		#   In the end completions stored in $HOME/.bash_completion will be executed
-		source_and_log /usr/local/etc/profile.d/bash_completion.sh
-		___git_complete dfg __git_main
-	fi
-	source_and_log "$HOME/.extra"
-	[ -f ~/.fzf.bash ] && source_and_log ~/.fzf.bash
-	set_iterm_title "bash"
+  set_iterm_title "Loading completions"
+  if [ -f /usr/local/etc/profile.d/bash_completion.sh ]; then
+    # This will end up sourcing "${XDG_CONFIG_HOME:-$HOME/.config}/bash_completion"
+    # Then it will read from the following dirs for commands of the form 'cmd', 'cmd.bash' or '_cmd':
+    #   ${BASH_COMPLETION_USER_DIR:-${XDG_DATA_HOME:-$HOME/.local/share}/bash-completion}/completions
+    #   ${XDG_DATA_DIRS:-/usr/local/share:/usr/share}/*/bash-completion/completions
+    #   ${BASH_SOURCE%/}/completions (for scripts) or ./completions (for not being in a script)
+    # For each of these it will load the completion when the command is required
+    # TLDR
+    #   Dynamically loaded completions go in  $HOME/.local/share/bash-completion/completions
+    #   Eagerly loaded completions should be loaded by $HOME/.config/bash/completion
+    #   In the end completions stored in $HOME/.bash_completion will be executed
+    source_and_log /usr/local/etc/profile.d/bash_completion.sh
+    ___git_complete dfg __git_main
+  fi
+  source_and_log "$HOME/.extra"
+  [ -f ~/.fzf.bash ] && source_and_log ~/.fzf.bash
+  set_iterm_title "bash"
 }
+MY_FUNCTIONS+=("add_missing_startup")
 
+# connect-ucmc() {
+#   pidfile=/var/run/connect-ucmc.pid
+#   logfile=/var/log/connect-ucmc.log
+#   if [[ -e "$pidfile" ]]; then
+#     printf "%s\n" "Openconnect is already connected"
+#   else
+#     sudo openconnect \
+#       --pid-file="$pidfile" \
+#       -b \
+#       --protocol=anyconnect \
+#       -user=nsf6756 \
+#       webvpn.uchospitals.edu \
+#       --servercert pin-sha256:OriunfL+2xPuSN1RFiY3gTzv+Daxe1GE1f5EokqFQTk= 2>&1 | sudo tee -a "$logfile"
+#   fi
+# }
+
+# disconnect-ucmc() {
+#   pidfile=/var/run/connect-ucmc.pid
+#   logfile=/var/log/connect-ucmc.log
+#   if [[ -e "$pidfile" ]]; then
+#     pid="$(cat "$pidfile")"
+#     kill -QUIT "$pid"
+#     printf "%s\n" "Openconnect disconnected"
+#   else
+#     printf "%s\n" "Openconnect is not running"
+#   fi
+# }
+
+# winrdp() {
+#   open "/Applications/Microsoft Remote Desktop Beta.app"
+# }
+outlook() {
+  open "/Applications/Microsoft Outlook.app"
+}
+msword() {
+  open "/Applications/Microsoft Word.app"
+}
+excel() {
+  open "/Applications/Microsoft Excel.app"
+}
+rdp() {
+  open "/Applications/Microsoft Remote Desktop Beta.app"
+}
+anki() {
+  open "/Applications/Anki.app"
+}
+MY_FUNCTIONS+=("anki" "rdp" "excel" "msword" "outlook")
 # vim: ft=sh

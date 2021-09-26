@@ -1,0 +1,8 @@
+#!/bin/sh
+
+nvim_real=`which nvim`
+nvim_real=`greadlink -f "$nvim_real"`
+export MYVIMRC=$HOME/.config/nvim.old/init.vim
+# export VIMINIT
+exec nvim --cmd "set runtimepath+=~/.local/share/nvim" "$@"
+
