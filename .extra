@@ -4,7 +4,7 @@
 # Tricks to minimize startup time for infrequently used functions
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source_and_log "$HOME/.rvm/scripts/rvm"
 set_iterm_title "Setting ruby version"
-rvm use ruby-3.0.0 >/dev/null 2>&1
+rvm use ruby-3 >/dev/null 2>&1
 # _rvm_first() {
 #   [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
 #   # eval "$(echo '_old_rvm()'; typeset -f rvm | tail -n212)"

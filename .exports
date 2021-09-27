@@ -1,5 +1,5 @@
 [[ "$DEBUG_STARTUP:" == "1:" ]] && echo "RUNNING $HOME/.exports"
-export HOMEBREW_PREFIX=$(brew --prefix)
+# export HOMEBREW_PREFIX=$(brew --prefix)
 
 export NIX_IGNORE_SYMLINK_STORE=1
 # export FULL_GHC_PACKAGE_PATH=$HOME/.ghcup/ghc/8.8.3/lib/ghc-8.8.3/package.conf.d:$HOME/.cabal/store/ghc-8.8.3/package.db
@@ -7,8 +7,10 @@ export NIX_IGNORE_SYMLINK_STORE=1
 # export USER_PACKAGE_PATH=$HOME/.cabal/store/ghc-8.8.3/package.db
 export URXVT_PERL_LIB=/usr/local/lib/urxvt/perl
 export extra_cabal_flags="'--package-db=$HOME/.ghcup/ghc/8.8.3/lib/ghc-8.8.3/package.conf.d' '--package-db=$HOME/.cabal/store/ghc-8.8.3/package.db' --extra-lib-dirs='/usr/X11/lib' --ghc-options='-L/usr/X11/lib'"
-export VISUAL=$HOMEBREW_PREFIX/bin/nvim
-export EDITOR=$HOMEBREW_PREFIX/bin/nvim
+# export VISUAL=$HOMEBREW_PREFIX/bin/nvim
+# export EDITOR=$HOMEBREW_PREFIX/bin/nvim
+export VISUAL=$HOME/.local/bin/lvim
+export EDITOR=$VISUAL
 export GOPATH=$HOME/go
 export BKPATH=/Volumes/LaptopBackup2/uic-backups
 export APACHEHOME=/usr/local/var/www

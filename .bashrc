@@ -6,6 +6,14 @@
 # set -o functrace
 shopt   -s autocd
 
+if [[ -a /opt/homebrew/bin ]]; then
+  export HOMEBREW_PREFIX=/opt/homebrew
+elif [[ -a /usr/local/Homebrew ]]; then
+  export HOMEBREW_PREFIX=/usr/local
+fi
+
+export PATH=$HOMEBREW_PREFIX/bin:$PATH
+
 set_iterm_title() {
   if [[ "${TERM_PROGRAM}p" == "iTerm.appp" ]]; then
     echo -ne "\033]0;$*\007"

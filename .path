@@ -15,7 +15,8 @@ PATH=$PATH:$HOME/edirect
 PATH=$PATH:$HOME/go/bin:/usr/local/go/bin
 PATH=$PATH:$HOME/src/flutter/bin
 PATH=$PATH:/Library/Frameworks/R.framework/Versions/Current/Resources/bin
-[[ -e /opt/homebrew/bin ]] && PATH=/opt/homebrew/bin:$PATH
+# [[ -e /opt/homebrew/bin ]] && PATH=/opt/homebrew/bin:$PATH
+PATH=$HOMEBREW_PREFIX/bin:$PATH
 PATH="/Library/Java/JavaVirtualMachines/jdk1.8.0_112.jdk/Contents/Home/bin:$PATH"
 
 PATH="$HOME/.local/bin:$PATH"
