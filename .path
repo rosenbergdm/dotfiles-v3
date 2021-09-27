@@ -21,8 +21,8 @@ PATH="/Library/Java/JavaVirtualMachines/jdk1.8.0_112.jdk/Contents/Home/bin:$PATH
 PATH="$HOME/.local/bin:$PATH"
 export PATH
 
-set_python 3
-set_perl 5.18
+# set_python 3
+# set_perl 5.18
 
 
 
