@@ -1,9 +1,9 @@
 # System safe copmmands
 
-[[ -e /opt/homebrew/bin/brew ]] && export PATH=/opt/homebrew/bin:$PATH
+# [[ -e /opt/homebrew/bin/brew ]] && export PATH=/opt/homebrew/bin:$PATH
 
 
-export HOMEBREW_PREFIX=$(brew config | grep PREFIX | awk '{print $2}')
+# export HOMEBREW_PREFIX=$(brew config | grep PREFIX | awk '{print $2}')
 
 
 export AWK=$HOMEBREW_PREFIX/bin/gawk
