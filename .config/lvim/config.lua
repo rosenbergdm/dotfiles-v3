@@ -1,6 +1,6 @@
 -- general
 lvim.log.level = "info"
-lvim.format_on_save = true
+  lvim.format_on_save = true
 lvim.lint_on_save = true
 -- lvim.colorscheme = "onedarker"
 lvim.colorscheme = "tokyonight"
@@ -159,8 +159,8 @@ lvim.lang.javascriptreact.linters = lvim.lang.javascript.linters
 --
 -- Additional Plugins
 lvim.plugins = {
-  {"folke/tokyonight.nvim"}, 
-  {"folke/trouble.nvim", cmd = "TroubleToggle"}, 
+  {"folke/tokyonight.nvim"},
+  {"folke/trouble.nvim", cmd = "TroubleToggle"},
   {"blackCauldron7/surround.nvim",
     config = function()
             require("surround").setup {
