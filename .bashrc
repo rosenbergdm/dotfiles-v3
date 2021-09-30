@@ -161,12 +161,14 @@ done
 # For bash_completion@2
 if [[ $FAST_STARTUP == 0 ]]; then
   set_iterm_title "Loading completions"
-  if [ -f /usr/local/etc/profile.d/bash_completion.sh ]; then
-    bc_script=/usr/local/etc/profile.d/bash_completion.sh
-  elif [ -f /opt/homebrew/Cellar/bash-completion@2/2.11/etc/profile.d/bash_completion.sh ]; then
-    bc_script=/opt/homebrew/Cellar/bash-completion@2/2.11/etc/profile.d/bash_completion.sh
-  fi
-  source_and_log "$bc_script"
+  source_and_log "$HOMEBREW_PREFIX/etc/profile.d/bash_completion.sh"
+
+  # if [ -f /usr/local/etc/profile.d/bash_completion.sh ]; then
+  #   bc_script=/usr/local/etc/profile.d/bash_completion.sh
+  # elif [ -f /opt/homebrew/Cellar/bash-completion@2/2.11/etc/profile.d/bash_completion.sh ]; then
+  #   bc_script=/opt/homebrew/Cellar/bash-completion@2/2.11/etc/profile.d/bash_completion.sh
+  # fi
+  # source_and_log "$bc_script"
   ___git_complete dfg __git_main
 
   # This will end up sourcing "${XDG_CONFIG_HOME:-$HOME/.config}/bash_completion"
@@ -189,10 +191,12 @@ else
   _dbg "Skipping $HOME/.extra and fzf loading for speed"
 fi
 
-# vim: ft=sh :
-
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+# export NVM_DIR="$HOME/.nvm"
+# [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 . "$HOME/.cargo/env"
 # [ -f "/Users/dmr/.ghcup/env" ] && source "/Users/dmr/.ghcup/env" # ghcup-env
+
+
+# vim: ft=sh :
+
