@@ -83,15 +83,15 @@ export PROMPT_COMMAND
 
 touch "$HOME/.bash_eternal_history"
 
-if [ ! $FAST_STARTUP -gt 0 ]; then 
+if [ ! "$FAST_STARTUP" -gt 0 ]; then 
   if [ "$(wc -l $HOME/.bash_history | $AWK '{print $1}')" -gt "$(wc -l $HOME/.bash_eternal_history | $AWK '{print $1}')" ]; then
     cp "$HOME/.bash_history" "$HOME/.bash_eternal_history"
   else
     _dbg "!!!! $HOME/.bash_eternal_history is longer than $HOME/.bash_history -- Something strange has happened." 0
-    tmpfile=$(mktemp)
-    mv .bash_history $tmpfile
+    # tmpfile="$(mktemp)"
+    # mv .bash_history "$tmpfile"
     cp .bash_eternal_history .bash_history
-    mv $tmpfile .bash_history.$(basename $tmpfile)
+    # mv "$tmpfile" ".bash_history.$(basename "$tmpfile")"
   fi
 fi
 
