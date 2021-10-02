@@ -1,7 +1,7 @@
 #!/usr/local/bin/bash
 [[ "$DEBUG_STARTUP:" == "1:" ]] && echo "RUNNING $HOME/.path"
 
-MANPATH=/usr/local/share/man:/usr/share/man:/usr/local/share/man:/opt/X11/share/man:/Library/TeX/Distributions/.DefaultTeX/Contents/Man:/usr/local/gfortran/share/man:$HOME/CommandLineTools/usr/share/man:$HOME/.ghcup/ghc/8.8.3/share/man:/Library/Apple/usr/share/man:/Library/Developer/CommandLineTools/usr/share/man:$HOME/.rustup/toolchains/stable-x86_64-apple-darwin/share/man:$HOME/.stack/programs/x86_64-osx/ghc-8.8.3/share/man:$HOME/share/man:$HOME/CommandLineTools/SDKs/MacOSX.sdk/usr/share/man:$HOME/CommandLineTools/SDKs/MacOSX.sdk/usr/share/man
+MANPATH=$HOMEBREW_PREFIX/share/man:/usr/share/man:/usr/local/share/man:/opt/X11/share/man:/Library/TeX/Distributions/.DefaultTeX/Contents/Man:/usr/local/gfortran/share/man:$HOME/CommandLineTools/usr/share/man:$HOME/.ghcup/ghc/8.8.3/share/man:/Library/Apple/usr/share/man:/Library/Developer/CommandLineTools/usr/share/man:$HOME/.rustup/toolchains/stable-x86_64-apple-darwin/share/man:$HOME/.stack/programs/x86_64-osx/ghc-8.8.3/share/man:$HOME/share/man:$HOME/CommandLineTools/SDKs/MacOSX.sdk/usr/share/man:$HOME/CommandLineTools/SDKs/MacOSX.sdk/usr/share/man
 export MANPATH
 
 PATH="$HOME/bin:/usr/local/bin:/usr/local/sbin:$PATH"
