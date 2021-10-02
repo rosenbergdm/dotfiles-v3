@@ -186,7 +186,11 @@ lvim.plugins = {
             }
             lvim.lang.lua.lsp.setup = luadev
         end
-    }
+    },
+    {
+     'glacambre/firenvim',
+      run = function() vim.fn['firenvim#install'](0) end
+    },
 }
 
 --   {
