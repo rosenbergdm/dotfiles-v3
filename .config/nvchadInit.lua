@@ -1,12 +1,12 @@
 local home_dir = vim.loop.os_homedir()
 
-vim.opt.rtp:append(home_dir .. "/.local/share/nvcvim")
+vim.opt.rtp:append(home_dir .. "/.local/share/nvim.ch")
 vim.opt.rtp:append(home_dir .. "/.config/nvim.ch")
 
 vim.opt.rtp:remove(home_dir .. "/.local/share/nvim/site")
 vim.opt.rtp:remove(home_dir .. "/.local/share/nvim/site/after")
-vim.opt.rtp:prepend(home_dir .. "/.local/share/nvcvim/site")
-vim.opt.rtp:append(home_dir .. "/.local/share/nvcvim/site/after")
+vim.opt.rtp:prepend(home_dir .. "/.local/share/nvim.ch/site")
+vim.opt.rtp:append(home_dir .. "/.local/share/nvim.ch/site/after")
 
 vim.opt.rtp:remove(home_dir .. "/.config/nvim")
 vim.opt.rtp:remove(home_dir .. "/.config/nvim/after")
