@@ -181,15 +181,21 @@ lvim.plugins = {
       }
     end,
   }, -- { "tpope/vim-surround", keys = { "c", "d", "y" }, opt = true },
-  {
-    "folke/lua-dev.nvim",
-    config = function()
-      local luadev = require("lua-dev").setup {
-        lspconfig = lvim.lang.lua.lsp.setup,
-      }
-      lvim.lang.lua.lsp.setup = luadev
-    end,
-  },
+  { "folke/lua-dev.nvim" },
+
+  -- {
+  --   "folke/lua-dev.nvim",
+  --   -- config = function()
+  --     -- lspconfig = {
+  --     --   { cmd = "lua-language-server" }
+  --     -- }
+  --   -- end
+  --   }
+
+  --     local lspconfig = require('lspconfig')
+  --     lspconfig.sumneko_lua.setup(luadev)
+  --   end,
+  -- },
   {
     "glacambre/firenvim",
     run = function()
