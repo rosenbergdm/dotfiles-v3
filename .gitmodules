@@ -4,7 +4,6 @@
 [submodule "packer"]
 	path = .local/share/lunarvim/site/pack/packer/start/packer.nvim
 	url = https://github.com/wbthomason/packer.nvim
-<<<<<<< HEAD
 [submodule "nvchad"]
   path = .config/nvim.ch
   url = git@github.com:NvChad/NvChad.git
