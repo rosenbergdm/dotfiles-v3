@@ -117,7 +117,7 @@ lvim.lsp.on_attach_callback = function(bufnr)
     vim.api.nvim_buf_set_option(bufnr, ...)
   end
   --Enable completion triggered by <c-x><c-o>
-  buf_set_option("omnifunc", "v:lua.vim.lsp.omnifunc")
+  -- buf_set_option("omnifunc", "v:lua.vim.lsp.omnifunc")
 end
 -- you can overwrite the null_ls setup table (useful for setting the root_dir function)
 -- lvim.lsp.null_ls.setup = {
@@ -183,7 +183,7 @@ lvim.plugins = {
     end,
   }, -- { "tpope/vim-surround", keys = { "c", "d", "y" }, opt = true },
   { "folke/lua-dev.nvim" },
-  { "vim-scripts/dbext.vim", { opt = true }, },
+  { "vim-scripts/dbext.vim", { opt = true } },
 
   -- {
   --   "folke/lua-dev.nvim",
@@ -220,6 +220,10 @@ lvim.plugins = {
 --     	    event = "InsertEnter"
 -- },
 
+lvim.autocommands.custom_groups = {
+  -- { "BufRead", "*", "chdir %:p:h" },
+  { "FileReadPost", "*", "cd %:p:h" },
+}
 -- Autocommands (https://neovim.io/doc/user/autocmd.html)
 -- lvim.autocommands.custom_groups = {
 --   { "BufWinEnter", "*.lua", "setlocal ts=2 sw=2" },
