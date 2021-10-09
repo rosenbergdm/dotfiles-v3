@@ -16,7 +16,7 @@ declare -a git_packages=()
 
 # general packages
 sudo apt update 
-sudo apt install --install-recommends --install-suggests ${base_install_linux[@]}
+sudo apt install ${base_install_linux[@]}
 
 # rust
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh

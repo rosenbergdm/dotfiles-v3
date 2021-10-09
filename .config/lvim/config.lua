@@ -105,20 +105,20 @@ lvim.builtin.nvimtree.show_icons.git = 1
 
 -- if you don't want all the parsers change this to a table of the ones you want
 lvim.builtin.treesitter.ensure_installed = "maintained"
--- lvim.builtin.treesitter.ignore_install = { "haskell" }
+lvim.builtin.treesitter.ignore_install = { "haskell" }
 lvim.builtin.treesitter.highlight.enabled = false
 
 lvim.lsp.diagnostics.virtual_text = true
 -- generic LSP settings
 -- you can set a custom on_attach function that will be used for all the language servers
 -- See <https://github.com/neovim/nvim-lspconfig#keybindings-and-completion>
--- lvim.lsp.on_attach_callback = function(client, bufnr)
---   local function buf_set_option(...)
---     vim.api.nvim_buf_set_option(bufnr, ...)
---   end
---   --Enable completion triggered by <c-x><c-o>
---   buf_set_option("omnifunc", "v:lua.vim.lsp.omnifunc")
--- end
+lvim.lsp.on_attach_callback = function(bufnr)
+  local function buf_set_option(...)
+    vim.api.nvim_buf_set_option(bufnr, ...)
+  end
+  --Enable completion triggered by <c-x><c-o>
+  buf_set_option("omnifunc", "v:lua.vim.lsp.omnifunc")
+end
 -- you can overwrite the null_ls setup table (useful for setting the root_dir function)
 -- lvim.lsp.null_ls.setup = {
 --   root_dir = require("lspconfig").util.root_pattern("Makefile", ".git", "node_modules"),
@@ -140,8 +140,9 @@ lvim.lang.python.formatters = { { exe = "black", args = {} } }
 lvim.lang.python.linters = { { exe = "flake8", args = {} } }
 
 lvim.lang.lua.formatters = {
-  { exe = "stylua", args = { "--config-path", "~/.stylua.toml" } },
-  { exe = "lua_format", args = { "-c", "~/.lua-format.cfg" } },
+  { exe = "stylua" },
+  -- { exe = "stylua", args = { "--config-path", "~/.stylua.toml", "-s", "-" } },
+  -- { exe = "lua_format", args = { "-c", "~/.lua-format.cfg" } },
 }
 lvim.lang.lua.linters = { { exe = "luacheck" } }
 
@@ -220,7 +221,7 @@ lvim.plugins = {
 
 -- Autocommands (https://neovim.io/doc/user/autocmd.html)
 -- lvim.autocommands.custom_groups = {
---   { "BufWinEnter", "*.lua", "setlocal ts=8 sw=8" },
+--   { "BufWinEnter", "*.lua", "setlocal ts=2 sw=2" },
 -- }
 
 -- vim: ft=lua
