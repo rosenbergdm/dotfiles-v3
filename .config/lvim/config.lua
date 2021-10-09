@@ -182,6 +182,7 @@ lvim.plugins = {
     end,
   }, -- { "tpope/vim-surround", keys = { "c", "d", "y" }, opt = true },
   { "folke/lua-dev.nvim" },
+  { "vim-scripts/dbext.vim", { opt = true }, },
 
   -- {
   --   "folke/lua-dev.nvim",
