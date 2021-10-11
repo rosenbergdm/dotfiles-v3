@@ -25,10 +25,10 @@ rvm use ruby-3 >/dev/null 2>&1
 # alias nvm=_nvm_first
 [ -s "$NVM_DIR/nvm.sh" ] && source_and_log "$NVM_DIR/nvm.sh"  # This loads nvm
 set_iterm_title "setting node version"
-nvm use --delete-prefix v16.0 >/dev/null 2>&1
+nvm use --delete-prefix v16.11 >/dev/null 2>&1
 
 source_and_log "$HOME/.iterm2_shell_integration.bash"
-[ -e $HOME/.iterm2/it2api ] && export PATH="$PATH:$HOME/.iterm2"
+[ -e "$HOME/.iterm2/it2api" ] && export PATH="$PATH:$HOME/.iterm2"
 source_and_log "$HOME/.ghcup/env" # ghcup-env
 
 dedupe_pathvar
