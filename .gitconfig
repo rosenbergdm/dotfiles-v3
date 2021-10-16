@@ -1,0 +1,9 @@
+# This is Git's per-user configuration file.
+[user]
+	name = David Rosenberg
+	email = dmr@davidrosenberg.me
+# Please adapt and uncomment the following lines:
+#	name = David Rosenbnerg
+#	email = dmr@Christinas-MacBook-Air-2.local
+[merge]
+	tool = lvimdiff
