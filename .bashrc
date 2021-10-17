@@ -6,6 +6,17 @@
 # set -o functrace
 shopt   -s autocd
 
+case "$(uname -s)" in
+  Darwin|darwin) export SYSTYPE=OSX
+  ;;
+  Linux|linux) export SYSTYPE=LINUX
+  ;;
+  *) export SYSTYPE=unknown
+  ;;
+esac
+
+
+
 if [[ -a /opt/homebrew/bin ]]; then
   export HOMEBREW_PREFIX=/opt/homebrew
 elif [[ -a /usr/local/Homebrew ]]; then

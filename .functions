@@ -420,4 +420,16 @@ anki() {
   open "/Applications/Anki.app"
 }
 MY_FUNCTIONS+=("anki" "rdp" "excel" "msword" "outlook")
+
+if [[ $SYSTYPE == "OSX" ]]; then
+  ldd () {
+      $PRINTF "%s\n\n" "Use otool -L instead on osx" > /dev/stderr
+      otool -L $@
+  }
+
+  readlink() {
+    $PRINTF "%s\n\n" "Use greadlink on osx" > /dev/stderr
+    greadlink $@
+  }
+fi
 # vim: ft=sh

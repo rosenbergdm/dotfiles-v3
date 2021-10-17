@@ -29,20 +29,20 @@ alias vimdiff="$HOME/.local/bin/lvim -d"
 # enforcing correct gmvault execution
 alias gmvault=/usr/local/bin/gmvault
 
-alias ldd="echo -e 'USE otool -L instead' && echo && echo && otool -L $*"
-alias readlink="echo -e 'USE greadlink instead' > /dev/stderr && /usr/local/bin/greadlink"
 
 # I'm not sure why this needs to be done
 alias rsync=$HOMEBREW_PREFIX/bin/rsync
 alias lilypond=/Applications/LilyPond.app/Contents/MacOS/LilyPond
 
-alias osxairport='/System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport'
 alias urlencode='python -c "import sys, urllib as ul; print ul.quote_plus(sys.argv[1]);"'
-alias osxflush="dscacheutil -flushcache && killall -HUP mDNSResponder"
+if [[ $SYSTYPE == "OSX" ]]; then
+  alias osxairport='/System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport'
+  alias osxflush="dscacheutil -flushcache && killall -HUP mDNSResponder"
 
-# Disable Spotlight
-alias spotoff="sudo mdutil -a -i off"
-# Enable Spotlight
-alias spoton="sudo mdutil -a -i on"
+  # Disable Spotlight
+  alias spotoff="sudo mdutil -a -i off"
+  # Enable Spotlight
+  alias spoton="sudo mdutil -a -i on"
+fi
 
 # vim: ft=sh
