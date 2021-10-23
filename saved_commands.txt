@@ -53,3 +53,4 @@ excel ()
     open /Applications/Microsoft\ Excel.app
 }
 for f in *00??.pdf; do echo  | essentials_dl.sh ; done
+sudo openconnect --protocol=anyconnect --user=nsf6756 webvpn.uchospitals.edu --servercert pin-sha256:OriunfL+2xPuSN1RFiY3gTzv+Daxe1GE1f5EokqFQTk=;
