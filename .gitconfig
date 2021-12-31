@@ -7,3 +7,5 @@
 #	email = dmr@Christinas-MacBook-Air-2.local
 [merge]
 	tool = lvimdiff
+[init]
+	defaultBranch = master
