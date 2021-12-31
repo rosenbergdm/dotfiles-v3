@@ -28,28 +28,7 @@
                     },
                     "ignore": false,
                     "manipulate_caps_lock_led": true,
-                    "simple_modifications": [
-                        {
-                            "from": {
-                                "key_code": "application"
-                            },
-                            "to": [
-                                {
-                                    "key_code": "fn"
-                                }
-                            ]
-                        },
-                        {
-                            "from": {
-                                "key_code": "right_option"
-                            },
-                            "to": [
-                                {
-                                    "key_code": "fn"
-                                }
-                            ]
-                        }
-                    ]
+                    "simple_modifications": []
                 },
                 {
                     "disable_built_in_keyboard_if_exists": false,
@@ -290,11 +269,11 @@
             "simple_modifications": [
                 {
                     "from": {
-                        "key_code": "right_option"
+                        "apple_vendor_top_case_key_code": "keyboard_fn"
                     },
                     "to": [
                         {
-                            "key_code": "fn"
+                            "key_code": "right_option"
                         }
                     ]
                 }

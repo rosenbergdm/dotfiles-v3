@@ -9,7 +9,7 @@ an executable
 -- THESE ARE EXAMPLE CONFIGS FEEL FREE TO CHANGE TO WHATEVER YOU WANT
 
 -- general
-lvim.log.level = "warn"
+lvim.log.level = "info"
 lvim.format_on_save = true
 lvim.lint_on_save = true
 lvim.colorscheme = "tokyonight"
@@ -43,7 +43,6 @@ end
 
 M.load_options()
 
-
 -- keymappings [view all the defaults by pressing <leader>Lk]
 lvim.leader = "space"
 -- add your own keymapping
@@ -55,6 +54,12 @@ lvim.keys.insert_mode["<M-v>"] = "<Esc>pi"
 lvim.keys.visual_mode["<M-c>"] = "y"
 vim.cmd "cnoremap <C-a> <Home>"
 vim.cmd "cnoremap <C-e> <End>"
+-- lvim.keys.visual_block_mode[""] = "y"
+vim.cmd "vmap <C-S-c> y"
+vim.cmd "xmap <C-S-c> y"
+vim.cmd "vmap <M-c> y"
+vim.cmd "xmap <M-c> y"
+
 -- unmap a default keymapping
 -- lvim.keys.normal_mode["<C-Up>"] = false
 -- edit a default keymapping
@@ -110,12 +115,13 @@ lvim.builtin.treesitter.ensure_installed = {
   "rust",
   "java",
   "yaml",
+  "r",
 }
 
 lvim.builtin.treesitter.ignore_install = { "haskell" }
 lvim.builtin.treesitter.highlight.enabled = true
 
-lvim.builtin.lualine.sections.lualine_c = { "location" }
+lvim.builtin.lualine.sections.lualine_y = { "location" }
 
 -- generic LSP settings
 
@@ -132,13 +138,13 @@ lvim.builtin.lualine.sections.lualine_c = { "location" }
 
 -- you can set a custom on_attach function that will be used for all the language servers
 -- See <https://github.com/neovim/nvim-lspconfig#keybindings-and-completion>
--- lvim.lsp.on_attach_callback = function(client, bufnr)
---   local function buf_set_option(...)
---     vim.api.nvim_buf_set_option(bufnr, ...)
---   end
---   --Enable completion triggered by <c-x><c-o>
---   buf_set_option("omnifunc", "v:lua.vim.lsp.omnifunc")
--- end
+lvim.lsp.on_attach_callback = function(client, bufnr)
+  local function buf_set_option(...)
+    vim.api.nvim_buf_set_option(bufnr, ...)
+  end
+  --Enable completion triggered by <c-x><c-o>
+  buf_set_option("omnifunc", "v:lua.vim.lsp.omnifunc")
+end
 -- you can overwrite the null_ls setup table (useful for setting the root_dir function)
 -- lvim.lsp.null_ls.setup.root_dir = require("lspconfig").util.root_pattern("Makefile", ".git", "node_modules")
 -- or if you need something more advanced
@@ -166,11 +172,12 @@ formatters.setup {
     ---@usage specify which filetypes to enable. By default a providers will attach to all the filetypes it supports.
     filetypes = { "typescript", "typescriptreact" },
   },
-  { 
+  {
     exe = "stylua",
-    args = { "--config-path", "~/.stylua.toml", "-s", "-" },
-    filetypes = { "lua" }
+    args = { "--config-path", "~/.stylua.toml" },
+    filetypes = { "lua" },
   },
+  { exe = "shfmt", args = { "-w", "-ci", "-s", "-kp", "-i", "2" } },
 }
 
 -- -- set additional linters
@@ -182,7 +189,10 @@ linters.setup {
     ---@usage arguments to pass to the formatter
     -- these cannot contain whitespaces, options such as `--line-width 80` become either `{'--line-width', '80'}` or `{'--line-width=80'}`
     args = { "--severity", "warning" },
+    filetypes = { "sh", "bash" },
   },
+  { exe = "luacheck", filetypes = { "lua" } },
+
   -- {
   --   exe = "codespell",
   --   ---@usage specify which filetypes to enable. By default a providers will attach to all the filetypes it supports.
@@ -192,11 +202,11 @@ linters.setup {
 
 -- Additional Plugins
 lvim.plugins = {
-    {"folke/tokyonight.nvim"},
-    {
-      "folke/trouble.nvim",
-      cmd = "TroubleToggle",
-    },
+  { "folke/tokyonight.nvim" },
+  {
+    "folke/trouble.nvim",
+    cmd = "TroubleToggle",
+  },
 
   {
     "blackCauldron7/surround.nvim",
@@ -218,18 +228,16 @@ lvim.plugins = {
         load_autogroups = false,
       }
     end,
-  }, -- { "tpope/vim-surround", keys = { "c", "d", "y" }, opt = true },
-  -- { "folke/lua-dev.nvim" },
-  { "vim-scripts/dbext.vim", { opt = true } },
-
+  },
   -- {
-  --   "folke/lua-dev.nvim",
-  --   -- config = function()
-  --     -- lspconfig = {
-  --     --   { cmd = "lua-language-server" }
-  --     -- }
-  --   -- end
-  --   }
+  --   "tpope/vim-surround",
+  --   keys = { "c", "d", "y" },
+  --   opt = true
+  -- },
+  {
+    "vim-scripts/dbext.vim",
+    { opt = true },
+  },
 
   --     local lspconfig = require('lspconfig')
   --     lspconfig.sumneko_lua.setup(luadev)
@@ -244,9 +252,9 @@ lvim.plugins = {
 }
 
 -- Autocommands (https://neovim.io/doc/user/autocmd.html)
--- lvim.autocommands.custom_groups = {
---   { "BufWinEnter", "*.lua", "setlocal ts=8 sw=8" },
--- }
+lvim.autocommands.custom_groups = {
+  { "BufWinEnter", "*", "chdir %:p:h" },
+}
 
 -- My function defs
 lvim.puts = function(varname)

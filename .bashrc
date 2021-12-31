@@ -7,19 +7,20 @@
 shopt   -s autocd
 
 case "$(uname -s)" in
-  Darwin|darwin) export SYSTYPE=OSX
-  ;;
-  Linux|linux) export SYSTYPE=LINUX
-  ;;
-  *) export SYSTYPE=unknown
-  ;;
+  Darwin | darwin)
+    export                SYSTYPE=OSX
+    ;;
+  Linux | linux)
+    export            SYSTYPE=LINUX
+    ;;
+  *)
+    export  SYSTYPE=unknown
+    ;;
 esac
 
-
-
-if [[ -a /opt/homebrew/bin ]]; then
+if [[ -e /opt/homebrew/bin ]]; then
   export HOMEBREW_PREFIX=/opt/homebrew
-elif [[ -a /usr/local/Homebrew ]]; then
+elif [[ -e /usr/local/Homebrew ]]; then
   export HOMEBREW_PREFIX=/usr/local
 fi
 
@@ -208,6 +209,4 @@ fi
 . "$HOME/.cargo/env"
 # [ -f "/Users/dmr/.ghcup/env" ] && source "/Users/dmr/.ghcup/env" # ghcup-env
 
-
 # vim: ft=sh :
-
