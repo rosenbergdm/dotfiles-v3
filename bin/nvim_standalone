@@ -1,23 +1,28 @@
 #!/bin/sh
 
-PATH="$HOME/bin:/usr/local/bin:/usr/local/sbin:$PATH"
-PATH=/usr/local/share/python:$PATH
-PATH=/usr/local/share/npm/bin:$PATH
-PATH=/usr/local/Cellar/qt5/5.7.0/bin:$PATH
-PATH="$HOME/.cargo/bin:$PATH"
-PATH=$PATH:$HOME/.local/bin
-PATH=$PATH:/usr/local/Cellar/perl/5.30.1/bin
-PATH=$PATH:$HOME/edirect
-PATH=$PATH:$HOME/go/bin:/usr/local/go/bin
-PATH=$PATH:$HOME/src/flutter/bin
-PATH=$PATH:/Library/Frameworks/R.framework/Versions/Current/Resources/bin
-PATH="/Library/Java/JavaVirtualMachines/jdk1.8.0_112.jdk/Contents/Home/bin:$PATH"
-export PATH
+
+export PATH="$HOME/.cargo/bin:$HOME/.cabal/bin:$HOME/.ghcup/bin:$HOME/.nvm/versions/node/v16.11.0/bin:$HOME/.rvm/gems/ruby-3.0.0/bin:$HOME/.rvm/gems/ruby-3.0.0@global/bin:$HOME/.rvm/rubies/ruby-3.0.0/bin:$HOME/.rvm/bin:$HOME/.local/bin:/Library/Java/JavaVirtualMachines/jdk1.8.0_112.jdk/Contents/Home/bin:/usr/local/bin:$HOME/.cargo/bin:/usr/local/Cellar/qt5/5.7.0/bin:/usr/local/share/npm/bin:/usr/local/share/python:$HOME/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/Cellar/perl/5.30.1/bin:$HOME/edirect:$HOME/go/bin:/usr/local/go/bin:$HOME/src/flutter/bin:/Library/Frameworks/R.framework/Versions/Current/Resources/bin:$HOME/.iterm2:/usr/local/opt/fzf/bin"
+
+# PATH=/usr/local/share/python:$PATH
+# PATH=/usr/local/share/npm/bin:$PATH
+# PATH=/usr/local/Cellar/qt5/5.7.0/bin:$PATH
+# PATH="$HOME/.cargo/bin:$PATH"
+# PATH=$PATH:$HOME/.local/bin
+# PATH=$PATH:/usr/local/Cellar/perl/5.30.1/bin
+# PATH=$PATH:$HOME/edirect
+# PATH=$PATH:$HOME/go/bin:/usr/local/go/bin
+# PATH=$PATH:$HOME/src/flutter/bin
+# PATH=$PATH:/Library/Frameworks/R.framework/Versions/Current/Resources/bin
+# PATH="/Library/Java/JavaVirtualMachines/jdk1.8.0_112.jdk/Contents/Home/bin:$PATH"
 
 # source $HOME/.nvm/nvm.sh
 # nvm use --delete-prefix v16.0 >/dev/null 2>&1
 
-exec /usr/local/bin/nvim $*
+# exec /usr/local/bin/nvim $*
+
+
+/usr/local/bin/alacritty -e $HOME/.local/bin/lvim "$(greadlink -f "$1")" &
+
 
 
 # vim: set ft=sh:
