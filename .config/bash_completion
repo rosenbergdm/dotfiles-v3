@@ -1,0 +1,5 @@
+#!/opt/homebrew/bin/bash
+
+for fname in /Users/dmr/.config/bash_completion.d/*; do
+  source "${fname}"
+done

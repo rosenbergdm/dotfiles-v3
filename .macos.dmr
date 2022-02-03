@@ -18,7 +18,7 @@ _SETBOOT=1
 _SETFINDER=1
 
 # _SETHOSTNAME=${_SETHOSTNAME-0}
-_HOSTNAME="archimedes.davidrosenberg.me"
+_HOSTNAME="turing.davidrosenberg.me"
 
 # _SETBOOT=${SETBOOT-0}
 _SETBOOT=1
@@ -174,8 +174,8 @@ fi
 defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false
 
 # # Set a blazingly fast keyboard repeat rate
-defaults write NSGlobalDomain KeyRepeat -int 50
-defaults write NSGlobalDomain InitialKeyRepeat -int 150
+# defaults write NSGlobalDomain KeyRepeat -int 50
+# defaults write NSGlobalDomain InitialKeyRepeat -int 150
 
 # # Set language and text formats
 # # Note: if you’re in the US, replace `EUR` with `USD`, `Centimeters` with
@@ -211,7 +211,7 @@ defaults write NSGlobalDomain InitialKeyRepeat -int 150
 # sudo pmset -a displaysleep 0
 
 # # Disable machine sleep while charging
-# sudo pmset -c sleep 0
+sudo pmset -c sleep 0
 
 # # Set machine sleep to 5 minutes on battery
 # # sudo pmset -b sleep 5
@@ -226,7 +226,7 @@ defaults write NSGlobalDomain InitialKeyRepeat -int 150
 # # 0: Disable hibernation (speeds up entering sleep mode)
 # # 3: Copy RAM to disk so the system state can still be restored in case of a
 # #    power failure.
-# sudo pmset -a hibernatemode 0
+sudo pmset -a hibernatemode 0
 
 # # Remove the sleep image file to save disk space
 # sudo rm /private/var/vm/sleepimage
@@ -717,10 +717,10 @@ defaults write com.apple.terminal SecureKeyboardEntry -bool true
 # ###############################################################################
 
 # # Prevent Time Machine from prompting to use new hard drives as backup volume
-# defaults write com.apple.TimeMachine DoNotOfferNewDisksForBackup -bool true
+defaults write com.apple.TimeMachine DoNotOfferNewDisksForBackup -bool true
 
 # # Disable local Time Machine backups
-# hash tmutil &>/dev/null && sudo tmutil disable ldl:se
+hash tmutil &>/dev/null && sudo tmutil disable ldl:se
 
 # ###############################################################################
 # # Activity Monitor                                                            #

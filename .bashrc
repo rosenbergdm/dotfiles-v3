@@ -1,10 +1,10 @@
-#!/usr/local/bin/bash
+#!/opt/homebrew/bin/bash
 # shellcheck disable=SC1090
 # SC1090: Not all references will be resolvable
 
 # set -E
 # set -o functrace
-shopt   -s autocd
+  shopt   -s autocd
 
 case "$(uname -s)" in
   Darwin | darwin)
