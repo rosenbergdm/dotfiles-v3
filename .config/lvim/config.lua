@@ -6,14 +6,11 @@ filled in as strings with either
 a global executable or a path to
 an executable
 ]]
--- THESE ARE EXAMPLE CONFIGS FEEL FREE TO CHANGE TO WHATEVER YOU WANT
 
--- general
 -- general
 lvim.log.level = "info"
 lvim.format_on_save = true
 lvim.lint_on_save = true
--- lvim.colorscheme = "tokyonight"
 lvim.colorscheme = "onedarker"
 lvim.builtin.sell_soul_to_devel = true
 
@@ -21,10 +18,12 @@ lvim.builtin.sell_soul_to_devel = true
 lvim.leader = "space"
 -- add your own keymapping
 lvim.keys.normal_mode["<C-s>"] = ":w<cr>"
--- unmap a default keymapping
--- lvim.keys.normal_mode["<C-Up>"] = false
--- edit a default keymapping
--- lvim.keys.normal_mode["<C-q>"] = ":q<cr>"
+lvim.keys.normal_mode["<M-c>"] = "y"
+lvim.keys.visual_mode["<M-c>"] = "y"
+lvim.keys.visual_block_mode["<M-c>"] = "y"
+-- lvim.keys.normal_mode["<A-c>"] = "y"
+-- lvim.keys.visual_mode["<A-c>"] = "y"
+-- lvim.keys.visual_block_mode["<A-c>"] = "y"
 
 local M = {}
 M.load_options = function()
@@ -40,6 +39,11 @@ M.load_options = function()
     writebackup = true, -- if a file is being edited by another program (or was written to file while editing with another program), it is not allowed to be edited
     spell = true,
     foldmethod = "marker",
+    wrap = true,
+    cmdheight = 4,
+    swapfile = true,
+    backup = true,
+    guifont = "Monaco:h14",
   }
   vim.cmd "set wildmode=longest,list"
   vim.cmd "set wildignore+=*/.idea/*"
@@ -66,7 +70,7 @@ lvim.keys.insert_mode["<M-v>"] = "<Esc>pi"
 lvim.keys.visual_mode["<M-c>"] = "y"
 vim.cmd "cnoremap <C-a> <Home>"
 vim.cmd "cnoremap <C-e> <End>"
--- lvim.keys.visual_block_mode[""] = "y"
+lvim.keys.visual_block_mode[""] = "y"
 vim.cmd "vmap <C-S-c> y"
 vim.cmd "xmap <C-S-c> y"
 vim.cmd "vmap <M-c> y"
@@ -74,21 +78,21 @@ vim.cmd "xmap <M-c> y"
 
 -- Change Telescope navigation to use j and k for navigation and n and p for history in both input and normal mode.
 -- we use protected-mode (pcall) just in case the plugin wasn't loaded yet.
--- local _, actions = pcall(require, "telescope.actions")
--- lvim.builtin.telescope.defaults.mappings = {
---   -- for input mode
---   i = {
---     ["<C-j>"] = actions.move_selection_next,
---     ["<C-k>"] = actions.move_selection_previous,
---     ["<C-n>"] = actions.cycle_history_next,
---     ["<C-p>"] = actions.cycle_history_prev,
---   },
---   -- for normal mode
---   n = {
---     ["<C-j>"] = actions.move_selection_next,
---     ["<C-k>"] = actions.move_selection_previous,
---   },
--- }
+local _, actions = pcall(require, "telescope.actions")
+lvim.builtin.telescope.defaults.mappings = {
+  -- for input mode
+  i = {
+    ["<C-j>"] = actions.move_selection_next,
+    ["<C-k>"] = actions.move_selection_previous,
+    ["<C-n>"] = actions.cycle_history_next,
+    ["<C-p>"] = actions.cycle_history_prev,
+  },
+  -- for normal mode
+  n = {
+    ["<C-j>"] = actions.move_selection_next,
+    ["<C-k>"] = actions.move_selection_previous,
+  },
+}
 
 -- Use which-key to add extra bindings with the leader-key prefix
 lvim.builtin.which_key.mappings["P"] = { "<cmd>Telescope projects<CR>", "Projects" }
@@ -108,7 +112,7 @@ lvim.builtin.dashboard.active = true
 lvim.builtin.notify.active = true
 lvim.builtin.terminal.active = true
 lvim.builtin.nvimtree.setup.view.side = "left"
-lvim.builtin.nvimtree.show_icons.git = 0
+lvim.builtin.nvimtree.show_icons.git = 1
 
 -- if you don't want all the parsers change this to a table of the ones you want
 lvim.builtin.treesitter.ensure_installed = {
@@ -129,6 +133,8 @@ lvim.builtin.treesitter.ignore_install = { "haskell" }
 lvim.builtin.treesitter.highlight.enabled = true
 
 lvim.builtin.lualine.sections.lualine_y = { "location" }
+lvim.builtin.dap.active = true
+
 -- generic LSP settings
 
 -- ---@usage disable automatic installation of servers
@@ -144,13 +150,13 @@ lvim.builtin.lualine.sections.lualine_y = { "location" }
 
 -- -- you can set a custom on_attach function that will be used for all the language servers
 -- -- See <https://github.com/neovim/nvim-lspconfig#keybindings-and-completion>
--- lvim.lsp.on_attach_callback = function(client, bufnr)
---   local function buf_set_option(...)
---     vim.api.nvim_buf_set_option(bufnr, ...)
---   end
---   --Enable completion triggered by <c-x><c-o>
---   buf_set_option("omnifunc", "v:lua.vim.lsp.omnifunc")
--- end
+lvim.lsp.on_attach_callback = function(_, bufnr)
+  local function buf_set_option(...)
+    vim.api.nvim_buf_set_option(bufnr, ...)
+  end
+  --Enable completion triggered by <c-x><c-o>
+  buf_set_option("omnifunc", "v:lua.vim.lsp.omnifunc")
+end
 
 -- -- set a formatter, this will override the language server formatting capabilities (if it exists)
 -- local formatters = require "lvim.lsp.null-ls.formatters"
@@ -190,17 +196,13 @@ formatters.setup {
 
 linters.setup {
   {
-    -- each linter accepts a list of options identical to https://github.com/jose-elias-alvarez/null-ls.nvim/blob/main/doc/BUILTINS.md#Configuration
     command = "shellcheck",
-    ---@usage arguments to pass to the formatter
-    -- these cannot contain whitespaces, options such as `--line-width 80` become either `{'--line-width', '80'}` or `{'--line-width=80'}`
-    extra_args = { "--severity", "warning" },
+    filetypes = { "sh", "bash", "shell", "zsh" },
   },
-  -- { command = "black", filetypes = { "python" } },
+  { command = "stylelint", filetypes = { "css", "scss" } },
   { command = "luacheck", filetypes = { "lua" } },
   {
     command = "codespell",
-    ---@usage specify which filetypes to enable. By default a providers will attach to all the filetypes it supports.
     filetypes = { "javascript", "python" },
   },
 }
@@ -232,11 +234,6 @@ lvim.plugins = {
       }
     end,
   },
-  -- {
-  --   "tpope/vim-surround",
-  --   keys = { "c", "d", "y" },
-  --   opt = true
-  -- },
   {
     "vim-scripts/dbext.vim",
     { opt = true },
@@ -265,17 +262,43 @@ lvim.plugins = {
       table.insert(lvim.builtin.cmp.sources, { name = "copilot" })
     end,
   },
+  {
+    "ray-x/lsp_signature.nvim",
+    config = function()
+      require("lsp_signature").setup()
+    end,
+    event = "InsertEnter",
+  },
+  {
+    "simrat39/symbols-outline.nvim",
+    cmd = "SymbolsOutline",
+  },
+  {
+    "iamcco/markdown-preview.nvim",
+    run = "cd app && npm install",
+    ft = "markdown",
+    config = function()
+      vim.g.mkdp_auto_start = 1
+    end,
+  },
 }
 
 -- Autocommands (https://neovim.io/doc/user/autocmd.html)
-lvim.autocommands.custom_groups = { { "BufWinEnter", "*", "chdir %:p:h" } }
+lvim.autocommands.custom_groups = {
+  { "BufWinEnter,BufRead,BufNewFile", "*", "chdir %:p:h" },
+}
+
+local lspservers = { "r_language_server" }
+for _, lspserver in pairs(lspservers) do
+  require("lspconfig")[lspserver].setup {}
+end
+vim.cmd "let g:firenvim_config = {'globalSettings': { }, 'localSettings': {'.*': { 'takeover': 'never'} } }"
 
 -- My function defs
 lvim.puts = function(varname)
   print(vim.inspect(varname))
 end
 
--- Autocommands (https://neovim.io/doc/user/autocmd.html)
--- lvim.autocommands.custom_groups = {
---   { "BufWinEnter", "*.lua", "setlocal ts=8 sw=8" },
--- }
+P = function(varname)
+  print(vim.inspect(varname))
+end

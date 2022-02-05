@@ -4,18 +4,18 @@
 
 # set -E
 # set -o functrace
-  shopt   -s autocd
+shopt   -s autocd
 
 case "$(uname -s)" in
-  Darwin | darwin)
-    export                SYSTYPE=OSX
-    ;;
-  Linux | linux)
-    export            SYSTYPE=LINUX
-    ;;
-  *)
-    export  SYSTYPE=unknown
-    ;;
+Darwin |   darwin)
+  export                  SYSTYPE=OSX
+  ;;
+Linux |   linux)
+  export              SYSTYPE=LINUX
+  ;;
+*)
+  export    SYSTYPE=unknown
+  ;;
 esac
 
 if [[ -e /opt/homebrew/bin ]]; then
