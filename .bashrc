@@ -54,11 +54,11 @@ elif [ "${FAST_STARTUP-0}" -gt 0 ]; then
 	printf "%s\n\n" "Fast startup enabled by file '$HOME/FAST_STARTUP'"
 else
 	export FAST_STARTUP
-	# read -n1 -r -t0.1 -s _startfast || true
-	# if [[ $_startfast == "f" ]] || [[ $_startfast == "F" ]]; then
-	# 	printf "%s\n\n" "Fast startup enabled by keypress"
-	# 	FAST_STARTUP=1
-	# fi
+	read -n1 -r -t0.1 -s _startfast || true
+	if [[ $_startfast == "f" ]] || [[ $_startfast == "F" ]]; then
+		printf "%s\n\n" "Fast startup enabled by keypress"
+		FAST_STARTUP=1
+	fi
 fi
 export FAST_STARTUP
 
