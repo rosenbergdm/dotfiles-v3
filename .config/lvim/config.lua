@@ -6,7 +6,6 @@ filled in as strings with either
 a global executable or a path to
 an executable
 ]]
-
 -- general
 lvim.log.level = "info"
 lvim.format_on_save = true
@@ -44,6 +43,7 @@ M.load_options = function()
     swapfile = true,
     backup = true,
     guifont = "Monaco:h14",
+    foldenable = false,
   }
   vim.cmd "set wildmode=longest,list"
   vim.cmd "set wildignore+=*/.idea/*"
@@ -138,11 +138,11 @@ lvim.builtin.dap.active = true
 -- generic LSP settings
 
 -- ---@usage disable automatic installation of servers
--- lvim.lsp.automatic_servers_installation = false
+lvim.lsp.automatic_servers_installation = true
 
 -- ---@usage Select which servers should be configured manually. Requires `:LvimCacheRest` to take effect.
 -- See the full default list `:lua print(vim.inspect(lvim.lsp.override))`
--- vim.list_extend(lvim.lsp.override, { "pyright" })
+vim.list_extend(lvim.lsp.override, { "pyright" })
 
 -- ---@usage setup a server -- see: https://www.lunarvim.org/languages/#overriding-the-default-configuration
 -- local opts = {} -- check the lspconfig documentation for a list of all possible options
