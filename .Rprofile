@@ -88,7 +88,12 @@ attach(.rprofile_env)
   .GlobalEnv[["+.character"]] <- function(...) {
     arg_list <- list(...)
     if (!is.character(arg_list[[2]])) {
-      stop(simpleError(message = "Attempting to use + with character and another type while overloading + is not a good idea.  Use .rprofile_env$unoverload_plus_character() to revert to default behavior"))
+      stop(simpleError(message = paste0(
+        "Attempting to use + with character and another type while overloading ",
+        "+ is not a good idea.  Use .rprofile_env$unoverload_plus_character() ",
+        "to revert to default behavior",
+        sep = "", collapse = ""
+      )))
     } else {
       paste(..., sep = "")
     }

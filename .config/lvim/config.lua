@@ -44,6 +44,8 @@ M.load_options = function()
     backup = true,
     guifont = "Monaco:h14",
     foldenable = false,
+    modeline = true,
+    modelines = 5,
   }
   vim.cmd "set wildmode=longest,list"
   vim.cmd "set wildignore+=*/.idea/*"
@@ -52,6 +54,7 @@ M.load_options = function()
   vim.cmd "set wildignore+=*/vendor/*"
   vim.cmd "set wildignore+=*/node_modules/*"
   vim.cmd "set wildmode=longest,list"
+  -- vim.cmd "let R_assign=0"
 
   for k, v in pairs(myopts) do
     vim.opt[k] = v
@@ -134,6 +137,8 @@ lvim.builtin.treesitter.highlight.enabled = true
 
 lvim.builtin.lualine.sections.lualine_y = { "location" }
 lvim.builtin.dap.active = true
+lvim.builtin.bufferline.active = true
+lvim.builtin.gitsigns.active = true
 
 -- generic LSP settings
 
@@ -143,6 +148,7 @@ lvim.lsp.automatic_servers_installation = true
 -- ---@usage Select which servers should be configured manually. Requires `:LvimCacheRest` to take effect.
 -- See the full default list `:lua print(vim.inspect(lvim.lsp.override))`
 vim.list_extend(lvim.lsp.override, { "pyright" })
+vim.list_extend(lvim.lsp.override, { "r_language_server" })
 
 -- ---@usage setup a server -- see: https://www.lunarvim.org/languages/#overriding-the-default-configuration
 -- local opts = {} -- check the lspconfig documentation for a list of all possible options
@@ -178,10 +184,18 @@ end
 local linters = require "lvim.lsp.null-ls.linters"
 local formatters = require "lvim.lsp.null-ls.formatters"
 formatters.setup {
-  { command = "black", filetypes = { "python" } },
+  {
+    command = "black",
+    filetypes = { "python" },
+  },
+  {
+    command = "isort",
+    filetypes = { "python" },
+  },
   {
     command = "prettier",
     args = { "--print-width", "100" },
+    extra_args = { "--print-width", "100" },
     filetypes = { "typescript", "typescriptreact", "javascript" },
   },
   { command = "shfmt", filetypes = { "sh" } },
@@ -197,6 +211,8 @@ formatters.setup {
 linters.setup {
   {
     command = "shellcheck",
+    extra_args = { "--line-width", "120" },
+    args = { "--line-width", "120" },
     filetypes = { "sh", "bash", "shell", "zsh" },
   },
   { command = "stylelint", filetypes = { "css", "scss" } },
@@ -236,7 +252,7 @@ lvim.plugins = {
   },
   {
     "vim-scripts/dbext.vim",
-    { opt = true },
+    opt = true,
   },
 
   {
@@ -281,6 +297,11 @@ lvim.plugins = {
       vim.g.mkdp_auto_start = 1
     end,
   },
+  {
+    "jalvesaq/Nvim-R",
+    opt = true,
+  },
+  { "mfussenegger/nvim-dap-python" },
 }
 
 -- Autocommands (https://neovim.io/doc/user/autocmd.html)
@@ -288,17 +309,36 @@ lvim.autocommands.custom_groups = {
   { "BufWinEnter,BufRead,BufNewFile", "*", "chdir %:p:h" },
 }
 
-local lspservers = { "r_language_server" }
-for _, lspserver in pairs(lspservers) do
-  require("lspconfig")[lspserver].setup {}
-end
+lvim.dap = require("dap-python").setup "~/.config/virtualenvs/debugpy/bin/python"
+-- lvim.dap.adapters.python = {
+--   type = "executable",
+--   command = "/opt/homebrew/bin/python3",
+--   args = { "-m", "debugpy.adapter" },
+-- }
+
+-- lvim.dap.configurations.python = {
+--   {
+--     type = "python",
+--     request = "launch",
+--     name = "Launch file",
+--     program = "${file}",
+--     pythonPath = function()
+--       return "/opt/homebrew/bin/python3"
+--     end,
+--   },
+-- }
+
+-- local lspservers = { "r_language_server" }
+-- for _, lspserver in pairs(lspservers) do
+--   require("lspconfig")[lspserver].setup {}
+-- end
 vim.cmd "let g:firenvim_config = {'globalSettings': { }, 'localSettings': {'.*': { 'takeover': 'never'} } }"
 
--- My function defs
-lvim.puts = function(varname)
-  print(vim.inspect(varname))
-end
+-- -- My function defs
+-- lvim.puts = function(varname)
+--   print(vim.inspect(varname))
+-- end
 
-P = function(varname)
-  print(vim.inspect(varname))
-end
+-- P = function(varname)
+--   print(vim.inspect(varname))
+-- end
