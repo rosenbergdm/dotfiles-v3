@@ -204,6 +204,8 @@ if [[ $FAST_STARTUP == 0 ]]; then
 	bind -m emacs-standard -r "\ec"
 	bind -m vi-command -r "\ec"
 	bind -m vi-insert -r "\ec"
+	bind -m vi-insert '"\ec": "\C-yii"'
+
 	# The above commands undo the following keybindings created by fzf
 	# bind -m emacs-standard '"\ec": " \C-b\C-k \C-u`__fzf_cd__`\e\C-e\er\C-m\C-y\C-h\e \C-y\ey\C-x\C-x\C-d"'
 	# bind -m vi-command '"\ec": "\C-z\ec\C-z"'

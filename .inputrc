@@ -198,6 +198,7 @@ $if mode=vi
     "\e[1;5D": shell-backward-word
     "\e[5C": shell-forward-word
     "\e[5D": shell-backward-word
+    "^[c":  "\C-yii"
   $else
     "\e[1;5C": forward-word
     "\e[1;5D": backward-word

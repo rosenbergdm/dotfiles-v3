@@ -300,6 +300,7 @@ lvim.plugins = {
   {
     "jalvesaq/Nvim-R",
     opt = true,
+    event = "BufEnter *.R",
   },
   { "mfussenegger/nvim-dap-python" },
 }
