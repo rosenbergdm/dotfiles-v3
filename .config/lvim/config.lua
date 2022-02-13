@@ -1,13 +1,9 @@
 --[[
 lvim is the global options object
+--]]
 
-Linters should be
-filled in as strings with either
-a global executable or a path to
-an executable
-]]
 -- general
-lvim.log.level = "info"
+lvim.log.level = "debug"
 lvim.format_on_save = true
 lvim.lint_on_save = true
 lvim.colorscheme = "onedarker"
@@ -15,14 +11,23 @@ lvim.builtin.sell_soul_to_devel = true
 
 -- keymappings [view all the defaults by pressing <leader>Lk]
 lvim.leader = "space"
--- add your own keymapping
+
+--[[
+CMD-c copying in insert / visual mode hack
+For this to work the way I want,
+  1.) iTerm2 is set to emit the escape sequence \[eC (esc-c) for CMD-c
+  2.) Readline is configured (via .inputrc) to map as follows:
+     set key map vi-insert
+     $if Bash
+       "^[c": "\C-yii"
+     $else
+     ...
+  3.) The visual map lvim.keys.visual_mode["<M-c>"] = "y"
+--]]
 lvim.keys.normal_mode["<C-s>"] = ":w<cr>"
 lvim.keys.normal_mode["<M-c>"] = "y"
 lvim.keys.visual_mode["<M-c>"] = "y"
 lvim.keys.visual_block_mode["<M-c>"] = "y"
--- lvim.keys.normal_mode["<A-c>"] = "y"
--- lvim.keys.visual_mode["<A-c>"] = "y"
--- lvim.keys.visual_block_mode["<A-c>"] = "y"
 
 local M = {}
 M.load_options = function()
@@ -32,10 +37,10 @@ M.load_options = function()
     hlsearch = false,
     autochdir = true,
     backupdir = LVIM_CACHE_DIR .. "/backup",
-    undodir = LVIM_CACHE_DIR .. "/undo", -- set an undo directory
-    undofile = true, -- enable persistent undo
+    undodir = LVIM_CACHE_DIR .. "/undo",
+    undofile = true,
     directory = LVIM_CACHE_DIR .. "/swap",
-    writebackup = true, -- if a file is being edited by another program (or was written to file while editing with another program), it is not allowed to be edited
+    writebackup = true,
     spell = true,
     foldmethod = "marker",
     wrap = true,
@@ -139,6 +144,8 @@ lvim.builtin.lualine.sections.lualine_y = { "location" }
 lvim.builtin.dap.active = true
 lvim.builtin.bufferline.active = true
 lvim.builtin.gitsigns.active = true
+lvim.builtin.nvimtree.setup.disable_netrw = false
+lvim.builtin.nvimtree.setup.disable_netrw = true
 
 -- generic LSP settings
 
@@ -147,7 +154,7 @@ lvim.lsp.automatic_servers_installation = true
 
 -- ---@usage Select which servers should be configured manually. Requires `:LvimCacheRest` to take effect.
 -- See the full default list `:lua print(vim.inspect(lvim.lsp.override))`
-vim.list_extend(lvim.lsp.override, { "pyright" })
+-- vim.list_extend(lvim.lsp.override, { "pyright" })
 vim.list_extend(lvim.lsp.override, { "r_language_server" })
 
 -- ---@usage setup a server -- see: https://www.lunarvim.org/languages/#overriding-the-default-configuration
@@ -302,7 +309,82 @@ lvim.plugins = {
     opt = true,
     event = "BufEnter *.R",
   },
-  { "mfussenegger/nvim-dap-python" },
+  {
+    "rcarriga/nvim-dap-ui",
+    requires = {
+      "mfussenegger/nvim-dap-python",
+    },
+  },
+
+  -- config = function()
+  --   if vim.fn.has "nvim-0.5.1" == 1 then
+  --     vim.lsp.handlers["textDocument/codeAction"] = require("lsputil.codeAction").code_action_handler
+  --     vim.lsp.handlers["textDocument/references"] = require("lsputil.locations").references_handler
+  --     vim.lsp.handlers["textDocument/definition"] = require("lsputil.locations").definition_handler
+  --     vim.lsp.handlers["textDocument/declaration"] = require("lsputil.locations").declaration_handler
+  --     vim.lsp.handlers["textDocument/typeDefinition"] = require("lsputil.locations").typeDefinition_handler
+  --     vim.lsp.handlers["textDocument/implementation"] = require("lsputil.locations").implementation_handler
+  --     vim.lsp.handlers["textDocument/documentSymbol"] = require("lsputil.symbols").document_handler
+  --     vim.lsp.handlers["workspace/symbol"] = require("lsputil.symbols").workspace_handler
+  --   else
+  --     local bufnr = vim.api.nvim_buf_get_number(0)
+
+  --     ---@diagnostic disable-next-line: redefined-local
+  --     vim.lsp.handlers["textDocument/codeAction"] = function(_, _, actions)
+  --       require("lsputil.codeAction").code_action_handler(nil, actions, nil, nil, nil)
+  --     end
+
+  --     vim.lsp.handlers["textDocument/references"] = function(_, _, result)
+  --       require("lsputil.locations").references_handler(nil, result, { bufnr = bufnr }, nil)
+  --     end
+
+  --     vim.lsp.handlers["textDocument/definition"] = function(_, method, result)
+  --       require("lsputil.locations").definition_handler(nil, result, { bufnr = bufnr, method = method }, nil)
+  --     end
+
+  --     vim.lsp.handlers["textDocument/declaration"] = function(_, method, result)
+  --       require("lsputil.locations").declaration_handler(nil, result, { bufnr = bufnr, method = method }, nil)
+  --     end
+
+  --     vim.lsp.handlers["textDocument/typeDefinition"] = function(_, method, result)
+  --       require("lsputil.locations").typeDefinition_handler(nil, result, { bufnr = bufnr, method = method }, nil)
+  --     end
+
+  --     vim.lsp.handlers["textDocument/implementation"] = function(_, method, result)
+  --       require("lsputil.locations").implementation_handler(nil, result, { bufnr = bufnr, method = method }, nil)
+  --     end
+
+  --     vim.lsp.handlers["textDocument/documentSymbol"] = function(_, _, result, _, bufn)
+  --       require("lsputil.symbols").document_handler(nil, result, { bufnr = bufn }, nil)
+  --     end
+
+  --     vim.lsp.handlers["textDocument/symbol"] = function(_, _, result, _, bufn)
+  --       require("lsputil.symbols").workspace_handler(nil, result, { bufnr = bufn }, nil)
+  --     end
+  --   end
+  -- end,
+  -- },
+  {
+
+    "kosayoda/nvim-lightbulb",
+    -- config = function()
+    --   vim.cmd [[autocmd CursorHold,CursorHoldI * lua require'nvim-lightbulb'.update_lightbulb()]]
+    -- end,
+  },
+  {
+    "rafamadriz/friendly-snippets",
+  },
+
+  {
+    "jghauser/kitty-runner.nvim",
+    config = function()
+      require("kitty-runner").setup()
+    end,
+  },
+
+  -- Colorschemes
+  { "tiagovla/tokyodark.nvim" },
+  { "tjdevries/gruvbuddy.nvim", requires = { "tjdevries/colorbuddy.vim" } },
 }
 
 -- Autocommands (https://neovim.io/doc/user/autocmd.html)
@@ -311,6 +393,14 @@ lvim.autocommands.custom_groups = {
 }
 
 lvim.dap = require("dap-python").setup "~/.config/virtualenvs/debugpy/bin/python"
+
+require("nvim-treesitter.configs").setup {
+  highligh = {
+    enable = true,
+    custom_captures = {},
+    additional_vim_regex_highlighing = true,
+  },
+}
 -- lvim.dap.adapters.python = {
 --   type = "executable",
 --   command = "/opt/homebrew/bin/python3",
