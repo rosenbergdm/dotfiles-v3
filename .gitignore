@@ -8,3 +8,5 @@ __pycache*
 .config/yarn/**
 .DS_Store
 .DS_Store
+~/.config/github-copilot/hosts.json
+~/.config/lvim/after/ftplugin/r.lua
