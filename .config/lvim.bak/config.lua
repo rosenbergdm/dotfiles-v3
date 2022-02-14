@@ -1,9 +1,14 @@
 --[[
 lvim is the global options object
---]]
+
+Linters should be
+filled in as strings with either
+a global executable or a path to
+an executable
+]]
 
 -- general
-lvim.log.level = "debug"
+lvim.log.level = "info"
 lvim.format_on_save = true
 lvim.lint_on_save = true
 lvim.colorscheme = "onedarker"
@@ -11,23 +16,14 @@ lvim.builtin.sell_soul_to_devel = true
 
 -- keymappings [view all the defaults by pressing <leader>Lk]
 lvim.leader = "space"
-
---[[
-CMD-c copying in insert / visual mode hack
-For this to work the way I want,
-  1.) iTerm2 is set to emit the escape sequence \[eC (esc-c) for CMD-c
-  2.) Readline is configured (via .inputrc) to map as follows:
-     set key map vi-insert
-     $if Bash
-       "^[c": "\C-yii"
-     $else
-     ...
-  3.) The visual map lvim.keys.visual_mode["<M-c>"] = "y"
---]]
+-- add your own keymapping
 lvim.keys.normal_mode["<C-s>"] = ":w<cr>"
 lvim.keys.normal_mode["<M-c>"] = "y"
 lvim.keys.visual_mode["<M-c>"] = "y"
 lvim.keys.visual_block_mode["<M-c>"] = "y"
+-- lvim.keys.normal_mode["<A-c>"] = "y"
+-- lvim.keys.visual_mode["<A-c>"] = "y"
+-- lvim.keys.visual_block_mode["<A-c>"] = "y"
 
 local M = {}
 M.load_options = function()
@@ -37,20 +33,16 @@ M.load_options = function()
     hlsearch = false,
     autochdir = true,
     backupdir = LVIM_CACHE_DIR .. "/backup",
-    undodir = LVIM_CACHE_DIR .. "/undo",
-    undofile = true,
+    undodir = LVIM_CACHE_DIR .. "/undo", -- set an undo directory
+    undofile = true, -- enable persistent undo
     directory = LVIM_CACHE_DIR .. "/swap",
-    writebackup = true,
+    writebackup = true, -- if a file is being edited by another program (or was written to file while editing with another program), it is not allowed to be edited
     spell = true,
     foldmethod = "marker",
     wrap = true,
     cmdheight = 4,
     swapfile = true,
     backup = true,
-    guifont = "Monaco:h14",
-    foldenable = false,
-    modeline = true,
-    modelines = 5,
   }
   vim.cmd "set wildmode=longest,list"
   vim.cmd "set wildignore+=*/.idea/*"
@@ -59,7 +51,6 @@ M.load_options = function()
   vim.cmd "set wildignore+=*/vendor/*"
   vim.cmd "set wildignore+=*/node_modules/*"
   vim.cmd "set wildmode=longest,list"
-  -- vim.cmd "let R_assign=0"
 
   for k, v in pairs(myopts) do
     vim.opt[k] = v
@@ -69,7 +60,7 @@ end
 M.load_options()
 
 lvim.leader = "space"
-
+-- add your own keymapping
 lvim.keys.normal_mode["<C-s>"] = ":w<cr>"
 lvim.keys.normal_mode[";"] = ":"
 lvim.keys.normal_mode[",nt"] = ":NvimTreeToggle<CR>"
@@ -141,21 +132,14 @@ lvim.builtin.treesitter.ignore_install = { "haskell" }
 lvim.builtin.treesitter.highlight.enabled = true
 
 lvim.builtin.lualine.sections.lualine_y = { "location" }
-lvim.builtin.dap.active = true
-lvim.builtin.bufferline.active = true
-lvim.builtin.gitsigns.active = true
-lvim.builtin.nvimtree.setup.disable_netrw = false
-lvim.builtin.nvimtree.setup.disable_netrw = true
-
 -- generic LSP settings
 
 -- ---@usage disable automatic installation of servers
-lvim.lsp.automatic_servers_installation = true
+-- lvim.lsp.automatic_servers_installation = false
 
 -- ---@usage Select which servers should be configured manually. Requires `:LvimCacheRest` to take effect.
 -- See the full default list `:lua print(vim.inspect(lvim.lsp.override))`
 -- vim.list_extend(lvim.lsp.override, { "pyright" })
-vim.list_extend(lvim.lsp.override, { "r_language_server" })
 
 -- ---@usage setup a server -- see: https://www.lunarvim.org/languages/#overriding-the-default-configuration
 -- local opts = {} -- check the lspconfig documentation for a list of all possible options
@@ -171,22 +155,30 @@ lvim.lsp.on_attach_callback = function(_, bufnr)
   buf_set_option("omnifunc", "v:lua.vim.lsp.omnifunc")
 end
 
+-- -- set a formatter, this will override the language server formatting capabilities (if it exists)
+-- local formatters = require "lvim.lsp.null-ls.formatters"
+-- formatters.setup {
+--   { command = "black", filetypes = { "python" } },
+--   { command = "isort", filetypes = { "python" } },
+--   {
+--     -- each formatter accepts a list of options identical to https://github.com/jose-elias-alvarez/null-ls.nvim/blob/main/doc/BUILTINS.md#Configuration
+--     command = "prettier",
+--     ---@usage arguments to pass to the formatter
+--     -- these cannot contain whitespaces, options such as `--line-width 80` become either `{'--line-width', '80'}` or `{'--line-width=80'}`
+--     extra_args = { "--print-with", "100" },
+--     ---@usage specify which filetypes to enable. By default a providers will attach to all the filetypes it supports.
+--     filetypes = { "typescript", "typescriptreact" },
+--   },
+-- }
+
 -- set additional linters
 local linters = require "lvim.lsp.null-ls.linters"
 local formatters = require "lvim.lsp.null-ls.formatters"
 formatters.setup {
-  {
-    command = "black",
-    filetypes = { "python" },
-  },
-  {
-    command = "isort",
-    filetypes = { "python" },
-  },
+  { command = "black", filetypes = { "python" } },
   {
     command = "prettier",
     args = { "--print-width", "100" },
-    extra_args = { "--print-width", "100" },
     filetypes = { "typescript", "typescriptreact", "javascript" },
   },
   { command = "shfmt", filetypes = { "sh" } },
@@ -202,8 +194,6 @@ formatters.setup {
 linters.setup {
   {
     command = "shellcheck",
-    -- extra_args = { "--line-width", "120" },
-    -- args = { "--line-width", "120" },
     filetypes = { "sh", "bash", "shell", "zsh" },
   },
   { command = "stylelint", filetypes = { "css", "scss" } },
@@ -243,7 +233,7 @@ lvim.plugins = {
   },
   {
     "vim-scripts/dbext.vim",
-    opt = true,
+    { opt = true },
   },
 
   {
@@ -288,45 +278,6 @@ lvim.plugins = {
       vim.g.mkdp_auto_start = 1
     end,
   },
-  {
-    "jalvesaq/Nvim-R",
-    opt = true,
-    event = "BufEnter *.R",
-  },
-  {
-    "rcarriga/nvim-dap-ui",
-    requires = {
-      "mfussenegger/nvim-dap-python",
-    },
-  },
-
-  {
-    "kosayoda/nvim-lightbulb",
-    opt = true,
-    disable = true,
-    -- This plugin seems to make the cursor problematic
-    -- config = function()
-    --   vim.cmd [[autocmd CursorHold,CursorHoldI * lua require'nvim-lightbulb'.update_lightbulb()]]
-    -- end,
-  },
-  {
-    "rafamadriz/friendly-snippets",
-  },
-
-  {
-    "jghauser/kitty-runner.nvim",
-    config = function()
-      require("kitty-runner").setup()
-    end,
-  },
-  {
-    "kyazdani42/nvim-web-devicons",
-  },
-
-  -- Colorschemes
-  { "tiagovla/tokyodark.nvim" },
-  { "tjdevries/gruvbuddy.nvim", requires = { "tjdevries/colorbuddy.vim" } },
-  -- launch the above scheme with ":lua require('colorbuddy').colorscheme('gruvbuddy')"
 }
 
 -- Autocommands (https://neovim.io/doc/user/autocmd.html)
@@ -334,44 +285,16 @@ lvim.autocommands.custom_groups = {
   { "BufWinEnter,BufRead,BufNewFile", "*", "chdir %:p:h" },
 }
 
-lvim.dap = require("dap-python").setup "~/.config/virtualenvs/debugpy/bin/python"
+local lspservers = { "r_language_server" }
+for _, lspserver in pairs(lspservers) do
+  require("lspconfig")[lspserver].setup {}
+end
 
-require("nvim-treesitter.configs").setup {
-  highligh = {
-    enable = true,
-    custom_captures = {},
-    additional_vim_regex_highlighing = true,
-  },
-}
--- lvim.dap.adapters.python = {
---   type = "executable",
---   command = "/opt/homebrew/bin/python3",
---   args = { "-m", "debugpy.adapter" },
--- }
+-- My function defs
+lvim.puts = function(varname)
+  print(vim.inspect(varname))
+end
 
--- lvim.dap.configurations.python = {
---   {
---     type = "python",
---     request = "launch",
---     name = "Launch file",
---     program = "${file}",
---     pythonPath = function()
---       return "/opt/homebrew/bin/python3"
---     end,
---   },
--- }
-
--- local lspservers = { "r_language_server" }
--- for _, lspserver in pairs(lspservers) do
---   require("lspconfig")[lspserver].setup {}
--- end
-vim.cmd "let g:firenvim_config = {'globalSettings': { }, 'localSettings': {'.*': { 'takeover': 'never'} } }"
-
--- -- My function defs
--- lvim.puts = function(varname)
---   print(vim.inspect(varname))
--- end
-
--- P = function(varname)
---   print(vim.inspect(varname))
--- end
+P = function(varname)
+  print(vim.inspect(varname))
+end

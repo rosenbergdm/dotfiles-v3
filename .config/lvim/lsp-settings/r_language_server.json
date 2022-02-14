@@ -1,0 +1,9 @@
+{
+  "r": {
+    "lsp": {
+      "server_capabilities": {
+        "definition_provider": true
+      }
+    }
+  }
+}

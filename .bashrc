@@ -27,7 +27,7 @@ fi
 export PATH=$HOMEBREW_PREFIX/bin:$PATH
 
 set_iterm_title() {
-	if [[ "${TERM_PROGRAM}p" == "iTerm.appp" ]]; then
+	if [[ ${TERM_PROGRAM}p == "iTerm.appp" ]]; then
 		echo -ne "\033]0;$*\007"
 	fi
 }
@@ -215,7 +215,7 @@ else
 	_dbg "Skipping $HOME/.extra and fzf loading for speed"
 fi
 
-# export NVM_DIR="$HOME/.nvm"
+export NVM_DIR="$HOME/.nvm"
 # [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" # This loads nvm bash_completion
 . "$HOME/.cargo/env"

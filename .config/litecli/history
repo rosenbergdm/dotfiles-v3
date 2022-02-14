@@ -1,0 +1,282 @@
+
+# 2021-10-16 06:04:04.949275
++select * from disease_site;
+
+# 2021-10-16 06:04:09.438628
++select * from patient;
+
+# 2021-10-16 06:04:12.129713
++.q
+
+# 2021-10-16 06:04:14.661581
++;
+
+# 2021-10-16 06:04:16.268274
++.exit
+
+# 2021-10-16 06:12:03.460702
++select * from patient;
+
+# 2021-10-16 06:12:31.264613
++insert into disease_site (name) values ('GI');
+
+# 2021-10-16 06:12:36.702602
++insert into disease_site (name) values ('H&N');
+
+# 2021-10-16 06:12:44.276421
++select * from disease_site;
+
+# 2021-10-16 06:13:00.718069
++--update patient set disease_site=3 where attending=;
+
+# 2021-10-16 06:13:08.538207
++select * from provider;
+
+# 2021-10-16 06:13:18.214467
++update patient set disease_site=3 where attending=2;
+
+# 2021-10-16 06:13:22.680280
++.e
+
+# 2021-10-16 06:13:25.268027
++.exit
+
+# 2021-10-16 06:14:08.191312
++update patient set disease_site=3 where attending=2;
+
+# 2021-10-16 06:14:09.890782
++commit;
+
+# 2021-10-16 06:14:17.152540
++select * from patient where disease_site=3;
+
+# 2021-10-16 06:14:23.499356
++select count(*) from patient where disease_site=3;
+
+# 2021-10-16 06:14:38.604371
++.q
+
+# 2021-10-16 06:14:46.141242
++.status
+
+# 2021-10-16 06:14:49.505194
++.exit
+
+# 2021-10-16 06:20:29.820858
++select * from disease_site;
+
+# 2021-10-16 06:20:35.617667
++select * from provider;
+
+# 2021-10-16 06:20:49.645336
++update patient set disease_site=1 where attending=2;
+
+# 2021-10-16 06:20:52.885186
++.q
+
+# 2021-10-16 06:20:54.311338
++.e
+
+# 2021-10-16 06:20:59.264658
++exit
+
+# 2021-10-16 06:22:48.567594
++select distinct(attending) from patient;
+
+# 2021-10-16 06:23:02.196358
++select count(*) from patient where attending=2;
+
+# 2021-10-16 06:23:11.229256
++select disease_site from patient where attending=2;
+
+# 2021-10-16 06:23:17.120755
++select * from disease_site;
+
+# 2021-10-16 06:23:41.640748
++update patient set disease_site=3 where attending=1; 
+
+# 2021-10-16 06:23:44.856465
++.exit
+
+# 2021-10-16 09:30:49.751486
++select * from disease_site;
+
+# 2021-10-16 09:31:02.834070
++.q
+
+# 2021-10-16 09:31:24.338540
++.exit
+
+# 2021-10-16 09:31:43.068285
++.q
+
+# 2021-10-16 09:31:45.609209
++.exit
+
+# 2021-10-17 00:34:39.481002
++select * from disease_site;
+
+# 2021-10-17 00:34:51.809083
++.exit
+
+# 2021-10-17 10:46:53.341556
++select * from disease_site;
+
+# 2021-10-17 10:46:58.919751
++select * from patient limit 1;
+
+# 2021-10-17 10:48:15.891175
++alter table patient add column active_service NOT NULL default False;
+
+# 2021-10-17 10:48:24.823320
++select * from patient;
+
+# 2021-10-17 10:48:32.981058
++.e
+
+# 2021-10-17 10:48:35.461639
++.exit\
+
+# 2021-10-17 10:48:38.120888
++.qu
+
+# 2021-10-17 10:48:39.594568
++.exit
+
+# 2021-10-17 17:14:41.380139
++select * from patient limit 1;
+
+# 2021-10-17 17:14:56.122944
++.q
+
+# 2021-10-17 17:14:57.786124
++.exit
+
+# 2021-10-17 17:15:25.983574
++select * from patient limit 1;
+
+# 2021-10-17 17:15:37.681043
++select distinct(disease_site) from patient;
+
+# 2021-10-17 17:15:45.261851
++.exit
+
+# 2021-10-22 19:52:24.804627
++select * from patient ;
+
+# 2021-10-22 19:52:34.436045
++.schema
+
+# 2021-10-22 19:52:45.822113
++select * from patient limit 1;
+
+# 2021-10-22 19:52:50.882329
++describe
+
+# 2021-10-22 19:52:54.798178
++describe patient;
+
+# 2021-10-22 20:16:06.461588
++.q
+
+# 2021-10-22 20:16:09.680531
++.exit
+
+# 2021-10-22 20:59:03.968778
++.q
+
+# 2021-10-22 20:59:04.978921
++.e
+
+# 2021-10-22 20:59:06.801000
++.exit
+
+# 2021-10-22 20:59:08.479910
++.quit
+
+# 2021-10-22 20:59:18.330022
++select * from disease_site;
+
+# 2021-10-22 20:59:36.897987
++select * from patient where disease_site=1 limit 10;
+
+# 2021-10-22 21:00:03.603837
++select * from patient where diagnosis like '%rectal%';
+
+# 2021-10-22 21:00:11.084933
++select count(*) from patient where diagnosis like '%rectal%';
+
+# 2021-10-22 21:00:21.471374
++select count(*) from patient where diagnosis like '%pancre%';
+
+# 2021-10-22 21:00:25.510400
++select count(*) from patient where diagnosis like '%anal%';
+
+# 2021-10-22 21:00:56.619164
++select count(*) from patient where diagnosis like '%anal%' or diagnosis like '%ectal%' or diagnosis like '%ancrea%';
+
+# 2021-10-22 21:01:09.687911
++select count(*) from patient where diagnosis like '%anal%' or diagnosis like '%ectal%' or diagnosis like '%ancrea%' or diagnosis like '%Anal%';
+
+# 2021-10-22 21:01:28.749362
++update patient set disease_site=2 where diagnosis like '%anal%' or diagnosis like '%ectal%' or diagnosis like '%ancrea%' or diagnosis like '%Anal%';
+
+# 2021-10-22 21:01:31.549319
++.exit
+
+# 2021-10-22 21:17:26.859130
++update patient set active_service = false;
+
+# 2021-10-22 21:17:41.921516
++select * from disease_site;
+
+# 2021-10-22 21:17:53.189477
++update patient set active_service = true where disease_site = 3;
+
+# 2021-10-22 21:18:01.446648
++.exit
+
+# 2021-12-31 08:30:44.662769
++select count(*) from patient;
+
+# 2021-12-31 08:30:47.263595
++\#q
+
+# 2021-12-31 08:30:48.111620
++\q
+
+# 2022-01-01 07:46:33.473507
++select * from Task
+
+# 2022-01-01 07:46:39.775785
++.q
+
+# 2022-01-01 07:46:43.300738
++.exit
+
+# 2022-01-01 07:54:13.021113
++select * from Task;
+
+# 2022-01-01 07:54:20.117683
++.q
+
+# 2022-01-01 07:54:21.501975
++.exit
+
+# 2022-01-27 15:01:18.280290
++.schema
+
+# 2022-01-27 15:01:38.678230
++select * from provider;
+
+# 2022-01-27 15:01:46.624101
++select * from disease_site;
+
+# 2022-01-27 15:01:53.872176
++select * from hospital;
+
+# 2022-01-27 15:02:01.587867
++select * from patient_status;
+
+# 2022-01-27 15:12:28.213709
++select * from intent;

@@ -1,0 +1,21 @@
+{
+    "full_project_path_in_window_title": true,
+    "initial_working_directory": "~",
+    "show_last_dot_value": true,
+    "graphics_backend": "quartz",
+    "posix_terminal_shell": "custom",
+    "editor_keybindings": "vim",
+    "editor_theme": "Solarized Dark",
+    "jobs_tab_visibility": "shown",
+    "global_theme": "alternate",
+    "python_type": "system",
+    "python_version": "3.9.10",
+    "python_path": "/opt/homebrew/bin/python3",
+    "source_with_echo": true,
+    "insert_native_pipe_operator": true,
+    "soft_wrap_r_files": true,
+    "syntax_color_console": true,
+    "custom_shell_command": "/opt/homebrew/bin/bash",
+    "custom_shell_options": "-l",
+    "terminal_initial_directory": "home"
+}

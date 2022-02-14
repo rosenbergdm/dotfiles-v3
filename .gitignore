@@ -5,3 +5,6 @@ __pycache*
 **/plugin/_p
 **/plugin/packer_compiled.lua
 **/lunarvim/cache
+.config/yarn/**
+.DS_Store
+.DS_Store

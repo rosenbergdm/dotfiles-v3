@@ -1,0 +1,4 @@
+#Netx deployment configuration
+#Fri Feb 04 18:09:08 CST 2022
+ows.install4j.propertyUpdate=1644019574448
+deployment.proxy.type=0
