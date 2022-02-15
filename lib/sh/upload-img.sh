@@ -11,5 +11,5 @@ upload-img() {
 	echo "cd wiki.davidrosenberg.me/uploads && git add $bfname && git commit -m imgcopy && git push" | ssh gollum@euler.davidrosenberg.me
 	echo "https://wiki.davidrosenberg.me/uploads/$bfname" | pbcopy
 	rm $fname
-	open "$fname"
+	open "$(pbpaste)"
 }

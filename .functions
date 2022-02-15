@@ -48,7 +48,7 @@ set_python() {
 MY_FUNCTIONS+=("set_python")
 
 adialog() {
-  if [[ -z $1  ]]; then
+  if [[ -z $1 ]]; then
     echo "USAGE: adialog MESSAGE"
     return 1
   fi
@@ -106,7 +106,7 @@ function logstop() {
 MY_FUNCTIONS+=("logstop")
 
 function settruecolor() {
-  if [[ -z $1  ]]; then
+  if [[ -z $1 ]]; then
     echo "USAGE: settruecolor RED GREEN BLUE"
     echo '  Ex: $ > echo "$(settruecolor 100 200 50)Hello"'
     printf "         \x1b[38;2;100;200;50mHello\n"
@@ -125,7 +125,7 @@ function resettruecolor() {
 MY_FUNCTIONS+=("resettruecolor")
 
 function gitignore() {
-  if [[ -z $1  ]]; then
+  if [[ -z $1 ]]; then
     echo "USAGE: gitignore FILES"
     echo "Adds FILES to the local .gitignore listing"
   fi
@@ -140,7 +140,7 @@ function gitignore() {
       testfile="../$testfile"
     fi
   done
-  if [[ -z $ignorefile  ]]; then
+  if [[ -z $ignorefile ]]; then
     echo "ERROR: .gitignore could not be found!"
     return 1
   fi
@@ -164,7 +164,7 @@ MY_FUNCTIONS+=("gitignore")
 
 function save_last_command() {
   function_file=${1:-$HOME/saved_commands.txt}
-  if [[ $1 == "--help" || $1 == "-help" || $1 == "-h"      ]]; then
+  if [[ $1 == "--help" || $1 == "-help" || $1 == "-h" ]]; then
     echo "USAGE: $FUNCNAME [FUNCTION_FILE]"
     echo '  Default FUNCTIONFILE is $HOME/saved_commands.txt'
     echo "  Saves the last entered to 'FUNCTION_FILE'"
@@ -172,7 +172,7 @@ function save_last_command() {
   fi
   lastcommand="$(history | tail -n2 | head -n1 | perl -p -e 's/^\W*\d+\W+//g')"
   function_file=${1:-$HOME/saved_commands.txt}
-  if [[ ! -f $function_file  ]]; then
+  if [[ ! -f $function_file ]]; then
     echo "Function file $function_file does not exist!"
   else
     echo "$lastcommand" >>"$function_file"
@@ -182,7 +182,7 @@ function save_last_command() {
 MY_FUNCTIONS+=("save_last_command")
 
 function dotfiles() {
-  if [[ $1 == "--help" || $1 == "-help" || $1 == "-h"      ]]; then
+  if [[ $1 == "--help" || $1 == "-help" || $1 == "-h" ]]; then
     cat <<EOF
 USAGE: $FUNCNAME ARGS
   Run GIT commands on one's HOME directory 
@@ -197,7 +197,7 @@ EOF
 MY_FUNCTIONS+=("dotfiles")
 
 function dfg() {
-  if [[ $1 == "--help" || $1 == "-help" || $1 == "-h"      ]]; then
+  if [[ $1 == "--help" || $1 == "-help" || $1 == "-h" ]]; then
     cat <<EOF
 USAGE: $FUNCNAME ARGS
   Run GIT commands on one's HOME directory 
@@ -220,7 +220,7 @@ function pathappend() {
 MY_FUNCTIONS+=("pathappend")
 
 function pathlistappend() {
-  if [[ $1 == "--help" || $1 == "-help" || $1 == "-h" || $# -ne 2      ]]; then
+  if [[ $1 == "--help" || $1 == "-help" || $1 == "-h" || $# -ne 2 ]]; then
     cat <<EOF
 USAGE: $FUNCNAME VARLIST NEWPATH
   VARLIST               -- the name of a ':' separated path list, such as PATH, MANPATH, or PYTHONPTH
@@ -231,7 +231,7 @@ USAGE: $FUNCNAME VARLIST NEWPATH
      \$ > echo \$MANPATH
     /usr/share/man:/usr/local/share/man:$HOME/share/man
 EOF
-    if [[ $1 == "--help" || $1 == "-help" || $1 == "-h"     ]]; then
+    if [[ $1 == "--help" || $1 == "-help" || $1 == "-h" ]]; then
       return 0
     else
       return 1
@@ -257,7 +257,7 @@ function pathprepend() {
 MY_FUNCTIONS+=("pathprepend")
 
 function dedupe_pathvar() {
-  if [[ $1 == "--help" || $1 == "-help" || $1 == "-h"      ]]; then
+  if [[ $1 == "--help" || $1 == "-help" || $1 == "-h" ]]; then
     cat <<EOF
 USAGE: $FUNCNAME VAR
   Remove duplicates from the list in variable \$VAR; default is \$PATH
@@ -315,7 +315,7 @@ ansi2text() {
 MY_FUNCTIONS+=("ansi2txt")
 
 twilio() {
-  if [[ $@ == ""  ]] || [[ $1 == "-h"   ]] || [[ $1 == "--help"   ]]; then
+  if [[ $@ == "" ]] || [[ $1 == "-h" ]] || [[ $1 == "--help" ]]; then
     local usage='$ twilio api:core:messages:create --body "Message body here" --from "+19388882701" --to "+17732403395"'
     printf "\n\nUSAGE:\n\n\t%s\n\n" "$usage"
   else
@@ -325,7 +325,7 @@ twilio() {
 MY_FUNCTIONS+=("twilio")
 
 toggle_citrix() {
-  if [[ $@ == ""  ]] || [[ $1 == "-h"   ]] || [[ $1 == "--help"   ]]; then
+  if [[ $@ == "" ]] || [[ $1 == "-h" ]] || [[ $1 == "--help" ]]; then
     local usage='$ toggle_citrix [disable|enable|start|stop] '
     printf "\n\nUSAGE:\n\n\t%s\n\n" "$usage"
   else
@@ -421,14 +421,16 @@ anki() {
 }
 MY_FUNCTIONS+=("anki" "rdp" "excel" "msword" "outlook")
 
+source_and_log "$HOME/.local/bin/upload-img.sh"
+
 if [[ $SYSTYPE == "OSX" ]]; then
-  ldd () {
-      $PRINTF "%s\n\n" "Use otool -L instead on osx" > /dev/stderr
-      otool -L $@
+  ldd() {
+    $PRINTF "%s\n\n" "Use otool -L instead on osx" >/dev/stderr
+    otool -L $@
   }
 
   readlink() {
-    $PRINTF "%s\n\n" "Use greadlink on osx" > /dev/stderr
+    $PRINTF "%s\n\n" "Use greadlink on osx" >/dev/stderr
     greadlink $@
   }
 fi

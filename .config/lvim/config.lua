@@ -189,7 +189,11 @@ formatters.setup {
     extra_args = { "--print-width", "100" },
     filetypes = { "typescript", "typescriptreact", "javascript" },
   },
-  { command = "shfmt", filetypes = { "sh" } },
+  {
+    command = "shfmt",
+    extra_args = { "-i", "2", "-s" },
+    filetypes = { "sh" },
+  },
 
   {
     command = "stylua",
@@ -310,17 +314,10 @@ lvim.plugins = {
     -- end,
   },
   {
-    "rafamadriz/friendly-snippets",
-  },
-
-  {
     "jghauser/kitty-runner.nvim",
     config = function()
       require("kitty-runner").setup()
     end,
-  },
-  {
-    "kyazdani42/nvim-web-devicons",
   },
 
   -- Colorschemes
