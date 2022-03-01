@@ -24,4 +24,14 @@ export NVIM_LOG_FILE="$HOME/.config/nvim/nvimlog.txt"
 export ANDROID_HOME=$HOME/Library/Android/sdk
 export MY_FUNCTIONS
 
+export XDG_CONFIG_HOME=$HOME/.config
+source "$XDG_CONFIG_HOME/user-dirs.dirs"
+export XDG_DATA_HOME=$HOME/.local/share
+export XDG_DATA_DIRS=$HOME/.local/share
+export XDG_CONFIG_HOME XDG_DATA_DIRS XDG_DESKTOP_DIR XDG_DOWNLOAD_DIR
+export XDG_PICTURES_DIR XDG_TEMPLATES_DIR XDG_DATA_DIR XDG_DATA_HOME
+export XDG_DOCUMENTS_DIR XDG_MUSIC_DIR XDG_PUBLICSHARE_DIR XDG_VIDEOS_DIR
+export PTPYTHON_CONFIG_HOME=$HOME/.config/ptpython
+export IPYTHON_DIR=$HOME/.ipython
+
 # vim: ft=sh

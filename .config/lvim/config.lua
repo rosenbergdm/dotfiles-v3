@@ -3,11 +3,14 @@ lvim is the global options object
 --]]
 
 -- general
+
 lvim.log.level = "debug"
 lvim.format_on_save = true
 lvim.lint_on_save = true
 lvim.colorscheme = "onedarker"
 lvim.builtin.sell_soul_to_devel = true
+
+lvim.myhelp = {}
 
 -- keymappings [view all the defaults by pressing <leader>Lk]
 lvim.leader = "space"
@@ -155,7 +158,7 @@ lvim.lsp.automatic_servers_installation = true
 -- ---@usage Select which servers should be configured manually. Requires `:LvimCacheRest` to take effect.
 -- See the full default list `:lua print(vim.inspect(lvim.lsp.override))`
 -- vim.list_extend(lvim.lsp.override, { "pyright" })
-vim.list_extend(lvim.lsp.override, { "r_language_server" })
+-- vim.list_extend(lvim.lsp.override, { "r_language_server" })
 
 -- ---@usage setup a server -- see: https://www.lunarvim.org/languages/#overriding-the-default-configuration
 -- local opts = {} -- check the lspconfig documentation for a list of all possible options
@@ -198,7 +201,7 @@ formatters.setup {
   {
     command = "stylua",
     -- args = { "--config-path", "~/.stylua.toml", "-s", "-" },
-    -- args = { "--config-path", "~/.stylua.toml"},
+    args = { "--config-path", "~/.stylua.toml" },
     filetypes = { "lua" },
   },
 }
@@ -207,7 +210,7 @@ linters.setup {
   {
     command = "shellcheck",
     -- extra_args = { "--line-width", "120" },
-    -- args = { "--line-width", "120" },
+    args = { "--line-width", "120" },
     filetypes = { "sh", "bash", "shell", "zsh" },
   },
   { command = "stylelint", filetypes = { "css", "scss" } },
@@ -218,14 +221,14 @@ linters.setup {
   },
 }
 lvim.plugins = {
-  { "folke/tokyonight.nvim" },
+  { "folke/tokyonight.nvim", rocks = { "see" } },
   {
     "folke/trouble.nvim",
     cmd = "TroubleToggle",
   },
 
   {
-    "blackCauldron7/surround.nvim",
+    "ur4ltz/surround.nvim",
     config = function()
       require("surround").setup {
         -- mappings_style = "surround",
@@ -267,7 +270,8 @@ lvim.plugins = {
   },
   {
     "hrsh7th/cmp-copilot",
-    disable = not lvim.builtin.sell_soul_to_devel,
+    -- disable = not lvim.builtin.sell_soul_to_devel,
+    disable = false,
     config = function()
       lvim.builtin.cmp.formatting.source_names["copilot"] = "(Cop)"
       table.insert(lvim.builtin.cmp.sources, { name = "copilot" })
@@ -280,10 +284,10 @@ lvim.plugins = {
     end,
     event = "InsertEnter",
   },
-  {
-    "simrat39/symbols-outline.nvim",
-    cmd = "SymbolsOutline",
-  },
+  -- {
+  --   "simrat39/symbols-outline.nvim",
+  --   cmd = "SymbolsOutline",
+  -- },
   {
     "iamcco/markdown-preview.nvim",
     run = "cd app && npm install",
@@ -319,7 +323,24 @@ lvim.plugins = {
       require("kitty-runner").setup()
     end,
   },
-
+  {
+    "edluffy/hologram.nvim",
+    config = function()
+      lvim.myhelp.hologram = "https://github.com/edluffy/hologram.nvim"
+    end,
+  },
+  {
+    "ray-x/navigator.lua",
+    requires = { "ray-x/guihua.lua", run = "cd lua/fzy && make " },
+  },
+  {
+    "sudormrfbin/cheatsheet.nvim",
+    requires = {
+      {'nvim-telescope/telescope.nvim'},
+      {'nvim-lua/popup.nvim'},
+      {'nvim-lua/plenary.nvim'}
+    }
+  },
   -- Colorschemes
   { "tiagovla/tokyodark.nvim" },
   { "tjdevries/gruvbuddy.nvim", requires = { "tjdevries/colorbuddy.vim" } },
@@ -331,32 +352,15 @@ lvim.autocommands.custom_groups = {
   { "BufWinEnter,BufRead,BufNewFile", "*", "chdir %:p:h" },
 }
 
-lvim.dap = require("dap-python").setup "~/.config/virtualenvs/debugpy/bin/python"
+-- lvim.dap = require("dap-python").setup "~/.config/virtualenvs/debugpy/bin/python"
 
 require("nvim-treesitter.configs").setup {
-  highligh = {
+  highlight = {
     enable = true,
     custom_captures = {},
     additional_vim_regex_highlighing = true,
   },
 }
--- lvim.dap.adapters.python = {
---   type = "executable",
---   command = "/opt/homebrew/bin/python3",
---   args = { "-m", "debugpy.adapter" },
--- }
-
--- lvim.dap.configurations.python = {
---   {
---     type = "python",
---     request = "launch",
---     name = "Launch file",
---     program = "${file}",
---     pythonPath = function()
---       return "/opt/homebrew/bin/python3"
---     end,
---   },
--- }
 
 -- local lspservers = { "r_language_server" }
 -- for _, lspserver in pairs(lspservers) do
@@ -371,4 +375,5 @@ vim.cmd "let g:firenvim_config = {'globalSettings': { }, 'localSettings': {'.*':
 
 -- P = function(varname)
 --   print(vim.inspect(varname))
--- end
+
+lvim.packer = require "packer"

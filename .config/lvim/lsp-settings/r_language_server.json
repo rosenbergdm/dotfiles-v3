@@ -1,9 +1,7 @@
 {
   "r": {
     "lsp": {
-      "server_capabilities": {
-        "definition_provider": true
-      }
+      "link_file_size_limit": 262144
     }
   }
 }

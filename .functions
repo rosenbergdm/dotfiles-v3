@@ -4,7 +4,7 @@
 MY_FUNCTIONS=()
 
 set_perl() {
-  if [ "$(echo $1 | tr a-z A-Z)" == "SYSTEM" ] || [ "$1" = "5.18" ]; then
+  if [ "$(echo "$1" | tr a-z A-Z)" == "SYSTEM" ] || [ "$1" = "5.18" ]; then
     export PERLLIB=/Library/Perl/5.18:/Library/Perl/5.18/darwin-thread-multi-2level:/System/Library/Perl/5.18:/System/Library/Perl/5.18/darwin-thread-multi-2level:/System/Library/Perl/Extras/5.18:/System/Library/Perl/Extras/5.18/darwin-thread-multi-2level
     export PERL5LIB=$PERLLIB
     export PERL=/usr/bin/perl
@@ -14,12 +14,12 @@ set_perl() {
     export PERL5LIB=$PERLLIB
     export PERL=/usr/bin/perl5.28
     alias perl=/usr/bin/perl5.28
-  elif [ "$(echo $1 | tr a-z A-Z)" == "HOMEBREW" ] || [ "$1" == "5.30" ]; then
+  elif [ "$(echo "$1" | tr a-z A-Z)" == "HOMEBREW" ] || [ "$1" == "5.30" ]; then
     export PERLLIB=/usr/local/Cellar/perl/5.30.1/lib/perl5/site_perl/5.30.1/darwin-thread-multi-2level:/usr/local/Cellar/perl/5.30.1/lib/perl5/site_perl/5.30.1:/usr/local/Cellar/perl/5.30.1/lib/perl5/5.30.1/darwin-thread-multi-2level:/usr/local/Cellar/perl/5.30.1/lib/perl5/5.30.1:/usr/local/lib/perl5/5.30.1:/usr/local/lib/perl5/5.30.1/darwin-thread-multi-2level
     export PERL5LIB=$PERLLIB
     export PERL=/usr/local/bin/perl
     alias perl=/usr/local/bin/perl
-  elif [ "$(echo $1 | tr a-z A-Z)" == "NONE" ]; then
+  elif [ "$(echo "$1" | tr a-z A-Z)" == "NONE" ]; then
     unset PERL
     unset PERL5LIB
     unset PERLLIB
@@ -421,17 +421,29 @@ anki() {
 }
 MY_FUNCTIONS+=("anki" "rdp" "excel" "msword" "outlook")
 
-source_and_log "$HOME/.local/bin/upload-img.sh"
+upload-img() {
+  local fname
+  local bfname
+  fname="$(gmktemp --suffix=.png)"
+  rm -f "$fname"
+  /Users/dmr/.nvm/versions/node/v16.10.0/bin/pbimage "$fname"
+  bfname="$(basename "$fname")"
+  scp "$fname" "gollum@euler.davidrosenberg.me:/home/gollum/wiki.davidrosenberg.me/uploads/$bfname"
+  echo "cd wiki.davidrosenberg.me/uploads && git add $bfname && git commit -m imgcopy && git push" | ssh gollum@euler.davidrosenberg.me
+  echo "https://wiki.davidrosenberg.me/uploads/$bfname" | pbcopy
+  rm "$fname"
+  open "$(pbpaste)"
+}
 
 if [[ $SYSTYPE == "OSX" ]]; then
   ldd() {
     $PRINTF "%s\n\n" "Use otool -L instead on osx" >/dev/stderr
-    otool -L $@
+    otool -L "$@"
   }
 
   readlink() {
     $PRINTF "%s\n\n" "Use greadlink on osx" >/dev/stderr
-    greadlink $@
+    greadlink "$@"
   }
 fi
 # vim: ft=sh
