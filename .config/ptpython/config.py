@@ -59,7 +59,7 @@ def configure(repl):
     repl.wrap_lines = True
 
     # Mouse support.
-    repl.enable_mouse_support = True
+    repl.enable_mouse_support = False
 
     # Complete while typing. (Don't require tab before the
     # completion menu is shown.)
@@ -144,6 +144,7 @@ def configure(repl):
     repl.use_ui_colorscheme("my-colorscheme")
     """
 
+    # @repl.add_key_binding("")
     # Add custom key binding for PDB.
     # @repl.add_key_binding("c-b")
     # def _(event):

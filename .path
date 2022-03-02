@@ -17,7 +17,7 @@ PATH=$PATH:$HOME/src/flutter/bin
 PATH=$PATH:/Library/Frameworks/R.framework/Versions/Current/Resources/bin
 # PATH=$HOMEBREW_PREFIX/Cellar/python@3.10/3.10.2/bin:$PATH
 # [[ -e /opt/homebrew/bin ]] && PATH=/opt/homebrew/bin:$PATH
-PATH=$HOMEBREW_PREFIX/bin:$PATH
+PATH=$HOMEBREW_PREFIX/bin:$HOMEBREW_PREFIX/sbin:$PATH
 PATH="/Library/Java/JavaVirtualMachines/jdk1.8.0_112.jdk/Contents/Home/bin:$PATH"
 
 PATH="$HOME/.local/bin:$PATH"
