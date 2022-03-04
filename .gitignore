@@ -11,3 +11,4 @@ __pycache*
 ~/.config/github-copilot/hosts.json
 ~/.config/lvim/after/ftplugin/r.lua
 .config/nvim/nvimlog.txt
+.config/secure_keys

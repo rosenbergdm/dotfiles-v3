@@ -6,9 +6,7 @@
 #   . $HOME/.bashrc
 # fi
 
-
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
-
 
 PATH="$HOME/bin:/usr/local/bin:$PATH"
 export PATH
@@ -26,6 +24,11 @@ shopt -s histappend
 rvm use 3.0
 
 export NVM_DIR=$HOME/.nvm
-[ -s "$NVM_DIR/nvm.sh" ] && source_and_log "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/nvm.sh" ] && source_and_log "$NVM_DIR/nvm.sh" # This loads nvm
 nvm use 16.0
 . "$HOME/.cargo/env"
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init --path)"
+
+export PATH="$HOME/.poetry/bin:$PATH"

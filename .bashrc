@@ -226,6 +226,12 @@ source_and_log "$NVM_DIR/nvm.sh"
 
 . "$HOME/.cargo/env"
 # [ -f "/Users/dmr/.ghcup/env" ] && source "/Users/dmr/.ghcup/env" # ghcup-env
+bind -m vi-insert -r "\ec"
 bind -m vi-insert '"\ec": "\C-yii"'
 
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init --path)"
+eval "$(pyenv init -)"
+pyenv shell 3.10.2
 # vim: ft=sh :

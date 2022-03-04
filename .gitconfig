@@ -9,3 +9,5 @@
 	tool = lvimdiff
 [init]
 	defaultBranch = master
+[pull]
+	ff = only
