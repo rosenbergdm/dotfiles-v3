@@ -4,7 +4,7 @@ ls ~/bin/
 # Start a tmux session group
 # In iterm window 1:
 tmux new-session -s left
-# In iterm window 2: 
+# In iterm window 2:
 tmux new-session -t left -s right
 
 
@@ -15,7 +15,7 @@ tmux new-session -t left -s right
 
 ###############################
 
-DEBUG_RCLONE=1 gdrive-backup-runner.sh 
+DEBUG_RCLONE=1 gdrive-backup-runner.sh
 /usr/bin/rsync -arvh $HOME/Box/ /Volumes/LaptopBackup2/uic-backups/Boxtmectl info
 tmutil listlocalsnapshots /
 echo "$PATHVAR=$(perl -e "print join(':', grep { not \$seen{\$_}++ } split(/:/, \$ENV{$PATHVAR}))")"
@@ -29,7 +29,7 @@ named-compilezone -f raw -F text -o ~/davidrosenberg.me.zone.text davidrosenberg
 sudo killall -HUP mDNSResponder
 sudo killall -HUP mDNSResponder
 certbot certonly --manual --preferred-challenge=dns --email=dmr@davidrosenberg.me --server https://acme-v02.api.letsencrypt.org/directory --agree-tos -d *.davidrosenberg.me
-./configure --enable-BLAS-shlib -x-libraries=/opt/X11/lib --x-include=/opt/X11/include --enable-R-framework --enable-R-shlib --enable-java --enable-prebuilt-html --enable-shared --with-aqua --with-blas --with-jpeglib --with-lapack --with-libpng --with-pcre2 --with-readline --with-recommended-packages --with-tcltk --with-x --with-cairo CC=gcc LDFLAGS=-L/usr/local/opt/readline/lib -L/usr/local/lib -I/usr/local/opt/cairo/include CPPFLAGS=-I/usr/local/opt/readline/include -I/usr/local/include -I/usr/local/cairo/include CXX=g++ 
+./configure --enable-BLAS-shlib -x-libraries=/opt/X11/lib --x-include=/opt/X11/include --enable-R-framework --enable-R-shlib --enable-java --enable-prebuilt-html --enable-shared --with-aqua --with-blas --with-jpeglib --with-lapack --with-libpng --with-pcre2 --with-readline --with-recommended-packages --with-tcltk --with-x --with-cairo CC=gcc LDFLAGS=-L/usr/local/opt/readline/lib -L/usr/local/lib -I/usr/local/opt/cairo/include CPPFLAGS=-I/usr/local/opt/readline/include -I/usr/local/include -I/usr/local/cairo/include CXX=g++
 CPPFLAGS="-I/usr/local/opt/readline/include -I/usr/local/include -I/usr/local/cairo/include" \
   LDFLAGS="-L/usr/local/opt/readline/lib -L/usr/local/lib -I/usr/local/opt/cairo/include" \
   ./configure --enable-BLAS-shlib -x-libraries=/opt/X11/lib --x-include=/opt/X11/include --enable-R-framework --enable-R-shlib --enable-java --enable-prebuilt-html --enable-shared --with-aqua --with-blas --with-jpeglib --with-lapack --with-libpng --with-pcre2 --with-readline --with-recommended-packages --with-tcltk --with-x --with-cairo \
@@ -44,13 +44,14 @@ git config --global merge.tool vimdiff && git config --global merge.conflictstyl
 $HOME/Library/Android/sdk/emulator/emulator @Pixel_3a_API_30_x86
 gpg --encrypt --sign --armor -r RECIPIENT@EXAMPLE.COM FILENAME
 convert +append image1.jpg image2.jpg  -resize x650 combined.jpg
- pbpaste | grep -B1 -A1 Gleason | grep -v volume | sed -e 's/.*grade \(.*\) (Gr.*/\1/g' |  sed -e 's/.).*Prostate, \(.*\)\;.*$/\1/g' | sed -e 's/-.*\([0-9] of [0-9]\).*/\1/g' | grep -v -ssh -c 3des-cbc dmr@192.168.1.11ssh -c 3des-cbc dmr@192.168.1.11copy running-config scp://dmr@192.168.1.26//share/config/sw01.davidrosenberg.meoutlook () 
-{ 
+ pbpaste | grep -B1 -A1 Gleason | grep -v volume | sed -e 's/.*grade \(.*\) (Gr.*/\1/g' |  sed -e 's/.).*Prostate, \(.*\)\;.*$/\1/g' | sed -e 's/-.*\([0-9] of [0-9]\).*/\1/g' | grep -v -ssh -c 3des-cbc dmr@192.168.1.11ssh -c 3des-cbc dmr@192.168.1.11copy running-config scp://dmr@192.168.1.26//share/config/sw01.davidrosenberg.meoutlook ()
+{
     open /Applications/Microsoft\ Outlook.app/
 }
-excel () 
-{ 
+excel ()
+{
     open /Applications/Microsoft\ Excel.app
 }
 for f in *00??.pdf; do echo  | essentials_dl.sh ; done
 sudo openconnect --protocol=anyconnect --user=nsf6756 webvpn.uchospitals.edu --servercert pin-sha256:OriunfL+2xPuSN1RFiY3gTzv+Daxe1GE1f5EokqFQTk=;
+ CFLAGS="-I/opt/homebrew/opt/openssl@1.1/include -I/opt/homebrew/include" LDFLAGS="-L/opt/homebrew/lib -L/opt/homebrew/opt/openssl@1.1/lib -lssl" UWSGI_PROFILE_OVERRIDE=ssl=true pip install uwsgi -Iv --no-cache-dir

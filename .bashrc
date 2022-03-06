@@ -85,7 +85,7 @@ _dbg() {
     USAGE: _dbg MESSAGE [level] [-n]
 
       MESSAGE:    The debugging message you want displayed
-      level:      One of the threshold levels or its corresponding integer: 
+      level:      One of the threshold levels or its corresponding integer:
                     4, 3, 2, 1 and 0, and trace, info, warn, error, always.
       [-n]:       Don't print a trailing newline
 
@@ -229,9 +229,10 @@ source_and_log "$NVM_DIR/nvm.sh"
 bind -m vi-insert -r "\ec"
 bind -m vi-insert '"\ec": "\C-yii"'
 
-export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init --path)"
 eval "$(pyenv init -)"
-pyenv shell 3.10.2
+# export PYENV_ROOT="$HOME/.pyenv"
+# export PATH="$PYENV_ROOT/bin:$PATH"
+# eval "$(pyenv init --path)"
+# eval "$(pyenv init -)"
+# pyenv shell 3.10.2
 # vim: ft=sh :

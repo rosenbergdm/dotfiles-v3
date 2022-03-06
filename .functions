@@ -185,7 +185,7 @@ function dotfiles() {
   if [[ $1 == "--help" || $1 == "-help" || $1 == "-h" ]]; then
     cat <<EOF
 USAGE: $FUNCNAME ARGS
-  Run GIT commands on one's HOME directory 
+  Run GIT commands on one's HOME directory
   This is the same as running 'git --git-dir=$HOME/dotfiles-new.git/ --work-tree=$HOME "\$@"'
 EOF
     return 0
@@ -200,7 +200,7 @@ function dfg() {
   if [[ $1 == "--help" || $1 == "-help" || $1 == "-h" ]]; then
     cat <<EOF
 USAGE: $FUNCNAME ARGS
-  Run GIT commands on one's HOME directory 
+  Run GIT commands on one's HOME directory
   This is the same as running 'git --git-dir=$HOME/src/dotfiles-v3.git/ --work-tree=$HOME "\$@"'
 EOF
     return 0
@@ -447,3 +447,7 @@ if [[ $SYSTYPE == "OSX" ]]; then
   }
 fi
 # vim: ft=sh
+winedit ()
+{
+    alacritty -e /opt/homebrew/bin/bash -c "$HOME/.local/bin/lvim $@" & !
+}
