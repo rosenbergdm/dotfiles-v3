@@ -55,3 +55,4 @@ excel ()
 for f in *00??.pdf; do echo  | essentials_dl.sh ; done
 sudo openconnect --protocol=anyconnect --user=nsf6756 webvpn.uchospitals.edu --servercert pin-sha256:OriunfL+2xPuSN1RFiY3gTzv+Daxe1GE1f5EokqFQTk=;
  CFLAGS="-I/opt/homebrew/opt/openssl@1.1/include -I/opt/homebrew/include" LDFLAGS="-L/opt/homebrew/lib -L/opt/homebrew/opt/openssl@1.1/lib -lssl" UWSGI_PROFILE_OVERRIDE=ssl=true pip install uwsgi -Iv --no-cache-dir
+git add .pre-commit-config.yaml  && pre-commit-validate-config && pre-commit install --install-hooks && pre-commit install
