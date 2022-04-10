@@ -446,8 +446,47 @@ if [[ $SYSTYPE == "OSX" ]]; then
     greadlink "$@"
   }
 fi
-# vim: ft=sh
 winedit ()
 {
     alacritty -e /opt/homebrew/bin/bash -c "$HOME/.local/bin/lvim $@" & !
 }
+
+mypushd () {
+  command pushd "$@" >/dev/null
+}
+
+mypopd () {
+  command popd "$@" >/dev/null
+}
+
+mycd () {
+  if [ "$#" -eq 0 ]; then
+    mypushd "$HOME"
+  elif [[ "$1" == "-" ]]; then
+    mypopd
+  else
+    mypushd "$@"
+  fi
+}
+alias cd=mycd
+
+cd..() {
+  mypushd ".."
+}
+
+cd...() {
+  mypushd "../.."
+}
+
+cd....() {
+  mypushd "../../.."
+}
+
+cd.....() {
+  mypushd "../../../.."
+}
+
+
+
+
+# vim: ft=sh

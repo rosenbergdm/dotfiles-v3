@@ -19,14 +19,14 @@ export LS_COLORS='no=00:fi=00:di=01;34:ln=01;36:pi=40;33:so=01;35:do=01;35:bd=40
 alias python=python3
 alias pio=pip3
 
-alias grep='$HOMEBREW_PREFIX/bin/ggrep --color=auto'
-alias fgrep='$HOMEBREW_PREFIX/bin/gfgrep --color=auto'
-alias egrep='$HOMEBREW_PREFIX/bin/gegrep --color=auto'
-alias pgrep='$HOMEBREW_PREFIX/bin/grep -P --color=auto'
+# alias grep='$HOMEBREW_PREFIX/bin/ggrep --color=auto'
+# alias fgrep='$HOMEBREW_PREFIX/bin/gfgrep --color=auto'
+# alias egrep='$HOMEBREW_PREFIX/bin/gegrep --color=auto'
+# alias pgrep='$HOMEBREW_PREFIX/bin/grep -P --color=auto'
 # alias ovim='/usr/local/bin/nvim'
 # alias vim="$HOME/bin/lvim"
 alias vim=$HOME/.local/bin/lvim
-alias vimdiff="$HOME/.local/bin/lvim -d"
+# alias vimdiff="$HOME/.local/bin/lvim -d"
 # alias mvim='/Users/davidrosenberg/bin/vimr'
 # alias vimdiff='/usr/local/bin/nvim -d'
 # enforcing correct gmvault execution
@@ -49,4 +49,6 @@ fi
 
 alias ipython=ptipython
 alias ptpython=ptipython
+
+alias R=/Library/Frameworks/R.framework/Versions/Current/Resources/bin/R
 # vim: ft=sh
