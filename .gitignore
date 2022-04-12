@@ -12,3 +12,4 @@ __pycache*
 ~/.config/lvim/after/ftplugin/r.lua
 .config/nvim/nvimlog.txt
 .config/secure_keys
+node_modules

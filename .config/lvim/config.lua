@@ -210,7 +210,7 @@ linters.setup {
   {
     command = "shellcheck",
     -- extra_args = { "--line-width", "120" },
-    args = { "--line-width", "120" },
+    -- args = { "--line-width", "120" },
     filetypes = { "sh", "bash", "shell", "zsh" },
   },
   { command = "stylelint", filetypes = { "css", "scss" } },
@@ -346,10 +346,10 @@ lvim.plugins = {
   -- launch the above scheme with ":lua require('colorbuddy').colorscheme('gruvbuddy')"
 }
 
--- Autocommands (https://neovim.io/doc/user/autocmd.html)
-lvim.autocommands.custom_groups = {
-  { "BufWinEnter,BufRead,BufNewFile", "*", "chdir %:p:h" },
-}
+-- -- Autocommands (https://neovim.io/doc/user/autocmd.html)
+-- lvim.autocommands.custom_groups = {
+--   { "BufWinEnter,BufRead,BufNewFile", "*", "chdir %:p:h" },
+-- }
 
 -- lvim.dap = require("dap-python").setup "~/.config/virtualenvs/debugpy/bin/python"
 

@@ -486,6 +486,10 @@ cd.....() {
   mypushd "../../../.."
 }
 
+editfun ()
+{
+    exec alacritty --command lvim "$@" & ! exit
+}
 
 
 

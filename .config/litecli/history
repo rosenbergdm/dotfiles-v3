@@ -93,7 +93,7 @@
 +select * from disease_site;
 
 # 2021-10-16 06:23:41.640748
-+update patient set disease_site=3 where attending=1; 
++update patient set disease_site=3 where attending=1;
 
 # 2021-10-16 06:23:44.856465
 +.exit
@@ -280,3 +280,18 @@
 
 # 2022-01-27 15:12:28.213709
 +select * from intent;
+
+# 2022-03-30 07:45:27.874378
++.databases
+
+# 2022-03-30 07:45:29.436143
++.schema
+
+# 2022-03-30 07:45:36.223502
++describe `ZMANAGEDOBJECTSTORECONNECTION`;
+
+# 2022-03-30 07:45:40.066673
++.q
+
+# 2022-03-30 07:45:41.217601
++.exit

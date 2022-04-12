@@ -1,4 +1,15 @@
 #Netx deployment configuration
-#Fri Feb 04 18:09:08 CST 2022
-ows.install4j.propertyUpdate=1644019574448
+#Sun Apr 10 08:40:28 CDT 2022
+ows.install4j.propertyUpdate=1649596398889
+ows.jvm.manager.server.allowFromJnlp=true
+ows.jvm.manager.vendor.allowFromJnlp=true
+ows.remote.debug.enabled=true
+ows.jvm.manager.updateStrategy=AUTOMATICALLY_DOWNLOAD
 deployment.proxy.type=0
+ows.update.activated=false
+deployment.security.jsse.hostmismatch.warning=false
+deployment.log.jnlpFileContent=true
+deployment.log=true
+deployment.javaws.shortcut=ALWAYS_IF_HINTED
+deployment.console.startup.mode=SHOW
+ows.shortcut.update.strategy=PRESERVE
