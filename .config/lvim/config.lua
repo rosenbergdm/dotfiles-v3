@@ -32,6 +32,8 @@ lvim.keys.normal_mode["<M-c>"] = "y"
 lvim.keys.visual_mode["<M-c>"] = "y"
 lvim.keys.visual_block_mode["<M-c>"] = "y"
 
+
+
 local M = {}
 M.load_options = function()
   local LVIM_CACHE_DIR = os.getenv "HOME" .. "/.cache/lvim"

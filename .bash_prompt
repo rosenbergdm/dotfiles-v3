@@ -5,16 +5,16 @@
 
 [[ "$DEBUG_STARTUP:" == "1:" ]] && echo "RUNNING $HOME/.bash_prompt"
 
-if [[ $- == *i* ]]; then 
-  if [[ $COLORTERM = gnome-* && $TERM = xterm ]] && infocmp gnome-256color >/dev/null 2>&1; then
+if [[ $- == *i* ]]; then
+  if [[ $COLORTERM == gnome-* && $TERM == xterm ]] && infocmp gnome-256color >/dev/null 2>&1; then
     export TERM=gnome-256color
-  elif [[ $TERM = alacritty ]]; then
+  elif [[ $TERM == alacritty ]]; then
     export TERM=alacritty
   elif infocmp xterm-256color >/dev/null 2>&1; then
     export TERM=xterm-256color
   fi
 
-  if tput setaf 1 &> /dev/null; then
+  if tput setaf 1 &>/dev/null; then
     tput sgr0
     if [[ $(tput colors) -ge 256 ]] 2>/dev/null; then
       # Changed these colors to fit Solarized theme
@@ -51,11 +51,11 @@ if [[ $- == *i* ]]; then
   export RESET
 
   function parse_git_dirty() {
-    [[ $(git status 2> /dev/null | tail -n1) != *"working directory clean"* ]] && echo "*"
+    [[ $(git status 2>/dev/null | tail -n1) != *"working directory clean"* ]] && echo "*"
   }
 
   function parse_git_branch() {
-    git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e "s/* \(.*\)/\1$(parse_git_dirty)/"
+    git branch --no-color 2>/dev/null | sed -e '/^[^*]/d' -e "s/* \(.*\)/\1$(parse_git_dirty)/"
   }
 
   export PS1="\[${BOLD}${MAGENTA}\]\u \[$WHITE\]at \[$ORANGE\]\h \[$WHITE\]in \[$GREEN\]\w\[$WHITE\]\$([[ -n \$(git branch 2> /dev/null) ]] && echo \" on \")\[$PURPLE\]\$(parse_git_branch)\[$WHITE\]\n\$ \[$RESET\]"
@@ -83,7 +83,7 @@ export PROMPT_COMMAND
 
 touch "$HOME/.bash_eternal_history"
 
-if [ ! "$FAST_STARTUP" -gt 0 ]; then 
+if [ ! "$FAST_STARTUP" -gt 0 ]; then
   if [ "$(wc -l $HOME/.bash_history | $AWK '{print $1}')" -gt "$(wc -l $HOME/.bash_eternal_history | $AWK '{print $1}')" ]; then
     cp "$HOME/.bash_history" "$HOME/.bash_eternal_history"
   else
@@ -95,5 +95,6 @@ if [ ! "$FAST_STARTUP" -gt 0 ]; then
   fi
 fi
 
+[[ $TERM_PROGRAM == WarpTerminal ]] && unset PROMPT_COMMAND
 
 # vim: ft=sh

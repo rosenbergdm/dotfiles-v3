@@ -11,3 +11,5 @@
 	defaultBranch = master
 [pull]
 	ff = only
+[receive]
+	denyCurrentBranch = warn

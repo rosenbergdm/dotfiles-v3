@@ -491,6 +491,7 @@ editfun ()
     exec alacritty --command lvim "$@" & ! exit
 }
 
+source "$HOME/src/epic-on-speed/managephrases.sh"
 
 
 # vim: ft=sh

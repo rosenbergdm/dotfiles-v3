@@ -2,6 +2,15 @@
 # shellcheck disable=SC1090
 # SC1090: Not all references will be resolvable
 
+if [ -a "$HOME/DEBUG_STARTUP" ]; then
+  if [[ "$(cat "$HOME/DEBUG_STARTUP")" == "" ]]; then
+    file_dbg_startup=1
+  else
+    file_dbg_startup=$(cat "$HOME/DEBUG_STARTUP")
+  fi
+fi
+export DEBUG_STARTUP=${DEBUG_STARTUP-${file_dbg_startup-0}}
+
 if [ "$BASH_PROFILE_RUN" ]; then
   # i.e. we got called twice
   if [ "$DEBUG_STARTUP" ]; then
@@ -23,5 +32,6 @@ eval "$(pyenv init --path)"
 # export PATH="$HOME/.poetry/bin:$PATH"
 
 test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"
+export BASH_PROFILE_RUN DEBUG_STARTUP BASHRC_RUN
 
 # vim: ft=sh :

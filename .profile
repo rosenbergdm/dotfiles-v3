@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
-[[ "$DEBUG_STARTUP:" == "1:" ]] && echo "RUNNING $HOME/.profile"
+# [[ "$DEBUG_STARTUP:" == "1:" ]] && echo "RUNNING $HOME/.profile"
+echo "RUNNING $HOME/.profile"
 # export PROFILE_RUN=1
 # if [  -z "$BASHRC_RUN" ]; then
 #   # .bashrc has not been run

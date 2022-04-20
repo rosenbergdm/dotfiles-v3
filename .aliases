@@ -49,6 +49,7 @@ fi
 
 alias ipython=ptipython
 alias ptpython=ptipython
+alias pwsh=/usr/local/bin/pwsh-preview
 
 alias R=/Library/Frameworks/R.framework/Versions/Current/Resources/bin/R
 # vim: ft=sh

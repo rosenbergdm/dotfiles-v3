@@ -295,3 +295,27 @@
 
 # 2022-03-30 07:45:41.217601
 +.exit
+
+# 2022-04-16 10:52:53.695130
++create table phrase (
+
+# 2022-04-16 10:54:31.366750
++create table phrase (
++  id integer not null autoincrement,
++  abbr text unique not null,
++  phrase text not null );
+
+# 2022-04-16 10:55:34.947570
++create table phrase (
++  id integer not null primary key autoincrement,
++  abbr text unique not null,
++  phrase text not null );
+
+# 2022-04-16 10:56:43.554338
++insert into phrase(abbr, phrase) values ("srstech", "Frameless SRS, 11 Static Conformal Noncoplanar 3D Plan");
+
+# 2022-04-16 10:56:49.458011
++;
+
+# 2022-04-16 10:56:52.846576
++quit
