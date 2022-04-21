@@ -139,7 +139,7 @@ Space: magic-space
 
 
 
-set show-mode-in-prompt
+# set show-mode-in-prompt
 set editing-mode vi
 
 $if mode=vi
@@ -149,7 +149,7 @@ $if mode=vi
   #alternate kill ring
   "y": yank-pop
   # To work with yiw/W
-  "gy": vi-yank-to 
+  "gy": vi-yank-to
   "dd": kill-whole-line
   "cc": "ddi"
   "|": "A | "
@@ -213,10 +213,10 @@ $if mode=vi
   $endif
   $if resty-cli
     Space: " "
-  $endif 
+  $endif
   $if resty-repl
     Space: " "
-  $endif 
+  $endif
 
   "\e[A": history-search-backward
   "\e[B": history-search-forward
@@ -238,5 +238,3 @@ $if mode=vi
 $endif
 
 set keymap vi-insert
-
-

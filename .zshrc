@@ -19,6 +19,8 @@ fpath+=( \
   "$HOME/.zshrc.d/completions" \
 )
 
+echo 22
+
 path+=( \
   $HOME/.local/bin \
   /opt/homebrew/bin \
@@ -76,6 +78,7 @@ path+=( \
 
   eval `gdircolors`
 
+echo 81
 
   zmodload zsh/complist
 autoload -U zstyle+
@@ -84,12 +87,12 @@ zmodload -a zsh/stat stat
 zmodload -a zsh/zle zle
 zmodload -a zsh/zpty zpty
 
+echo 90
 
 alias ls="ls -a -G"
 alias lsd='ls -ld *(-/DN)'
-alias vim=/Users/dmr/.bin/lvim
+alias vim=/Users/dmr/.local/bin/lvim
 
-source /opt/homebrew/share/zsh-fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
 
 
 
@@ -195,6 +198,8 @@ zstyle ':completion:*' completer _expand _complete _ignored _correct _prefix
 zstyle ':completion:*' special-dirs true
 zstyle :compinstall filename '/Users/dmr/.zshrc'
 
+echo 200
+
 autoload -Uz compinit
 compinit -i
 
@@ -203,6 +208,7 @@ compinit -i
 
 
 
+echo 209
 
 
 
@@ -214,6 +220,7 @@ zle -N incremental-complete-word
 zle -N predict-on
 zle -N predict-off
 
+print 223
 
 # Most important bindings
 
@@ -287,5 +294,10 @@ bindkey -M viins '^[.' _history-complete-older
 bindkey -M vicmd '^Z' my-screen-to-other
 bindkey -M viins '^Z' my-screen-to-other
 
+
+print 298
 # End of lines added by compinstall
-  source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh  source /opt/homebrew/opt/zsh-vi-mode/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh  source /opt/homebrew/share/zsh-navigation-tools/zsh-navigation-tools.plugin.zsh  source "/opt/homebrew/opt/zsh-git-prompt/zshrc.sh"
+# source /opt/homebrew/share/zsh-fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
+ # source /opt/homebrew/opt/zsh-vi-mode/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh
+ # source /opt/homebrew/share/zsh-navigation-tools/zsh-navigation-tools.plugin.zsh
+ # source "/opt/homebrew/opt/zsh-git-prompt/zshrc.sh"
