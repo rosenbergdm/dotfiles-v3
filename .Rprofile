@@ -61,7 +61,7 @@ if (interactive()) {
   invisible(sapply(auto_loads, suppress_load_message))
 }
 
-if (Sys.getenv("TERM") == "xterm-256color") {
+if (Sys.getenv("TERM") %in% c("xterm-256color", "kitty", "alacritty") ) {
   if (commandArgs()[1] != "radian") {
     if ("colorout" %in% rownames(utils::installed.packages())) {
       suppress_load_message("colorout")
@@ -82,6 +82,8 @@ if (Sys.getenv("TERM") == "xterm-256color") {
       #   error = "\x1b[38;2;255;255;255;48;2;255;0;0m",
       #   zero.limit = 0.01, verbose = FALSE
       # ))
+    } else {
+      cat("'Colorout not installed\n")
     }
   }
 }

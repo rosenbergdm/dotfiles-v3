@@ -1,3 +1,5 @@
+# Fig pre block. Keep at the top of this file.
+. "$HOME/.fig/shell/bash_profile.pre.bash"
 #!/opt/homebrew/bin/bash
 # shellcheck disable=SC1090
 # SC1090: Not all references will be resolvable
@@ -35,3 +37,6 @@ test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shel
 export BASH_PROFILE_RUN DEBUG_STARTUP BASHRC_RUN
 
 # vim: ft=sh :
+
+# Fig post block. Keep at the bottom of this file.
+. "$HOME/.fig/shell/bash_profile.post.bash"

@@ -1,3 +1,5 @@
+# Fig pre block. Keep at the top of this file.
+. "$HOME/.fig/shell/bashrc.pre.bash"
 #!/opt/homebrew/bin/bash
 # shellcheck disable=SC1090
 # SC1090: Not all references will be resolvable
@@ -236,3 +238,6 @@ eval "$(pyenv init -)"
 # eval "$(pyenv init -)"
 # pyenv shell 3.10.2
 # vim: ft=sh :
+
+# Fig post block. Keep at the bottom of this file.
+. "$HOME/.fig/shell/bashrc.post.bash"

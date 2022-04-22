@@ -1,3 +1,5 @@
+# Fig pre block. Keep at the top of this file.
+. "$HOME/.fig/shell/profile.pre.bash"
 #!/usr/bin/env bash
 # [[ "$DEBUG_STARTUP:" == "1:" ]] && echo "RUNNING $HOME/.profile"
 echo "RUNNING $HOME/.profile"
@@ -33,3 +35,6 @@ export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init --path)"
 
 export PATH="$HOME/.poetry/bin:$PATH"
+
+# Fig post block. Keep at the bottom of this file.
+. "$HOME/.fig/shell/profile.post.bash"

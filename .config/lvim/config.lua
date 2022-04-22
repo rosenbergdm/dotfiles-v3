@@ -53,8 +53,9 @@ M.load_options = function()
     swapfile = true,
     backup = true,
     -- guifont = "Monaco:h14",
+    guifont = "DroidSansMono Nerd Font Mono:h14",
     -- guifont = "ProFontIIx Nerd Font Mono:h14",
-    guifont = "Inconsolata Nerd Font Mono:h14",
+    -- guifont = "Inconsolata Nerd Font Mono:h14",
     foldenable = false,
     modeline = true,
     modelines = 5,
@@ -378,5 +379,7 @@ vim.cmd "let g:firenvim_config = {'globalSettings': { }, 'localSettings': {'.*':
 
 -- P = function(varname)
 --   print(vim.inspect(varname))
+-- You can print with :lua =XXXX
+--   or use :lua =lvim.see(xxxx)
 
 lvim.packer = require "packer"

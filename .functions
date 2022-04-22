@@ -401,9 +401,6 @@ MY_FUNCTIONS+=("add_missing_startup")
 #   fi
 # }
 
-# winrdp() {
-#   open "/Applications/Microsoft Remote Desktop Beta.app"
-# }
 outlook() {
   open "/Applications/Microsoft Outlook.app"
 }

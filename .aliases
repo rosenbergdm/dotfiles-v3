@@ -53,5 +53,6 @@ alias pwsh=/usr/local/bin/pwsh-preview
 alias keepalive="$HOME/.pyenv/shims/python $HOME/src/epic-on-speed/keep-epic-alive.py"
 
 alias R=/Library/Frameworks/R.framework/Versions/Current/Resources/bin/R
+alias warp=open\ /Applications/Warp.app
+alias rdp=open "/Applications/Microsoft Remote Desktop.app"
 # vim: ft=sh
- alias warp=open\ /Applications/Warp.app

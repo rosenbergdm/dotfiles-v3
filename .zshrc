@@ -1,3 +1,5 @@
+# Fig pre block. Keep at the top of this file.
+. "$HOME/.fig/shell/zshrc.pre.zsh"
 # Lines configured by zsh-newuser-install
 HISTFILE=~/.zsh_hist
 HISTSIZE=100000000
@@ -5,6 +7,8 @@ SAVEHIST=100000000000
 setopt autocd extendedglob
 bindkey -v
 
+unset PROMPT_COMMAND
+export SHELL=zsh
 fpath+=( \
   /opt/homebrew/share/zsh-completions \
   /opt/homebrew/share/zsh-vi-mode \
@@ -41,6 +45,7 @@ path+=( \
   /Library/Frameworks/R.framework/Versions/Current/Resources/bin \
 )
 
+if [[ "$TERM_PROGRAM" != "WarpTerminal" ]]; then
     setopt   BASH_AUTO_LIST NO_BEEP CLOBBER
 
   # Job Control
@@ -297,7 +302,11 @@ bindkey -M viins '^Z' my-screen-to-other
 
 print 298
 # End of lines added by compinstall
-# source /opt/homebrew/share/zsh-fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
- # source /opt/homebrew/opt/zsh-vi-mode/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh
- # source /opt/homebrew/share/zsh-navigation-tools/zsh-navigation-tools.plugin.zsh
- # source "/opt/homebrew/opt/zsh-git-prompt/zshrc.sh"
+source /opt/homebrew/share/zsh-fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
+source /opt/homebrew/opt/zsh-vi-mode/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh
+source /opt/homebrew/share/zsh-navigation-tools/zsh-navigation-tools.plugin.zsh
+source "/opt/homebrew/opt/zsh-git-prompt/zshrc.sh"
+fi
+
+# Fig post block. Keep at the bottom of this file.
+. "$HOME/.fig/shell/zshrc.post.zsh"

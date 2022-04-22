@@ -319,3 +319,40 @@
 
 # 2022-04-16 10:56:52.846576
 +quit
+
+# 2022-04-21 11:09:36.653848
++.schema
+
+# 2022-04-21 11:10:48.411279
++update phrase set phrase="Following multidisciplinary discussion and evaluation of .HIS records, imaging, ttreatment course, and exam, we recommend SRS to the lesion as a means of
++providing durable control without the risks and longer recovery period that
++would be needed following surgical resection.  Based on the size of the lesion,
++we would like treat to 20 Gy using a frameless approach.
++" where abbr="get-phrase";
+
+# 2022-04-21 11:11:10.461288
++select * from phrase;
+
+# 2022-04-21 11:11:26.560536
++select * from phrase where abbr='srsplan';
+
+# 2022-04-21 11:12:02.698450
++update phrase set phrase='Following multidisciplinary discussion and evaluation of .HIS records, imaging, treat.HIS t course, we recommend SRS to the lesion as a means of providing durable control without the risks and longer recovery period that would be needed following surgical resection.  Based on the size of the lesion, we would like treat to 20 Gy using a frameless approach.'  where abbr='srsplan';
+
+# 2022-04-21 11:12:05.213951
++.q
+
+# 2022-04-21 11:12:09.893522
++commit
+
+# 2022-04-21 11:12:12.969730
++quit
+
+# 2022-04-21 11:13:04.692154
++select * from phrase where abbr='srsplan';
+
+# 2022-04-21 11:13:26.194332
++.q
+
+# 2022-04-21 11:13:27.910773
++exit
