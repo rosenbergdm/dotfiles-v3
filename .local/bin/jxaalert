@@ -1,0 +1,56 @@
+#!/usr/bin/env bash
+#
+# Usage:
+#   jxaalert [--verbose] <message> [<infomsg>]
+#   jxaalert -h | --help | --verbose
+#
+# Examples:
+#   jxaalert 'About to shutdown'
+#   jxaalert 'About to shutdown' 'Shutdown initiation by command'
+#
+# Options:
+#   -h --help    Show this usage
+#   --verbose    Be verbose
+#
+#
+#
+
+version=0.0.1
+source "$HOME/lib/sh/docopts.sh" --auto "$@"
+
+#main code based on $ARGS produced by --auto
+# for a in ${!ARGS[@]}; do
+#   echo "$a = ${ARGS[$a]}"
+# done
+
+msg="${ARGS["<message>"]}"
+infomsg="${ARGS["<infomsg>"]}"
+
+[[ ${ARGS["--verbose"]} == true ]] && echo "infomsg='$infomsg', message='$msg'" >/dev/stderr && sleep 1
+
+tf=$(/usr/bin/mktemp)
+cat <<EOF | /usr/bin/osascript -l JavaScript >"$tf" 2>&1
+
+var app = Application.currentApplication();
+app.includeStandardAdditions = true;
+
+var displayOpts = {
+  message: "$infomsg",
+};
+
+var dialogText = "$msg";
+try {
+  var result = app.displayAlert(dialogText, displayOpts);
+} catch (e) {
+  var result = {};
+}
+EOF
+
+if [ ! -s "$tf" ]; then
+  rm "$tf"
+  exit 1
+else
+  cat "$tf"
+  rm "$tf"
+fi
+# vim: set ft=sh:

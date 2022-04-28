@@ -1,0 +1,73 @@
+#!/usr/bin/env bash
+#
+# Usage:
+#   jxaprompt [--verbose] <message> [<default>] [<buttons>]
+#   jxaprompt -h | --help | --verbose
+#
+# Examples:
+#   jxaprompt 'Enter a filename' './'
+#   jxaprompt 'Accept the default or enter a new value' '<value>' '[\"OK\", \"Abort\"]'
+#
+# Options:
+#   -h --help    Show this usage
+#   --verbose    Be verbose
+#
+#
+#
+
+version=0.0.1
+source "$HOME/lib/sh/docopts.sh" --auto "$@"
+
+# main code based on $ARGS produced by --auto
+# for a in ${!ARGS[@]}; do
+#   echo "$a = ${ARGS[$a]}"
+# done
+
+dtext="${ARGS["<message>"]}"
+dans="${ARGS["<default>"]}"
+buttons="${ARGS["<buttons>"]}"
+if [ -z "$buttons" ]; then
+  buttons='["OK", "Cancel"]'
+fi
+
+[[ ${ARGS["--verbose"]} == true ]] && echo "buttons='$buttons', answer='$dans', text='$dtext'" >/dev/stderr && sleep 1
+
+tf=$(/usr/bin/mktemp)
+cat <<EOF | /usr/bin/osascript -l JavaScript >"$tf" 2>&1
+
+var app = Application.currentApplication();
+app.includeStandardAdditions = true;
+
+var displayOpts = {
+  buttons: $buttons,
+  defaultAnswer: "$dans"
+};
+
+var customButtons = false;
+if (displayOpts["buttons"].join("") === "OKCancel") {
+  displayOpts["defaultButton"] = "OK";
+} else {
+  customButtons = true;
+}
+
+var dialogText = "${dtext}";
+try {
+  var result = app.displayDialog(dialogText, displayOpts);
+  if (customButtons) {
+    console.log(JSON.stringify(result))
+  } else {
+    console.log(result["textReturned"])
+  }
+} catch (e) {
+  var result = {};
+}
+EOF
+
+if [ ! -s "$tf" ]; then
+  rm "$tf"
+  exit 1
+else
+  cat "$tf"
+  rm "$tf"
+fi
+# vim: set ft=sh:

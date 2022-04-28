@@ -1,0 +1,67 @@
+#!/usr/bin/env bash
+#
+# Usage:
+#   jxaselect [--verbose] [-m] <prompt> <choices>
+#   jxaselect -h | --help | --verbose
+#
+# Examples:
+#   jxaselect 'What is your favorite color' '["Red", "Blue"]'
+#
+# Options:
+#   -h --help    Show this usage
+#   --verbose    Be verbose
+#   -m           Allow multiple selections
+#
+#
+
+version=0.0.1
+source "$HOME/lib/sh/docopts.sh" --auto "$@"
+
+# main code based on $ARGS produced by --auto
+# for a in ${!ARGS[@]}; do
+#   echo "$a = ${ARGS[$a]}"
+# done
+
+prompt="${ARGS["<prompt>"]}"
+choices="${ARGS["<choices>"]}"
+multi="${ARGS["-m"]}"
+
+[[ ${ARGS["--verbose"]} == true ]] && echo "choices='$choices', prompt='$prompt', multi='$multi'" >/dev/stderr && sleep 1
+
+tf=$(/usr/bin/mktemp)
+cat <<EOF | /usr/bin/osascript -l JavaScript >"$tf" 2>&1
+
+var app = Application.currentApplication();
+app.includeStandardAdditions = true;
+
+var displayOpts = {
+  withPrompt: "$prompt",
+  multipleSelectionsAllowed: $multi
+};
+
+
+try {
+  var result = app.chooseFromList($choices, displayOpts);
+  if (displayOpts.multipleSelectionsAllowed) {
+    console.log(JSON.stringify(result))
+  } else {
+    console.log(result[0])
+  }
+} catch (e) {
+  var result = {};
+}
+EOF
+
+if [ ! -s "$tf" ]; then
+  rm "$tf"
+  exit 1
+else
+  cat "$tf"
+  rm "$tf"
+fi
+
+# app.chooseFromList(['red', 'green', 'blue'],
+#   { withPrompt: 'What is your favorite color?',
+#     multipleSelectionsAllowed: true })
+#
+# vim: set ft=sh:

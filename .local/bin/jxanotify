@@ -1,0 +1,66 @@
+#!/usr/bin/env bash
+#
+# Usage:
+#   jxanotify [--verbose] <message> [<title>] [<subtitle>]
+#   jxanotify -h | --help | --verbose
+#
+# Examples:
+#   jxanotify 'The file has been converted'
+#   jxanotify 'The file has been converted' 'Success' 'Done'
+#
+# Options:
+#   -h --help    Show this usage
+#   --verbose    Be verbose
+#
+#
+#
+
+version=0.0.1
+source "$HOME/lib/sh/docopts.sh" --auto "$@"
+
+#main code based on $ARGS produced by --auto
+# for a in ${!ARGS[@]}; do
+#   echo "$a = ${ARGS[$a]}"
+# done
+
+msg="${ARGS["<message>"]}"
+title="${ARGS["<title>"]}"
+subtitle="${ARGS["<subtitle>"]}"
+
+if [ -z "$title" ]; then
+  title="Notification:"
+fi
+
+[[ ${ARGS["--verbose"]} == true ]] && echo "title='$title', subtitle='$subtitle',message='$msg'" >/dev/stderr && sleep 1
+
+tf=$(/usr/bin/mktemp)
+cat <<EOF | /usr/bin/osascript -l JavaScript >"$tf" 2>&1
+
+var app = Application.currentApplication();
+app.includeStandardAdditions = true;
+
+var displayOpts = {
+  withTitle: "$title",
+  subtitle: "$subtitle"
+};
+
+var dialogText = "$msg";
+try {
+  var result = app.displayNotification(dialogText, displayOpts);
+} catch (e) {
+  var result = {};
+}
+EOF
+
+if [ ! -s "$tf" ]; then
+  rm "$tf"
+  exit 1
+else
+  cat "$tf"
+  rm "$tf"
+fi
+
+# app.displayNotification('The file has been converted',
+#   { withTitle: 'Success', subtitle: 'Done' })
+#
+# vim: ft=sh:

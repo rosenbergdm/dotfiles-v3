@@ -1,7 +1,7 @@
-# Fig pre block. Keep at the top of this file.
-. "$HOME/.fig/shell/bashrc.pre.bash"
 #!/opt/homebrew/bin/bash
-# shellcheck disable=SC1090
+
+# Fig pre block. Keep at the top of this file.
+# # shellcheck disable=SC1090
 # SC1090: Not all references will be resolvable
 
 # set -E
@@ -240,4 +240,7 @@ eval "$(pyenv init -)"
 # vim: ft=sh :
 
 # Fig post block. Keep at the bottom of this file.
-. "$HOME/.fig/shell/bashrc.post.bash"
+#
+
+[[ -f ~/.bash-preexec.sh ]] && source ~/.bash-preexec.sh
+eval "$(atuin init bash)"
