@@ -5,6 +5,30 @@ vim.opt.rtp:remove(home_dir .. "/.config/nvim")
 vim.opt.rtp:append(home_dir .. "/.local/share/nvim.ch")
 vim.opt.rtp:append(home_dir .. "/.local/share/nvim.ch/site")
 vim.cmd [[let &packpath=&rtp]]
+
+_G.HOME_PATH = vim.loop.os_homedir()
+_G.DATA_PATH = _G.HOME_PATH .. "/.local/share/nvim.ch"
+_G.CACHE_PATH = _G.DATA_PATH .. "/cache"
+_G.CONFIG_PATH = _G.HOME_PATH .. "/.config/nvim.ch"
+-- _G.RUNTIME_PATH = vim.loop.os_getenv "DRVIM_RUNTIME_PATH"
+
+vim.fn.old_stdpath = vim.fn.stdpath
+
+vim.fn.stdpath = function(what)
+    if what == "cache" then
+        return _G.CACHE_PATH
+    elseif what == "config_dirs" then
+        return vim.fn.old_stdpath "config_dirs"
+    elseif what == "data" then
+        return _G.DATA_PATH
+    elseif what == "data_dirs" then
+        return vim.fn.old_stdpath "data_dirs"
+    elseif what == "config" then
+        return _G.CONFIG_PATH
+    else
+        return
+    end
+end
 -- vim.opt.rtp:remove(home_dir .. "/.local/share/nvim/site")
 -- vim.opt.rtp:remove(home_dir .. "/.local/share/nvim/site/after")
 -- vim.opt.rtp:prepend(home_dir .. "/.local/share/nvim.ch/site")

@@ -1,7 +1,7 @@
-# Fig pre block. Keep at the top of this file.
-. "$HOME/.fig/shell/bash_profile.pre.bash"
 #!/opt/homebrew/bin/bash
-# shellcheck disable=SC1090
+
+# Fig pre block. Keep at the top of this file.
+# # shellcheck disable=SC1090
 # SC1090: Not all references will be resolvable
 
 if [ -a "$HOME/DEBUG_STARTUP" ]; then
@@ -26,7 +26,8 @@ else
     source "$HOME/.bashrc"
   fi
 fi
-
+export DENO_INSTALL="/Users/dmr/.deno"
+export PATH="$DENO_INSTALL/bin:$PATH"
 export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init --path)"
@@ -34,9 +35,10 @@ eval "$(pyenv init --path)"
 # export PATH="$HOME/.poetry/bin:$PATH"
 
 test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"
+export NEOVIM_BIN=/usr/local/bin/nvim
 export BASH_PROFILE_RUN DEBUG_STARTUP BASHRC_RUN
 
 # vim: ft=sh :
 
 # Fig post block. Keep at the bottom of this file.
-. "$HOME/.fig/shell/bash_profile.post.bash"
+#

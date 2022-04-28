@@ -1,6 +1,5 @@
 # Fig pre block. Keep at the top of this file.
-. "$HOME/.fig/shell/zshrc.pre.zsh"
-# Lines configured by zsh-newuser-install
+# # Lines configured by zsh-newuser-install
 HISTFILE=~/.zsh_hist
 HISTSIZE=100000000
 SAVEHIST=100000000000
@@ -309,4 +308,6 @@ source "/opt/homebrew/opt/zsh-git-prompt/zshrc.sh"
 fi
 
 # Fig post block. Keep at the bottom of this file.
-. "$HOME/.fig/shell/zshrc.post.zsh"
+#
+
+eval "$(atuin init zsh)"

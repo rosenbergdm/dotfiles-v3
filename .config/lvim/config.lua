@@ -31,8 +31,7 @@ lvim.keys.normal_mode["<C-s>"] = ":w<cr>"
 lvim.keys.normal_mode["<M-c>"] = "y"
 lvim.keys.visual_mode["<M-c>"] = "y"
 lvim.keys.visual_block_mode["<M-c>"] = "y"
-
-
+lvim.keys.insert_mode["√"] = "<esc>:PasteImg<CR>o"
 
 local M = {}
 M.load_options = function()
@@ -128,7 +127,7 @@ lvim.builtin.dashboard.active = true
 lvim.builtin.notify.active = true
 lvim.builtin.terminal.active = true
 lvim.builtin.nvimtree.setup.view.side = "left"
-lvim.builtin.nvimtree.show_icons.git = 1
+lvim.builtin.nvimtree.show_icons.git = 0
 
 -- if you don't want all the parsers change this to a table of the ones you want
 lvim.builtin.treesitter.ensure_installed = {
@@ -151,9 +150,11 @@ lvim.builtin.treesitter.highlight.enabled = true
 lvim.builtin.lualine.sections.lualine_y = { "location" }
 lvim.builtin.dap.active = true
 lvim.builtin.bufferline.active = true
-lvim.builtin.gitsigns.active = true
+lvim.builtin.gitsigns.active = false
 lvim.builtin.nvimtree.setup.disable_netrw = false
 lvim.builtin.nvimtree.setup.disable_netrw = true
+lvim.builtin.nvimtree.setup.update_cwd = false
+lvim.builtin.project.manual_mode = true
 
 -- generic LSP settings
 
@@ -202,11 +203,10 @@ formatters.setup {
     extra_args = { "-i", "2", "-s" },
     filetypes = { "sh" },
   },
-
   {
     command = "stylua",
     -- args = { "--config-path", "~/.stylua.toml", "-s", "-" },
-    args = { "--config-path", "~/.stylua.toml" },
+    -- args = { "--config-path", "~/.stylua.toml" },
     filetypes = { "lua" },
   },
 }
@@ -265,11 +265,11 @@ lvim.plugins = {
     end,
   },
   {
-    "gelfand/copilot.vim",
+    "github/copilot.vim",
     config = function()
       -- copilot assume mapped
       vim.g.copilot_assume_mapped = true
-      vim.g.copilot_no_tab_map = true
+      vim.g.copilot_no_tab_map = false
     end,
   },
   {
@@ -281,6 +281,40 @@ lvim.plugins = {
       table.insert(lvim.builtin.cmp.sources, { name = "copilot" })
     end,
   },
+  {
+    "ekickx/clipboard-image.nvim",
+    disable = false,
+    config = function()
+      require("clipboard-image").setup {
+        -- Default configuration for all filetype
+        default = {
+          img_dir = os.getenv "HOME" .. "/tmp",
+          img_name = function()
+            return os.date "%Y-%m-%d-%H-%M-%S"
+          end, -- Example result: "2021-04-13-10-04-18"
+          -- affix = "<\n  %s\n>" -- Multi lines affix
+        },
+        -- You can create configuration for ceartain filetype by creating another field (markdown, in this case)
+        -- If you're uncertain what to name your field to, you can run `lua print(vim.bo.filetype)`
+        -- Missing options from `markdown` field will be replaced by options from `default` field
+        asciidoc = {
+          img_dir = { "img" },
+        },
+        markdown = {
+          img_dir = { "img" }, -- Use table for nested dir (New feature form PR #20)
+          -- img_dir_txt = "img",
+        },
+      }
+    end,
+  },
+  -- {
+  --   "shuntaka9576/preview-asciidoc.nvim",
+  --   config = function()
+  --     vim.g.padoc_node_path = "/Users/dmr/.nvm/versions/node/v16.10.0/bin/node"
+  --     vim.g.padoc_build_command = "/Users/dmr/.rvm/gems/ruby-3.0.2/bin/asciidoctor"
+  --   end,
+  --   run = "yarn install",
+  -- },
   {
     "ray-x/lsp_signature.nvim",
     config = function()
@@ -340,10 +374,10 @@ lvim.plugins = {
   {
     "sudormrfbin/cheatsheet.nvim",
     requires = {
-      {'nvim-telescope/telescope.nvim'},
-      {'nvim-lua/popup.nvim'},
-      {'nvim-lua/plenary.nvim'}
-    }
+      { "nvim-telescope/telescope.nvim" },
+      { "nvim-lua/popup.nvim" },
+      { "nvim-lua/plenary.nvim" },
+    },
   },
   -- Colorschemes
   { "tiagovla/tokyodark.nvim" },
@@ -351,9 +385,11 @@ lvim.plugins = {
   -- launch the above scheme with ":lua require('colorbuddy').colorscheme('gruvbuddy')"
 }
 
--- -- Autocommands (https://neovim.io/doc/user/autocmd.html)
--- lvim.autocommands.custom_groups = {
---   { "BufWinEnter,BufRead,BufNewFile", "*", "chdir %:p:h" },
+-- Autocommands (https://neovim.io/doc/user/autocmd.html)
+lvim.autocommands.custom_groups = {
+  -- { "BufWinEnter,BufRead,BufNewFile", "*", "chdir %:p:h" },
+  { "BufWritePost", "*.adoc", ":!asciidoctor %" },
+}
 -- }
 
 -- lvim.dap = require("dap-python").setup "~/.config/virtualenvs/debugpy/bin/python"

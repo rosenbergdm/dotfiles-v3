@@ -488,6 +488,47 @@ editfun ()
     exec alacritty --command lvim "$@" & ! exit
 }
 
+# osxalert(){
+#   message=${1:-"Message"}
+
+#   /usr/bin/osascript <<-EndOfScript
+# 			button returned of ¬
+# 				(display dialog "$message" ¬
+# 					buttons {"OK","Cancel"} ¬
+# 					default button "OK")
+# 			EndOfScript
+# }
+
+# displayfortext() { # $0: message $2: default text
+#   message=${1:-"Message"}
+#   defaultvalue=${2:-"default value"}
+
+#   /usr/bin/osascript <<-EndOfScript
+# 			text returned of ¬
+# 				(display dialog "$message" ¬
+# 					default answer "$defaultvalue" ¬
+# 					buttons {"OK","Cancel"} ¬
+# 					default button "OK")
+# 			EndOfScript
+# }
+
+# osxdisplay () {
+#   if [ -n "$2" ]; then
+#     displayfortext "$1" "$2"
+#   else
+#     osxalert "$1"
+#   fi
+# }
+
+# saveimage ()
+# {
+#     fname="${1-"$(osxdisplay "Filename to save to" "./")"}";
+#     /usr/bin/pbimage "$fname";
+#     /Users/dmr/.iterm2/imgcat "$fname.png"
+# }
+
+# run all functions
+
 source "$HOME/src/epic-on-speed/managephrases.sh"
 
 

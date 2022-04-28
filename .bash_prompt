@@ -96,5 +96,6 @@ if [ ! "$FAST_STARTUP" -gt 0 ]; then
 fi
 
 [[ $TERM_PROGRAM == WarpTerminal ]] && unset PROMPT_COMMAND
+eval "$(starship init bash)"
 
 # vim: ft=sh
