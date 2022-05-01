@@ -488,6 +488,22 @@ editfun ()
     exec alacritty --command lvim "$@" & ! exit
 }
 
+adoc2pdf() {
+  themefile="$HOME/.config/asciidoctor/dmrsmall.yml"
+
+  if [ -a ${1/.adoc/.pdf} ]; then
+    if [[ $2 != "-f" ]]; then
+      echo "File exists.  Use -f to override"
+      return 1
+    else
+      echo "File exists!  Overwriting!"
+    fi
+  fi
+  # echo "Would have run ok"
+  asciidoctor-pdf "$1" -a pdf-theme="$themefile" && open "${1/.adoc/.pdf}"
+
+}
+
 # osxalert(){
 #   message=${1:-"Message"}
 

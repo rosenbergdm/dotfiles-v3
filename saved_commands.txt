@@ -58,3 +58,13 @@ sudo openconnect --protocol=anyconnect --user=nsf6756 webvpn.uchospitals.edu --s
 git add .pre-commit-config.yaml  && pre-commit-validate-config && pre-commit install --install-hooks && pre-commit install
 cd ~dmr/paperless-ng && docker start paperless-ng
 certbot certonly --manual --preferred-challenge=dns --email=dmr@davidrosenberg.me --server https://acme-v02.api.letsencrypt.org/directory --agree-tos -d *.davidrosenberg.me
+## add a border to an image
+convert -border 2x2 -bordercolor '#999999' ./FILES/Notes.md/13836a38.png ./FILES/Notes.md/13836a38-border.png
+## convert an movie into an imageset for inclusion in powerpoint
+ffmpeg -i ../FlairT2InitialMPR.mov -vf fps=5 out-%d.jpeg
+enscript -L1 -b'||Page $% of $=' -o- < <(for i in $(seq 1 20); do echo; done) | ps2pdf - | pdftk Monday-4-25-2022-handout.pdf multistamp - output Monday-handout-numbered.pdf
+
+myfun() { fname="$(jxaprompt "save to...")"; cd $HOME/tmp; pbimage $fname; imgcat $fname.png; }
+
+# word 2 from the prior command
+echo !!:2

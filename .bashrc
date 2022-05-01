@@ -242,5 +242,15 @@ eval "$(pyenv init -)"
 # Fig post block. Keep at the bottom of this file.
 #
 
+export ATUIN_NOBIND="true"
 [[ -f ~/.bash-preexec.sh ]] && source ~/.bash-preexec.sh
 eval "$(atuin init bash)"
+__atuin_history() {
+  # override the default
+  # Set application cursor mode
+  tput rmkx
+  HISTORY="$(RUST_LOG=error atuin search -i "$BUFFER" 3>&1 1>&2 2>&3)"
+  READLINE_LINE=${HISTORY}
+  READLINE_POINT=${#READLINE_LINE}
+}
+bind -x '"\C-r": __atuin_history'
