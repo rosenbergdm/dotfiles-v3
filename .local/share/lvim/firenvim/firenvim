@@ -2,7 +2,7 @@
 mkdir -p /var/folders/97/rl9m525d4kv6j8ycyt14qq6h0000gp/T//firenvim
 chmod 700 /var/folders/97/rl9m525d4kv6j8ycyt14qq6h0000gp/T//firenvim
 cd /var/folders/97/rl9m525d4kv6j8ycyt14qq6h0000gp/T//firenvim
-export PATH="$PATH:/Users/dmr/.cabal/bin:/Users/dmr/.ghcup/bin:/Users/dmr/.nvm/versions/node/v16.10.0/bin:/Users/dmr/.rvm/gems/ruby-3.0.2/bin:/Users/dmr/.rvm/gems/ruby-3.0.2@global/bin:/Users/dmr/.rvm/rubies/ruby-3.0.2/bin:/Users/dmr/.local/bin:/Library/Java/JavaVirtualMachines/jdk1.8.0_112.jdk/Contents/Home/bin:/opt/homebrew/bin:/Users/dmr/.cargo/bin:/usr/local/Cellar/qt5/5.7.0/bin:/usr/local/share/npm/bin:/usr/local/share/python:/Users/dmr/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/Applications/VMware Fusion.app/Contents/Public:/usr/local/go/bin:/usr/local/MacGPG2/bin:/opt/X11/bin:/Library/Apple/usr/bin:/usr/local/Cellar/perl/5.30.1/bin:/Users/dmr/edirect:/Users/dmr/go/bin:/Users/dmr/src/flutter/bin:/Library/Frameworks/R.framework/Versions/Current/Resources/bin:/Users/dmr/.rvm/bin:/Users/dmr/.iterm2://opt/homebrew/opt/fzf/bin"
+export PATH="$PATH:/Users/dmr/.pyenv/shims:/Users/dmr/.pyenv/bin:/Users/dmr/.deno/bin:/Users/dmr/.cabal/bin:/Users/dmr/.ghcup/bin:/Users/dmr/.nvm/versions/node/v16.10.0/bin:/Users/dmr/.rvm/gems/ruby-3.0.2/bin:/Users/dmr/.rvm/gems/ruby-3.0.2@global/bin:/Users/dmr/.rvm/rubies/ruby-3.0.2/bin:/Users/dmr/.local/bin:/Library/Java/JavaVirtualMachines/jdk1.8.0_112.jdk/Contents/Home/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/Users/dmr/.cargo/bin:/usr/local/Cellar/qt5/5.7.0/bin:/usr/local/share/npm/bin:/usr/local/share/python:/Users/dmr/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/Applications/VMware Fusion.app/Contents/Public:/usr/local/go/bin:/usr/local/MacGPG2/bin:/opt/X11/bin:/Library/Apple/usr/bin:/Applications/Wireshark.app/Contents/MacOS:/usr/local/Cellar/perl/5.30.1/bin:/Users/dmr/edirect:/Users/dmr/go/bin:/Users/dmr/src/flutter/bin:/Library/Frameworks/R.framework/Versions/Current/Resources/bin:/Users/dmr/.rvm/bin:/Users/dmr/.iterm2://opt/homebrew/opt/fzf/bin"
 unset NVIM_LISTEN_ADDRESS
 if [ -n "$VIM" ] && [ ! -d "$VIM" ]; then
   unset VIM
@@ -13,6 +13,14 @@ fi
 if [ ! -n "$XDG_DATA_HOME" ]; then
   XDG_DATA_HOME='/Users/dmr/.local/share/lvim'
   export XDG_DATA_HOME
+fi
+if [ ! -n "$XDG_CONFIG_HOME" ]; then
+  XDG_CONFIG_HOME='/Users/dmr/.config'
+  export XDG_CONFIG_HOME
+fi
+if [ ! -n "$XDG_DATA_DIRS" ]; then
+  XDG_DATA_DIRS='/Users/dmr/.local/share'
+  export XDG_DATA_DIRS
 fi
 
 exec '/usr/local/bin/nvim' --headless --cmd "let g:firenvim_i=[]|let g:firenvim_o=[]|let g:Firenvim_oi={i,d,e->add(g:firenvim_i,d)}|let g:Firenvim_oo={t->add(g:firenvim_o,t)}|let g:firenvim_c=stdioopen({'on_stdin':{i,d,e->g:Firenvim_oi(i,d,e)},'on_print':{t->g:Firenvim_oo(t)}})" --cmd 'let g:started_by_firenvim = v:true' -c 'call firenvim#run()'

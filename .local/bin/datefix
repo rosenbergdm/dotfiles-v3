@@ -1,0 +1,6 @@
+#!/usr/bin/env node
+
+rawInput = process.argv[2];
+parts = rawInput.split(":");
+let d = new Date(parts[0]);
+console.log(d.toLocaleDateString());

@@ -57,6 +57,7 @@ M.load_options = function()
     -- guifont = "Inconsolata Nerd Font Mono:h14",
     foldenable = false,
     modeline = true,
+    list = true,
     modelines = 5,
   }
   vim.cmd "set wildmode=longest,list"
@@ -124,10 +125,13 @@ lvim.builtin.which_key.mappings["t"] = {
 -- TODO: User Config for predefined plugins
 -- After changing plugin config exit and reopen LunarVim, Run :PackerInstall :PackerCompile
 lvim.builtin.dashboard.active = true
+-- lvim.builtin.alpha.active = true
 lvim.builtin.notify.active = true
 lvim.builtin.terminal.active = true
 lvim.builtin.nvimtree.setup.view.side = "left"
 lvim.builtin.nvimtree.show_icons.git = 0
+lvim.lsp.diagnostics.virtual_text = true
+lvim.lsp.code_lens_refresh = true
 
 -- if you don't want all the parsers change this to a table of the ones you want
 lvim.builtin.treesitter.ensure_installed = {
@@ -151,7 +155,6 @@ lvim.builtin.lualine.sections.lualine_y = { "location" }
 lvim.builtin.dap.active = true
 lvim.builtin.bufferline.active = true
 lvim.builtin.gitsigns.active = false
-lvim.builtin.nvimtree.setup.disable_netrw = false
 lvim.builtin.nvimtree.setup.disable_netrw = true
 lvim.builtin.nvimtree.setup.update_cwd = false
 lvim.builtin.project.manual_mode = true
@@ -176,6 +179,7 @@ lvim.lsp.on_attach_callback = function(_, bufnr)
   local function buf_set_option(...)
     vim.api.nvim_buf_set_option(bufnr, ...)
   end
+
   --Enable completion triggered by <c-x><c-o>
   buf_set_option("omnifunc", "v:lua.vim.lsp.omnifunc")
 end
@@ -228,6 +232,13 @@ linters.setup {
 lvim.plugins = {
   { "folke/tokyonight.nvim", rocks = { "see" } },
   {
+    "goolord/alpha-nvim",
+    requires = { "kyazdani42/nvim-web-devicons" },
+    config = function()
+      require("alpha").setup(require("alpha.themes.startify").config)
+    end,
+  },
+  {
     "folke/trouble.nvim",
     cmd = "TroubleToggle",
   },
@@ -266,16 +277,17 @@ lvim.plugins = {
   },
   {
     "github/copilot.vim",
+    disable = false,
     config = function()
       -- copilot assume mapped
       vim.g.copilot_assume_mapped = true
-      vim.g.copilot_no_tab_map = false
+      vim.g.copilot_no_tab_map = true
     end,
   },
   {
     "hrsh7th/cmp-copilot",
     -- disable = not lvim.builtin.sell_soul_to_devel,
-    disable = false,
+    disable = true,
     config = function()
       lvim.builtin.cmp.formatting.source_names["copilot"] = "(Cop)"
       table.insert(lvim.builtin.cmp.sources, { name = "copilot" })
@@ -299,6 +311,7 @@ lvim.plugins = {
         -- Missing options from `markdown` field will be replaced by options from `default` field
         asciidoc = {
           img_dir = { "img" },
+          affix = "image::%s[align=center]",
         },
         markdown = {
           img_dir = { "img" }, -- Use table for nested dir (New feature form PR #20)
@@ -318,14 +331,10 @@ lvim.plugins = {
   {
     "ray-x/lsp_signature.nvim",
     config = function()
-      require("lsp_signature").setup()
+      require("lsp_signature").on_attach()
     end,
-    event = "InsertEnter",
+    event = "BufRead",
   },
-  -- {
-  --   "simrat39/symbols-outline.nvim",
-  --   cmd = "SymbolsOutline",
-  -- },
   {
     "iamcco/markdown-preview.nvim",
     run = "cd app && npm install",
@@ -379,6 +388,9 @@ lvim.plugins = {
       { "nvim-lua/plenary.nvim" },
     },
   },
+  {
+    "Glench/Vim-Jinja2-Syntax",
+  },
   -- Colorschemes
   { "tiagovla/tokyodark.nvim" },
   { "tjdevries/gruvbuddy.nvim", requires = { "tjdevries/colorbuddy.vim" } },
@@ -387,11 +399,9 @@ lvim.plugins = {
 
 -- Autocommands (https://neovim.io/doc/user/autocmd.html)
 lvim.autocommands.custom_groups = {
-  -- { "BufWinEnter,BufRead,BufNewFile", "*", "chdir %:p:h" },
+  { "BufWinEnter,BufRead,BufNewFile", "*", "chdir %:p:h" },
   { "BufWritePost", "*.adoc", ":!asciidoctor %" },
 }
--- }
-
 -- lvim.dap = require("dap-python").setup "~/.config/virtualenvs/debugpy/bin/python"
 
 require("nvim-treesitter.configs").setup {

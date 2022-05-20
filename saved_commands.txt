@@ -68,3 +68,4 @@ myfun() { fname="$(jxaprompt "save to...")"; cd $HOME/tmp; pbimage $fname; imgca
 
 # word 2 from the prior command
 echo !!:2
+ daphne -e ssl:8443:privateKey=privkey7.pem:certKey=fullchain7.pem core.asgi:application

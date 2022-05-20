@@ -1,0 +1,11 @@
+#!/opt/homebrew/bin/bash
+export NVM_DIR=~/.nvm
+source "$NVM_DIR/nvm.sh"
+nvm use 16.10
+cd ~/tmp
+
+fname="$(~/.local/bin/jxaprompt "Name for this image?")"
+
+# /Users/dmr/.nvm/versions/node/v16.10.0/bin/node
+/Users/dmr/.nvm/versions/node/v16.10.0/bin/pbimage "$fname"
+open "$fname.png"

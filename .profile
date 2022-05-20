@@ -24,6 +24,11 @@ export HISTSIZE=-1
 export HISTFILESIZE=-1
 shopt -s histappend
 
+export LUNARVIM_RUNTIME_DIR="${LUNARVIM_RUNTIME_DIR:-"/Users/dmr/.local/share/lunarvim"}"
+export LUNARVIM_CONFIG_DIR="${LUNARVIM_CONFIG_DIR:-"/Users/dmr/.config/lvim"}"
+export LUNARVIM_CACHE_DIR="${LUNARVIM_CACHE_DIR:-"/Users/dmr/.cache/lvim"}"
+export VIMINIT="$LUNARVIM_RUNTIME_DIR/lvim/init.lua"
+
 # [ -s "$HOME/.rvm/scripts/rvm" ] && . "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
 # rvm use 3.0
 

@@ -26,6 +26,10 @@ else
     source "$HOME/.bashrc"
   fi
 fi
+export LUNARVIM_RUNTIME_DIR="${LUNARVIM_RUNTIME_DIR:-"/Users/dmr/.local/share/lunarvim"}"
+export LUNARVIM_CONFIG_DIR="${LUNARVIM_CONFIG_DIR:-"/Users/dmr/.config/lvim"}"
+export LUNARVIM_CACHE_DIR="${LUNARVIM_CACHE_DIR:-"/Users/dmr/.cache/lvim"}"
+export VIMINIT="$LUNARVIM_RUNTIME_DIR/lvim/init.lua"
 export DENO_INSTALL="/Users/dmr/.deno"
 export PATH="$DENO_INSTALL/bin:$PATH"
 export PYENV_ROOT="$HOME/.pyenv"
