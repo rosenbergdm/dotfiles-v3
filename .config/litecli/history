@@ -356,3 +356,819 @@
 
 # 2022-04-21 11:13:27.910773
 +exit
+
+# 2022-05-22 10:20:08.484507
++open db.sqlite3
+
+# 2022-05-22 10:20:13.552612
++connect db.sqlite3
+
+# 2022-05-22 10:20:14.398902
++.q
+
+# 2022-05-22 10:20:24.923885
++select * from disease_site;
+
+# 2022-05-22 18:58:28.559062
++select * from patient;
+
+# 2022-05-22 18:58:30.823518
++select * from patients;
+
+# 2022-05-22 18:58:41.640779
++select * from patients_patient;
+
+# 2022-05-23 17:59:36.332658
++select * from disease_site;
+
+# 2022-05-23 17:59:38.404324
++select * from disease_site2;
+
+# 2022-05-23 17:59:42.703912
++select * from disease_site;
+
+# 2022-05-23 18:32:00.710010
++.schema
+
+# 2022-05-23 18:32:03.687004
++.schema
+
+# 2022-05-23 18:32:05.055179
++.q
+
+# 2022-05-23 18:32:07.994176
++ls
+
+# 2022-05-23 18:32:09.062839
++.q
+
+# 2022-05-23 18:32:09.564445
++;
+
+# 2022-05-23 18:32:12.196728
++.q
+
+# 2022-05-23 18:32:14.041962
++exit
+
+# 2022-05-23 18:32:48.378321
++.q
+
+# 2022-05-23 18:32:49.703940
++;q
+
+# 2022-05-23 18:33:03.654219
++;
+
+# 2022-05-23 18:33:22.542414
++.schema
+
+# 2022-05-23 18:33:28.317003
++describe patients_patient;
+
+# 2022-05-23 18:34:05.482445
++.q
+
+# 2022-05-23 18:34:07.126823
++;q
+
+# 2022-05-23 18:34:08.142322
++exit
+
+# 2022-05-23 18:34:45.174726
++select * from patients_patient;
+
+# 2022-05-23 18:34:50.598052
++delete from patients_patient;
+
+# 2022-05-23 18:34:53.640062
++exit
+
+# 2022-05-23 22:50:10.968481
++select * from patient_status;
+
+# 2022-05-23 22:50:25.239691
++select id, descr from patient_status;
+
+# 2022-05-23 22:50:31.348858
++.mode csv
+
+# 2022-05-23 22:50:32.578767
++select id, descr from patient_status;
+
+# 2022-05-23 22:58:20.859749
++patient_status;q
+
+# 2022-05-23 22:58:21.516753
++.q
+
+# 2022-05-23 22:58:22.239319
++;
+
+# 2022-05-23 22:58:23.342921
++exit
+
+# 2022-05-23 23:26:15.696314
++select * from hospital;
+
+# 2022-05-23 23:26:20.903266
++describe hospital;
+
+# 2022-05-23 23:28:33.272855
++insert into hospital (id, name) values (1, 'University of Chicago')
+
+# 2022-05-23 23:28:37.926948
++describe hospital;
+
+# 2022-05-23 23:28:39.556799
++select * from hospital;
+
+# 2022-05-23 23:28:41.253360
++.q
+
+# 2022-05-23 23:28:42.992975
++exit
+
+# 2022-05-24 17:44:12.559127
++select disease_site from patient where attending=2;
+
+# 2022-05-24 17:44:15.465064
++select disease_site from patient;
+
+# 2022-05-24 17:44:17.837221
++select disease_site_2 from patient;
+
+# 2022-05-24 17:44:27.902614
++select treatment_category, disease_site_2 from patient;
+
+# 2022-05-24 17:45:04.020723
++select disease_site_2 from patient;
+
+# 2022-05-24 17:45:06.508473
++select treatment_category, disease_site_2 from patient;
+
+# 2022-05-24 18:08:29.378946
++select treatment_category, disease_site from patient;
+
+# 2022-05-24 18:08:32.466010
++.q
+
+# 2022-05-24 18:08:54.310597
++update patient set treatment_category = 1, disease_site_2=1;
+
+# 2022-05-24 18:09:11.593469
++select treatment_category, disease_site from patient;
+
+# 2022-05-24 18:09:14.340808
++select treatment_category, disease_site_2 from patient;
+
+# 2022-05-24 18:09:17.930453
++update patient set treatment_category = 1, disease_site_2=1;
+
+# 2022-05-24 18:09:19.418267
++.q
+
+# 2022-05-24 18:09:20.876555
++;q
+
+# 2022-05-24 18:09:50.532539
++exit
+
+# 2022-05-24 18:50:54.860529
++select * from patiets;
+
+# 2022-05-24 18:50:58.848676
++select * from patients;
+
+# 2022-05-24 18:51:02.880353
++select * from patient;
+
+# 2022-05-24 18:51:11.724954
++select disease_site from patient;
+
+# 2022-05-24 18:55:00.052180
++.q
+
+# 2022-05-24 20:59:00.323982
++select disease_site, treatment_category from patient;
+
+# 2022-05-25 01:21:17.654958
++select * from event;
+
+# 2022-05-25 01:21:19.888713
++select * from events;
+
+# 2022-05-25 01:21:36.351617
++.schema
+
+# 2022-05-25 01:21:45.006230
++describe *
+
+# 2022-05-25 01:21:49.556044
++schema
+
+# 2022-05-25 01:21:50.491066
++.q
+
+# 2022-05-25 01:21:52.298633
++;
+
+# 2022-05-25 01:21:53.656673
++exit
+
+# 2022-05-25 01:22:36.184849
++select * from visit;
+
+# 2022-05-25 01:24:34.032162
++.q
+
+# 2022-05-25 01:24:35.135224
++;q
+
+# 2022-05-25 01:24:35.921095
++q
+
+# 2022-05-25 01:24:38.280177
++quit
+
+# 2022-05-25 06:47:36.138429
++select * from `ImagingProtocol`
+
+# 2022-05-25 06:47:48.392090
++select * from `Treatment`;
+
+# 2022-05-25 06:47:53.048695
++select * from Target
+
+# 2022-05-25 06:48:06.583164
++select respiratory_management from `Target`
+
+# 2022-05-25 06:48:24.294816
++update patient set respiratory_management = 40;
+
+# 2022-05-25 06:48:32.923811
++update `Target` set respiratory_management = 40;
+
+# 2022-05-25 06:48:35.198310
++update patient set respiratory_management = 40;
+
+# 2022-05-25 06:48:53.567553
++select * from `Treatment`;
+
+# 2022-05-25 06:48:57.067324
++.schema
+
+# 2022-05-25 06:49:04.210733
++describe `Treatment`
+
+# 2022-05-25 06:49:19.015731
++select patient, referred-by_id, consult, end, start, sim from Treatment;
+
+# 2022-05-25 06:49:25.368558
++select patient, referred_by_id, consult, end, start, sim from Treatment;
+
+# 2022-05-25 06:49:39.943620
++describe Target;
+
+# 2022-05-25 06:49:43.658774
++describe `Target`
+
+# 2022-05-25 06:49:50.924017
++describe `Target`;
+
+# 2022-05-25 06:49:55.833267
++describe `Target`
+
+# 2022-05-25 06:50:03.401621
++.schema `Target`]
+
+# 2022-05-25 20:37:26.595929
++.help
+
+# 2022-05-25 20:37:28.306250
++help
+
+# 2022-05-25 20:37:30.384224
++.?
+
+# 2022-05-25 20:37:32.642721
++.schema
+
+# 2022-05-25 20:37:43.383322
++describe Target
+
+# 2022-05-25 20:37:48.903069
++describe Treatment
+
+# 2022-05-25 20:38:02.221540
++index;
+
+# 2022-05-25 20:38:10.445209
++.schema
+
+# 2022-05-27 18:30:33.736453
++ select x, 548-x from (select min(iif(pow<n, 548-n, 548)) as x from powers);
+
+# 2022-05-27 18:30:59.481432
++create table pow(n int, pow int, vals json);
+
+# 2022-05-27 18:31:03.618481
++.q
+
+# 2022-05-27 18:31:04.687519
++;q
+
+# 2022-05-27 18:31:08.711123
++exit
+
+# 2022-05-27 18:31:19.013811
++create table pow(n int, pow int, vals json);
+
+# 2022-05-27 18:31:50.410815
++with recursive power(n, p) as
+
+# 2022-05-27 18:33:07.188622
++with recursive power(n, p) as (
++select 63, 4611686018427387904 union all
++select n-1, p/2 from power where n > 1;
+
+# 2022-05-27 18:33:15.042386
++with recursive power(n, p) as (
++select 63, 4611686018427387904 union all
++select n-1, p/2 from power where n > 1)
++select * from power;
+
+# 2022-05-27 18:38:43.780563
++with recursive power(n, p, val, arr) as (
++select 63, 4611686018427387904, 513, json_array() union all
++select n-1, p/2, iif(val-p<0, val, val-p), iif(val-p<0, arr, json_insert(arr, '$[#]', p))  from power where n > 1)
++select * from power;
+
+# 2022-05-27 18:38:58.917277
++with recursive power(n, p, val, arr) as (
++select 63, 4611686018427387904, 513, json_array() union all
++select n-1, p/2, iif(val-p<0, val, val-p), iif(val-p<0, arr, json_insert(arr, '$[#]', p))  from power where n > 0)
++select * from power;
+
+# 2022-05-27 18:40:19.478134
++with recursive power(n, p, val, squares, roots) as (
++select 63, 4611686018427387904, 513, json_array(), json_array() union all
++select n-1, p/2, iif(val-p<0, val, val-p), iif(val-p<0, squares, json_insert(squares, '$[#]', p)), iif(val-p<0, roots, json_insert(roots, '$[#]', n)  from power where n > 0)
++select * from power;
+
+# 2022-05-27 18:40:32.765986
++with recursive power(n, p, val, squares, roots) as (
++select 63, 4611686018427387904, 513, json_array(), json_array() union all
++select n-1, p/2, iif(val-p<0, val, val-p), iif(val-p<0, squares, json_insert(squares, '$[#]', p)), iif(val-p<0, roots, json_insert(roots, '$[#]', n))  from power where n > 0)
++select * from power;
+
+# 2022-05-27 18:40:49.037382
++with recursive power(n, p, val, squares, roots) as (
++select 63, 4611686018427387904, 513, json_array(), json_array() union all
++select n-1, p/2, iif(val-p<0, val, val-p), iif(val-p<0, squares, json_insert(squares, '$[#]', p)), iif(val-p<0, roots, json_insert(roots, '$[#]', n-1))  from power where n > 0)
++select * from power;
+
+# 2022-05-27 18:41:15.926538
++select 4294967296 + 131072 + 64
++;
+
+# 2022-05-27 18:41:27.142555
++with recursive power(n, p, val, squares, roots) as (
++select 63, 4611686018427387904, 4295098432, json_array(), json_array() union all
++select n-1, p/2, iif(val-p<0, val, val-p), iif(val-p<0, squares, json_insert(squares, '$[#]', p)), iif(val-p<0, roots, json_insert(roots, '$[#]', n-1))  from power where n > 0)
++select * from power;
+
+# 2022-05-27 18:49:32.749272
++WITH RECURSIVE power(n, p, val, roots) as (
++         SELECT 63, 4611686018427387904, 4295098432, json_array(), UNION ALL
++         SELECT n-1,
++                p/2,
++                iif(val > p, val, val-p),
++                iif(val-p<0, roots, json_insert(roots, '$[#]', n-1))
++         FROM power WHERE N > 0)
++         SELECT * FROM power;
++
+
+# 2022-05-27 18:49:48.800693
++WITH RECURSIVE power(n, p, val, roots) as (
++         SELECT 63, 4611686018427387904, 4295098432, json_array() UNION ALL
++         SELECT n-1,
++                p/2,
++                iif(val > p, val, val-p),
++                iif(val-p<0, roots, json_insert(roots, '$[#]', n-1))
++         FROM power WHERE N > 0)
++         SELECT * FROM power;
++
+
+# 2022-05-27 18:50:46.123952
++WITH RECURSIVE power(n, p, val, roots) as (
++         SELECT 63, 4611686018427387904, 4295098432, json_array() UNION ALL
++         SELECT n-1,
++                p/2,
++                iif(p>val, val, val-p),
++                iif(val-p<0, roots, json_insert(roots, '$[#]', n-1))
++         FROM power WHERE N > 0)
++         SELECT * FROM power;
++
+
+# 2022-05-27 18:51:06.382052
++WITH RECURSIVE power(n, p, val, roots) as (
++         SELECT 63, 4611686018427387904, 4295098432, json_array() UNION ALL
++         SELECT n-1,
++                p/2,
++                iif(p > val, val, val-p),
++                iif(p > val, roots, json_insert(roots, '$[#]', n-1))
++         FROM power WHERE n > 0)
++         SELECT * FROM power;
++
+
+# 2022-05-27 18:55:20.051412
++WITH RECURSIVE power(n, p, val, roots) as (
++         SELECT 63, 4611686018427387904, 4295098432, json_array() UNION ALL
++         SELECT n-1,
++                p/2,
++                iif(p > val, val, val-p),
++                iif(p > val, roots, json_insert(roots, '$[#]', n-1))
++         FROM power WHERE n > 0)
++         SELECT * FROM power;
+
+# 2022-05-27 18:55:27.594729
++.help
+
+# 2022-05-27 18:55:29.392513
++help
+
+# 2022-05-27 18:55:40.351343
++.tables
+
+# 2022-05-27 18:55:43.941812
++\G
+
+# 2022-05-27 18:55:49.010140
++..q
+
+# 2022-05-27 19:02:15.002560
++.schema
+
+# 2022-05-27 19:02:22.650125
++\f
+
+# 2022-05-27 19:02:25.020532
++\fs
+
+# 2022-05-27 19:02:51.110385
++\fs powers WITH RECURSIVE power(n, p, val, roots) as (
++         SELECT 63, 4611686018427387904, 4295098432, json_array() UNION ALL
++         SELECT n-1,
++                p/2,
++                iif(p > val, val, val-p),
++                iif(p > val, roots, json_insert(roots, '$[#]', n-1))
++         FROM power WHERE n > 0)
++         SELECT * FROM power;
+
+# 2022-05-27 19:02:54.541589
++\f powers
+
+# 2022-05-27 19:02:57.397416
++\fd
+
+# 2022-05-27 19:03:01.510826
++\h
+
+# 2022-05-27 19:03:03.155307
++\?
+
+# 2022-05-27 19:03:18.403464
++.exit
+
+# 2022-05-27 19:49:26.334735
++\fs powers WITH RECURSIVE power(n, p, val, roots) as (
++         SELECT 63, 4611686018427387904, 4295098432, json_array() UNION ALL
++         SELECT n-1,
++                p/2,
++                iif(p > val, val, val-p),
++                iif(p > val, roots, json_insert(roots, '$[#]', n-1))
++         FROM power WHERE n > 0)
++         SELECT * FROM power;
+
+# 2022-05-27 19:49:31.604485
++WITH RECURSIVE power(n, p, val, roots) as (
++         SELECT 63, 4611686018427387904, 4295098432, json_array() UNION ALL
++         SELECT n-1,
++                p/2,
++                iif(p > val, val, val-p),
++                iif(p > val, roots, json_insert(roots, '$[#]', n-1))
++         FROM power WHERE n > 0)
++         SELECT * FROM power;
+
+# 2022-05-27 19:49:45.476112
++WITH RECURSIVE power(n, p, val, roots) as (
++         SELECT 63, 4611686018427387904, 4295098432, json_array() UNION ALL
++         SELECT n-1,
++                p/2,
++                iif(p > val, val, val-p),
++                iif(p > val, roots, json_insert(roots, '$[#]', n-1))
++         FROM power WHERE n > 0)
++         SELECT roots from pow;
+
+# 2022-05-27 19:49:51.724522
++WITH RECURSIVE power(n, p, val, roots) as (
++         SELECT 63, 4611686018427387904, 4295098432, json_array() UNION ALL
++         SELECT n-1,
++                p/2,
++                iif(p > val, val, val-p),
++                iif(p > val, roots, json_insert(roots, '$[#]', n-1))
++         FROM power WHERE n > 0)
++         SELECT roots from power where n = 0;
+
+# 2022-05-27 19:51:33.746679
++WITH RECURSIVE power(n, p, val, roots) as (
++         SELECT 63, 4611686018427387904, 4295098432, json_array() UNION ALL
++         SELECT n-1,
++                p/2,
++                iif(p > val, val, val-p),
++                iif(p > val, roots, json_insert(roots, '$[#]', n-1))
++         FROM power WHERE n > 0)
++         SELECT * from power, json_each(power.roots) where n = 0;
+
+# 2022-05-27 19:52:05.356593
++WITH RECURSIVE power(n, p, val, roots) as (
++         SELECT 63, 4611686018427387904, 4295098432, json_array() UNION ALL
++         SELECT n-1,
++                p/2,
++                iif(p > val, val, val-p),
++                iif(p > val, roots, json_insert(roots, '$[#]', n-1))
++         FROM power WHERE n > 0)
++         select count(*) from (SELECT * from power, json_each(power.roots) where n = 0) where value=32;
+
+# 2022-05-27 19:52:08.167837
++WITH RECURSIVE power(n, p, val, roots) as (
++         SELECT 63, 4611686018427387904, 4295098432, json_array() UNION ALL
++         SELECT n-1,
++                p/2,
++                iif(p > val, val, val-p),
++                iif(p > val, roots, json_insert(roots, '$[#]', n-1))
++         FROM power WHERE n > 0)
++         select count(*) from (SELECT * from power, json_each(power.roots) where n = 0) where value=33;
+
+# 2022-05-27 19:52:11.418158
++WITH RECURSIVE power(n, p, val, roots) as (
++         SELECT 63, 4611686018427387904, 4295098432, json_array() UNION ALL
++         SELECT n-1,
++                p/2,
++                iif(p > val, val, val-p),
++                iif(p > val, roots, json_insert(roots, '$[#]', n-1))
++         FROM power WHERE n > 0)
++         select count(*) from (SELECT * from power, json_each(power.roots) where n = 0) where value=32;
+
+# 2022-05-27 20:06:24.625198
++select instr("abc", "a")
+
+# 2022-05-27 20:06:28.755373
++select instr("abc", "d")
+
+# 2022-05-27 20:06:30.931551
++select instr("abcd", "d")
+
+# 2022-05-27 20:06:35.454269
++select instr("a", "abcdd")
+
+# 2022-05-27 20:06:58.804501
++SELECT CAST(1, "TEXT")
+
+# 2022-05-27 20:07:42.648007
++SELECT CAST('123' as json)
+
+# 2022-05-27 20:07:49.425207
++SELECT CAST('[123]' as json)
+
+# 2022-05-27 20:07:56.541785
++SELECT CAST(123 as json)
+
+# 2022-05-27 20:08:03.902357
++SELECT CAST(123 as text)
+
+# 2022-05-27 20:08:07.827537
++SELECT CAST(bool as text)
+
+# 2022-05-27 20:08:16.896541
++SELECT CAST(1 as real);'
+
+# 2022-05-27 20:08:18.978532
++SELECT CAST(1 as real);
+
+# 2022-05-27 20:10:09.202025
++SELECT "patient"."id", "patient"."lname", "patient"."fname", "patient"."mrn", "patient"."dob", "patient"."sex", "patient"."acgme", "patient"."disease_site", "patient"."treatment_category", "patient"."intent", "patient"."hospital", "patient"."patient_status", "patient"."attending", "patient"."diagnosis", "patient"."summary_line", "patient"."chart_rounds_text", "patient"."notes", "patient"."plan", "patient"."chemo", "patient"."active_service", "patient"."contours_complete", "patient"."plan_eval_complete", "patient"."chart_rounds_complete", "patient"."completion_summary_complete" FROM "patient" WHERE
++          select count(*) from ( WITH RECURSIVE power(n, p, val, roots) AS (
++                SELECT
++                    63,
++                    4611686018427387904,
++                    "patient"."disease_site",
++                    json_array() UNION ALL
++                SELECT
++                    n - 1,
++                    p / 2,
++                    iif(p > val, val, val - p),
++                    iif(p > val, roots, json_insert(roots, '$[#]', n - 1))
++                FROM power WHERE n > 0
++            )
++            SELECT count(*) from (
++                SELECT * from power, json_each(power.roots) where n = 0) where value = ?
++                ))  LIMIT 21 = 1
+
+# 2022-05-27 20:10:46.360394
++            WITH RECURSIVE power(n, p, val, roots) AS (
++                SELECT
++                    63,
++                    4611686018427387904,
++                    "patient"."disease_site",
++                    json_array() UNION ALL
++                SELECT
++                    n - 1,
++                    p / 2,
++                    iif(p > val, val, val - p),
++                    iif(p > val, roots, json_insert(roots, '$[#]', n - 1))
++                FROM power WHERE n > 0
++            )
++            SELECT count(*) from (
++                SELECT * from power, json_each(power.roots) where n = 0) where value = ?
++                )
+
+# 2022-05-27 20:10:48.769869
++            WITH RECURSIVE power(n, p, val, roots) AS (
++                SELECT
++                    63,
++                    4611686018427387904,
++                    "patient"."disease_site",
++                    json_array() UNION ALL
++                SELECT
++                    n - 1,
++                    p / 2,
++                    iif(p > val, val, val - p),
++                    iif(p > val, roots, json_insert(roots, '$[#]', n - 1))
++                FROM power WHERE n > 0
++            )
++            SELECT count(*) from (
++                SELECT * from power, json_each(power.roots) where n = 0) where value = ?
++
+
+# 2022-05-27 20:10:53.653197
++;
+
+# 2022-05-27 20:10:55.812843
++            WITH RECURSIVE power(n, p, val, roots) AS (
++                SELECT
++                    63,
++                    4611686018427387904,
++                    "patient"."disease_site",
++                    json_array() UNION ALL
++                SELECT
++                    n - 1,
++                    p / 2,
++                    iif(p > val, val, val - p),
++                    iif(p > val, roots, json_insert(roots, '$[#]', n - 1))
++                FROM power WHERE n > 0
++            )
++            SELECT count(*) from (
++                SELECT * from power, json_each(power.roots) where n = 0) where value = ?
++                );
+
+# 2022-05-27 20:11:29.742803
++            WITH RECURSIVE power(n, p, val, roots) AS (
++                SELECT
++                    63,
++                    4611686018427387904,
++                    33,$d$CUME_DIST
++                    json_array() UNION ALL
++                SELECT
++                    n - 1,
++                    p / 2,
++                    iif(p > val, val, val - p),
++                    iif(p > val, roots, json_insert(roots, '$[#]', n - 1))
++                FROM power WHERE n > 0
++            )
++            SELECT count(*) from (
++                SELECT * from power, json_each(power.roots) where n = 0) where value = 5
++                );
+
+# 2022-05-27 20:11:37.590257
++            WITH RECURSIVE power(n, p, val, roots) AS (
++                SELECT
++                    63,
++                    4611686018427387904,
++                    33,
++                    json_array() UNION ALL
++                SELECT
++                    n - 1,
++                    p / 2,
++                    iif(p > val, val, val - p),
++                    iif(p > val, roots, json_insert(roots, '$[#]', n - 1))
++                FROM power WHERE n > 0
++            )
++            SELECT count(*) from (
++                SELECT * from power, json_each(power.roots) where n = 0) where value = 5
++                );
+
+# 2022-05-27 20:11:58.670978
++            WITH RECURSIVE power(n, p, val, roots) AS (
++                SELECT
++                    63,
++                    4611686018427387904,
++                    33,
++                    json_array() UNION ALL
++                SELECT
++                    n - 1,
++                    p / 2,
++                    iif(p > val, val, val - p),
++                    iif(p > val, roots, json_insert(roots, '$[#]', n - 1))
++                FROM power WHERE n > 0
++            )
++            SELECT count(*) from (
++                SELECT * from power, json_each(power.roots) where n = 0)
++                );
+
+# 2022-05-27 20:12:02.248899
++            WITH RECURSIVE power(n, p, val, roots) AS (
++                SELECT
++                    63,
++                    4611686018427387904,
++                    33,
++                    json_array() UNION ALL
++                SELECT
++                    n - 1,
++                    p / 2,
++                    iif(p > val, val, val - p),
++                    iif(p > val, roots, json_insert(roots, '$[#]', n - 1))
++                FROM power WHERE n > 0
++            )
++            SELECT count(*) from (
++                SELECT * from power, json_each(power.roots) where n = 0)
++
+
+# 2022-05-27 20:12:22.338856
++            WITH RECURSIVE power(n, p, val, roots) AS (
++                SELECT
++                    63,
++                    4611686018427387904,
++                    33,
++                    json_array() UNION ALL
++                SELECT
++                    n - 1,
++                    p / 2,
++                    iif(p > val, val, val - p),
++                    iif(p > val, roots, json_insert(roots, '$[#]', n - 1))
++                FROM power WHERE n > 0
++            )
++            SELECT count(*) from (
++                SELECT * from power, json_each(power.roots) where n = 0)
+
+# 2022-05-27 20:12:33.631540
++            WITH RECURSIVE power(n, p, val, roots) AS (
++                SELECT
++                    63,
++                    4611686018427387904,
++                    33,
++                    json_array() UNION ALL
++                SELECT
++                    n - 1,
++                    p / 2,
++                    iif(p > val, val, val - p),
++                    iif(p > val, roots, json_insert(roots, '$[#]', n - 1))
++                FROM power WHERE n > 0
++            )
++            SELECT * from (
++                SELECT * from power, json_each(power.roots) where n = 0)
+
+# 2022-05-27 20:12:50.045447
++            WITH RECURSIVE power(n, p, val, roots) AS (
++                SELECT
++                    63,
++                    4611686018427387904,
++                    33,
++                    json_array() UNION ALL
++                SELECT
++                    n - 1,
++                    p / 2,
++                    iif(p > val, val, val - p),
++                    iif(p > val, roots, json_insert(roots, '$[#]', n - 1))
++                FROM power WHERE n > 0
++            )
++            SELECT count(value) from (
++                SELECT * from power, json_each(power.roots) where n = 0 and value = 5)
+
+# 2022-05-27 20:12:52.527968
++            WITH RECURSIVE power(n, p, val, roots) AS (
++                SELECT
++                    63,
++                    4611686018427387904,
++                    33,
++                    json_array() UNION ALL
++                SELECT
++                    n - 1,
++                    p / 2,
++                    iif(p > val, val, val - p),
++                    iif(p > val, roots, json_insert(roots, '$[#]', n - 1))
++                FROM power WHERE n > 0
++            )
++            SELECT count(value) from (
++                SELECT * from power, json_each(power.roots) where n = 0 and value = 4)

@@ -311,7 +311,7 @@ lvim.plugins = {
         -- Missing options from `markdown` field will be replaced by options from `default` field
         asciidoc = {
           img_dir = { "img" },
-          affix = "image::%s[align=center]",
+          affix = "image::%s[align=center,width=75%%]",
         },
         markdown = {
           img_dir = { "img" }, -- Use table for nested dir (New feature form PR #20)
@@ -364,6 +364,14 @@ lvim.plugins = {
     --   vim.cmd [[autocmd CursorHold,CursorHoldI * lua require'nvim-lightbulb'.update_lightbulb()]]
     -- end,
   },
+  -- {
+  --   "p00f/nvim-ts-rainbow",
+  --   -- requires = {
+  --   --   "nvim-treesitter/nvim-treesitter",
+  --   -- },
+  --   disable = false,
+  --   opt = false,
+  -- },
   {
     "jghauser/kitty-runner.nvim",
     config = function()
@@ -404,12 +412,16 @@ lvim.autocommands.custom_groups = {
 }
 -- lvim.dap = require("dap-python").setup "~/.config/virtualenvs/debugpy/bin/python"
 
-require("nvim-treesitter.configs").setup {
+lvim.ts = require("nvim-treesitter.configs").setup {
   highlight = {
     enable = true,
     custom_captures = {},
     additional_vim_regex_highlighing = true,
   },
+  -- rainbow = {
+  --   extended_mode = true,
+  --   enable = true,
+  -- },
 }
 
 -- local lspservers = { "r_language_server" }

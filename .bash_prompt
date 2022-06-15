@@ -72,7 +72,7 @@ else
     echo ''
   }
 
-  export PROMPT_COMMAND="builtin history -a; builtin history -c; builtin history -r"
+  export PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND$'\n'}builtin history -a; builtin history -c; builtin history -r"
 fi
 
 export HISTCONTROL=ignoredups:erasedups

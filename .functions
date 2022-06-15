@@ -555,3 +555,19 @@ source "$HOME/src/epic-on-speed/managephrases.sh"
 
 
 # vim: ft=sh
+asciidoc2docx ()
+{
+    src="$(grealpath "$1")";
+    tgt="${src/.xml/docx}";
+    if [ -f "$tgt" ]; then
+        if [[ "$2" == "--force" ]]; then
+            tgt="$tgt";
+        else
+            printf "%s\n\n" "File '$fname' already exists! Use --force to overwrite";
+            exit 1;
+        fi;
+    fi;
+    temp=$(mktemp);
+    asciidoctor -b docbook "${src}" -o "$temp";
+    pandoc -f docbook -t docx < "$temp" > "$tgt"
+}

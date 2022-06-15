@@ -13,3 +13,4 @@ __pycache*
 .config/nvim/nvimlog.txt
 .config/secure_keys
 node_modules
+.config/litecli/log

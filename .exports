@@ -2,8 +2,9 @@
 
 [[ "$DEBUG_STARTUP:" == "1:" ]] && echo "RUNNING $HOME/.exports"
 # export HOMEBREW_PREFIX=$(brew --prefix)
+export HOMEBREW_PREFIX=/opt/homebrew
 
-export NIX_IGNORE_SYMLINK_STORE=1
+# export NIX_IGNORE_SYMLINK_STORE=1
 # export FULL_GHC_PACKAGE_PATH=$HOME/.ghcup/ghc/8.8.3/lib/ghc-8.8.3/package.conf.d:$HOME/.cabal/store/ghc-8.8.3/package.db
 # export GLOBAL_PACKAGE_PATH=$HOME/.ghcup/ghc/8.8.3/lib/ghc-8.8.3/package.conf.d
 # export USER_PACKAGE_PATH=$HOME/.cabal/store/ghc-8.8.3/package.db
@@ -23,6 +24,7 @@ export NVIM_LOG_FILE="$HOME/.config/nvim/nvimlog.txt"
 # export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_112.jdk/Contents/Home
 export ANDROID_HOME=$HOME/Library/Android/sdk
 export MY_FUNCTIONS
+export PAGER=/opt/homebrew/bin/less
 
 export XDG_CONFIG_HOME=$HOME/.config
 source "$XDG_CONFIG_HOME/user-dirs.dirs"
