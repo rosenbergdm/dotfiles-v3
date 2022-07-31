@@ -67,6 +67,7 @@ M.load_options = function()
   vim.cmd "set wildignore+=*/vendor/*"
   vim.cmd "set wildignore+=*/node_modules/*"
   vim.cmd "set wildmode=longest,list"
+  vim.g.python3_host_prog = "/Users/dmr/.pyenv/versions/3.10.2/bin/python3.10"
   -- vim.cmd "let R_assign=0"
 
   for k, v in pairs(myopts) do
@@ -121,17 +122,26 @@ lvim.builtin.which_key.mappings["t"] = {
   l = { "<cmd>Trouble loclist<cr>", "LocationList" },
   w = { "<cmd>Trouble lsp_workspace_diagnostics<cr>", "Diagnostics" },
 }
+lvim.builtin.which_key.mappings["S"] = {
+  name = "Session",
+  c = { "<cmd>lua require('persistence').load()<cr>", "Restore last session for current dir" },
+  l = { "<cmd>lua require('persistence').load({ last = true })<cr>", "Restore last session" },
+  Q = { "<cmd>lua require('persistence').stop()<cr>", "Quit without saving session" },
+}
 
 -- TODO: User Config for predefined plugins
 -- After changing plugin config exit and reopen LunarVim, Run :PackerInstall :PackerCompile
-lvim.builtin.dashboard.active = true
 -- lvim.builtin.alpha.active = true
+-- lvim.builtin.alpha.mode = "dashboard"
 lvim.builtin.notify.active = true
 lvim.builtin.terminal.active = true
 lvim.builtin.nvimtree.setup.view.side = "left"
-lvim.builtin.nvimtree.show_icons.git = 0
-lvim.lsp.diagnostics.virtual_text = true
-lvim.lsp.code_lens_refresh = true
+-- lvim.builtin.nvimtree.setup.renderer.icons.show.git = false
+lvim.builtin.nvimtree.setup.disable_netrw = true
+lvim.builtin.nvimtree.setup.update_cwd = false
+
+lvim.builtin.cmp.formatting.source_names["copilot"] = "(Copilot)"
+table.insert(lvim.builtin.cmp.sources, 1, { name = "copilot" })
 
 -- if you don't want all the parsers change this to a table of the ones you want
 lvim.builtin.treesitter.ensure_installed = {
@@ -155,23 +165,30 @@ lvim.builtin.lualine.sections.lualine_y = { "location" }
 lvim.builtin.dap.active = true
 lvim.builtin.bufferline.active = true
 lvim.builtin.gitsigns.active = false
-lvim.builtin.nvimtree.setup.disable_netrw = true
-lvim.builtin.nvimtree.setup.update_cwd = false
 lvim.builtin.project.manual_mode = true
 
 -- generic LSP settings
 
+lvim.lsp.diagnostics.virtual_text = true
+lvim.lsp.code_lens_refresh = true
+
 -- ---@usage disable automatic installation of servers
 lvim.lsp.automatic_servers_installation = true
 
--- ---@usage Select which servers should be configured manually. Requires `:LvimCacheRest` to take effect.
--- See the full default list `:lua print(vim.inspect(lvim.lsp.override))`
--- vim.list_extend(lvim.lsp.override, { "pyright" })
--- vim.list_extend(lvim.lsp.override, { "r_language_server" })
+-- vim.list_extend(lvim.lsp.automatic_configuration.skipped_servers, { "pyright" })
+-- require("lvim.lsp.manager").setup("pylsp", {})
 
--- ---@usage setup a server -- see: https://www.lunarvim.org/languages/#overriding-the-default-configuration
+-- ---configure a server manually. !!Requires `:LvimCacheReset` to take effect!!
+-- ---see the full default list `:lua print(vim.inspect(lvim.lsp.automatic_configuration.skipped_servers))`
+-- vim.list_extend(lvim.lsp.automatic_configuration.skipped_servers, { "pyright" })
 -- local opts = {} -- check the lspconfig documentation for a list of all possible options
--- require("lvim.lsp.manager").setup("pylsp", opts)
+-- require("lvim.lsp.manager").setup("pyright", opts)
+
+-- ---remove a server from the skipped list, e.g. eslint, or emmet_ls. !!Requires `:LvimCacheReset` to take effect!!
+-- ---`:LvimInfo` lists which server(s) are skiipped for the current filetype
+-- vim.tbl_map(function(server)
+--   return server ~= "emmet_ls"
+-- end, lvim.lsp.automatic_configuration.skipped_servers)
 
 -- -- you can set a custom on_attach function that will be used for all the language servers
 -- -- See <https://github.com/neovim/nvim-lspconfig#keybindings-and-completion>
@@ -231,18 +248,34 @@ linters.setup {
 }
 lvim.plugins = {
   { "folke/tokyonight.nvim", rocks = { "see" } },
-  {
-    "goolord/alpha-nvim",
-    requires = { "kyazdani42/nvim-web-devicons" },
-    config = function()
-      require("alpha").setup(require("alpha.themes.startify").config)
-    end,
-  },
+  -- {
+  --   "goolord/alpha-nvim",
+  --   requires = { "kyazdani42/nvim-web-devicons" },
+  --   config = function()
+  --     require("alpha").setup(require("alpha.themes.startify").config)
+  --   end,
+  -- },
   {
     "folke/trouble.nvim",
     cmd = "TroubleToggle",
   },
-
+  { "oberblastmeister/neuron.nvim" },
+  {
+    "ethanholz/nvim-lastplace",
+    event = "BufRead",
+    config = function()
+      require("nvim-lastplace").setup {
+        lastplace_ignore_buftype = { "quickfix", "nofile", "help" },
+        lastplace_ignore_filetype = {
+          "gitcommit",
+          "gitrebase",
+          "svn",
+          "hgcommit",
+        },
+        lastplace_open_folds = true,
+      }
+    end,
+  },
   {
     "ur4ltz/surround.nvim",
     config = function()
@@ -276,23 +309,17 @@ lvim.plugins = {
     end,
   },
   {
-    "github/copilot.vim",
-    disable = false,
+    "zbirenbaum/copilot.lua",
+    event = { "VimEnter" },
     config = function()
-      -- copilot assume mapped
-      vim.g.copilot_assume_mapped = true
-      vim.g.copilot_no_tab_map = true
+      vim.defer_fn(function()
+        require("copilot").setup {
+          plugin_manager_path = get_runtime_dir() .. "/site/pack/packer",
+        }
+      end, 100)
     end,
   },
-  {
-    "hrsh7th/cmp-copilot",
-    -- disable = not lvim.builtin.sell_soul_to_devel,
-    disable = true,
-    config = function()
-      lvim.builtin.cmp.formatting.source_names["copilot"] = "(Cop)"
-      table.insert(lvim.builtin.cmp.sources, { name = "copilot" })
-    end,
-  },
+  { "zbirenbaum/copilot-cmp", after = { "copilot.lua", "nvim-cmp" } },
   {
     "ekickx/clipboard-image.nvim",
     disable = false,
@@ -378,6 +405,12 @@ lvim.plugins = {
       require("kitty-runner").setup()
     end,
   },
+
+  {
+    "npxbr/glow.nvim",
+    ft = { "markdown" },
+    -- run = "yay -S glow"
+  },
   {
     "edluffy/hologram.nvim",
     config = function()
@@ -392,6 +425,7 @@ lvim.plugins = {
     "sudormrfbin/cheatsheet.nvim",
     requires = {
       { "nvim-telescope/telescope.nvim" },
+
       { "nvim-lua/popup.nvim" },
       { "nvim-lua/plenary.nvim" },
     },
@@ -402,14 +436,64 @@ lvim.plugins = {
   -- Colorschemes
   { "tiagovla/tokyodark.nvim" },
   { "tjdevries/gruvbuddy.nvim", requires = { "tjdevries/colorbuddy.vim" } },
-  -- launch the above scheme with ":lua require('colorbuddy').colorscheme('gruvbuddy')"
+  {
+    "windwp/nvim-ts-autotag",
+    event = "InsertEnter",
+    config = function()
+      require("nvim-ts-autotag").setup()
+    end,
+  },
+  { "p00f/nvim-ts-rainbow" },
+  {
+    "romgrk/nvim-treesitter-context",
+    config = function()
+      require("treesitter-context").setup {
+        enable = true, -- Enable this plugin (Can be enabled/disabled later via commands)
+        throttle = true, -- Throttles plugin updates (may improve performance)
+        max_lines = 0, -- How many lines the window should span. Values <= 0 mean no limit.
+        patterns = { -- Match patterns for TS nodes. These get wrapped to match at word boundaries.
+          -- For all filetypes
+          -- Note that setting an entry here replaces all other patterns for this entry.
+          -- By setting the 'default' entry below, you can control which nodes you want to
+          -- appear in the context window.
+          default = {
+            "class",
+            "function",
+            "method",
+          },
+        },
+      }
+    end,
+  },
 }
 
+-- launch the above scheme with ":lua require('colorbuddy').colorscheme('gruvbuddy')"
+
 -- Autocommands (https://neovim.io/doc/user/autocmd.html)
-lvim.autocommands.custom_groups = {
-  { "BufWinEnter,BufRead,BufNewFile", "*", "chdir %:p:h" },
-  { "BufWritePost", "*.adoc", ":!asciidoctor %" },
-}
+-- lvim.autocommands.custom_groups = {
+--   { "BufWinEnter,BufRead,BufNewFile", "*", "chdir %:p:h" },
+--   { "BufWritePost", "*.adoc", ":!asciidoctor %" },
+-- }
+vim.api.nvim_create_autocmd("BufEnter", {
+  pattern = { "*.json", "*.jsonc" },
+  -- enable wrap mode for json files only
+  command = "setlocal wrap",
+})
+vim.api.nvim_create_autocmd("BufWinEnter,BufRead,BufNewFile", {
+  pattern = { "*" },
+  command = "chdir %:p:h",
+})
+vim.api.nvim_create_autocmd("BufWritePost", {
+  pattern = { "*.adoc" },
+  command = ":!asciidoctor '%'",
+})
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "zsh",
+  callback = function()
+    -- let treesitter use bash highlight for zsh files as well
+    require("nvim-treesitter.highlight").attach(0, "bash")
+  end,
+})
 -- lvim.dap = require("dap-python").setup "~/.config/virtualenvs/debugpy/bin/python"
 
 lvim.ts = require("nvim-treesitter.configs").setup {

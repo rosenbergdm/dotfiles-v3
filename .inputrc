@@ -143,6 +143,7 @@ Space: magic-space
 set editing-mode vi
 
 $if mode=vi
+  Space: " "
   set keymap vi-command
   "P": yank
   "p": "l\P"
@@ -221,6 +222,7 @@ $if mode=vi
   "\e[A": history-search-backward
   "\e[B": history-search-forward
   "\C-r": re-read-init-file
+  "\C-0": re-read-init-file
 
   #Go back in history and replay step one by one ... :)
   Control-o: operate-and-get-next
@@ -236,5 +238,9 @@ $if mode=vi
   # but should work with substrings :(
   Control-n: dynamic-complete-history
 $endif
+$if sqlite3
+  Space: " "
+$endif
+
 
 set keymap vi-insert

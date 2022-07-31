@@ -24,10 +24,10 @@ export NVIM_LOG_FILE="$HOME/.config/nvim/nvimlog.txt"
 # export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_112.jdk/Contents/Home
 export ANDROID_HOME=$HOME/Library/Android/sdk
 export MY_FUNCTIONS
-export PAGER=/opt/homebrew/bin/less
+export PAGER=/opt/homebrew/bin/less\ -r
 
 export XDG_CONFIG_HOME=$HOME/.config
-source "$XDG_CONFIG_HOME/user-dirs.dirs"
+source "/Users/dmr/.config/user-dirs.dirs"
 export XDG_DATA_HOME=$HOME/.local/share
 export XDG_DATA_DIRS=$HOME/.local/share
 export XDG_CONFIG_HOME XDG_DATA_DIRS XDG_DESKTOP_DIR XDG_DOWNLOAD_DIR

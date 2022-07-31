@@ -1,6 +1,7 @@
 {
   "Lua.diagnostics.enable": true,
   "Lua.diagnostics.globals": [
+    "lvim",
     "vim",
     "describe",
     "it",
@@ -13,5 +14,10 @@
     "undefined-field"
   ],
   "Lua.completion.callSnippet": "Both",
-  "Lua.completion.keywordSnippet": "Both"
+  "Lua.completion.keywordSnippet": "Both",
+  "Lua.hint.enable": true,
+  "Lua.hint.setType": true,
+  "Lua.workspace.maxPreload": 5000,
+  "Lua.workspace.preloadFileSize": 50000,
+  "Lua.workspace.library": "/Users/dmr/.local/share/lunarvim/lvim/lua"
 }

@@ -554,7 +554,6 @@ EOF
 source "$HOME/src/epic-on-speed/managephrases.sh"
 
 
-# vim: ft=sh
 asciidoc2docx ()
 {
     src="$(grealpath "$1")";
@@ -571,3 +570,27 @@ asciidoc2docx ()
     asciidoctor -b docbook "${src}" -o "$temp";
     pandoc -f docbook -t docx < "$temp" > "$tgt"
 }
+extract_alto_tenor ()
+{
+    if [[ $1 == "--help" || $1 == "-help" || $1 == "-h" || $# -ne 3 ]]; then
+        cat <<EOF
+
+USAGE: $FUNCNAME SOURCEPDF ALTO_PAGES TENOR_PAGES
+
+  Note: this presumes that the tenor parts are collected in ./Tenor2 and the
+  alto 2 parts in ./Alto2
+
+EOF
+
+    else
+        srcfile="$1"
+        alto2="$2";
+        tenor2="$3";
+        pdftk "$srcfile" cat "$alto2" output "Alto2/${srcfile/.pdf/}-Alto2.pdf";
+        pdftk "$srcfile" cat "$tenor2" output "Tenor2/${srcfile/.pdf/}-Tenor2.pdf";
+        open "Alto2/${srcfile/.pdf/}-Alto2.pdf" "Tenor2/${srcfile/.pdf/}-Tenor2.pdf";
+        mv "$srcfile" extracted/;
+    fi
+}
+
+# vim: ft=sh
