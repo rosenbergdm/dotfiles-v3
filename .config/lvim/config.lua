@@ -133,6 +133,7 @@ lvim.builtin.which_key.mappings["S"] = {
 -- After changing plugin config exit and reopen LunarVim, Run :PackerInstall :PackerCompile
 -- lvim.builtin.alpha.active = true
 -- lvim.builtin.alpha.mode = "dashboard"
+lvim.builtin.dashboard.active = true
 lvim.builtin.notify.active = true
 lvim.builtin.terminal.active = true
 lvim.builtin.nvimtree.setup.view.side = "left"
@@ -192,14 +193,14 @@ lvim.lsp.automatic_servers_installation = true
 
 -- -- you can set a custom on_attach function that will be used for all the language servers
 -- -- See <https://github.com/neovim/nvim-lspconfig#keybindings-and-completion>
-lvim.lsp.on_attach_callback = function(_, bufnr)
-  local function buf_set_option(...)
-    vim.api.nvim_buf_set_option(bufnr, ...)
-  end
+-- lvim.lsp.on_attach_callback = function(_, bufnr)
+--   local function buf_set_option(...)
+--     vim.api.nvim_buf_set_option(bufnr, ...)
+--   end
 
-  --Enable completion triggered by <c-x><c-o>
-  buf_set_option("omnifunc", "v:lua.vim.lsp.omnifunc")
-end
+--   --Enable completion triggered by <c-x><c-o>
+--   buf_set_option("omnifunc", "v:lua.vim.lsp.omnifunc")
+-- end
 
 -- set additional linters
 local linters = require "lvim.lsp.null-ls.linters"
@@ -248,13 +249,13 @@ linters.setup {
 }
 lvim.plugins = {
   { "folke/tokyonight.nvim", rocks = { "see" } },
-  -- {
-  --   "goolord/alpha-nvim",
-  --   requires = { "kyazdani42/nvim-web-devicons" },
-  --   config = function()
-  --     require("alpha").setup(require("alpha.themes.startify").config)
-  --   end,
-  -- },
+  {
+    "goolord/alpha-nvim",
+    requires = { "kyazdani42/nvim-web-devicons" },
+    config = function()
+      require("alpha").setup(require("alpha.themes.startify").config)
+    end,
+  },
   {
     "folke/trouble.nvim",
     cmd = "TroubleToggle",
@@ -314,6 +315,7 @@ lvim.plugins = {
     config = function()
       vim.defer_fn(function()
         require("copilot").setup {
+---@diagnostic disable-next-line: undefined-global
           plugin_manager_path = get_runtime_dir() .. "/site/pack/packer",
         }
       end, 100)
@@ -391,14 +393,14 @@ lvim.plugins = {
     --   vim.cmd [[autocmd CursorHold,CursorHoldI * lua require'nvim-lightbulb'.update_lightbulb()]]
     -- end,
   },
-  -- {
-  --   "p00f/nvim-ts-rainbow",
-  --   -- requires = {
-  --   --   "nvim-treesitter/nvim-treesitter",
-  --   -- },
-  --   disable = false,
-  --   opt = false,
-  -- },
+  {
+    "p00f/nvim-ts-rainbow",
+    requires = {
+      "nvim-treesitter/nvim-treesitter",
+    },
+    disable = false,
+    opt = false,
+  },
   {
     "jghauser/kitty-runner.nvim",
     config = function()
@@ -443,7 +445,7 @@ lvim.plugins = {
       require("nvim-ts-autotag").setup()
     end,
   },
-  { "p00f/nvim-ts-rainbow" },
+
   {
     "romgrk/nvim-treesitter-context",
     config = function()
@@ -502,10 +504,10 @@ lvim.ts = require("nvim-treesitter.configs").setup {
     custom_captures = {},
     additional_vim_regex_highlighing = true,
   },
-  -- rainbow = {
-  --   extended_mode = true,
-  --   enable = true,
-  -- },
+  rainbow = {
+    extended_mode = true,
+    enable = true,
+  },
 }
 
 -- local lspservers = { "r_language_server" }
@@ -525,3 +527,10 @@ vim.cmd "let g:firenvim_config = {'globalSettings': { }, 'localSettings': {'.*':
 --   or use :lua =lvim.see(xxxx)
 
 lvim.packer = require "packer"
+require('lspconfig').tsserver.setup {
+    on_attach = function(client, bufnr)
+    client.server_capabilities.documentFormattingProvider = false
+    client.server_capabilities.documentRangeFormattingProvider = false
+    on_attach(client, bufnr)
+  end,
+}
