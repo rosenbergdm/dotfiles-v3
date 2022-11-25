@@ -34,7 +34,8 @@ export VIMINIT="$LUNARVIM_RUNTIME_DIR/lvim/init.lua"
 
 export NVM_DIR=$HOME/.nvm
 [ -s "$NVM_DIR/nvm.sh" ] && source "$NVM_DIR/nvm.sh" # This loads nvm
-nvm use 16.10
+# nvm use 16.10
+nvm use 18.7
 source "$HOME/.cargo/env"
 export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$PYENV_ROOT/bin:$PATH"

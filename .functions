@@ -589,7 +589,7 @@ EOF
         pdftk "$srcfile" cat "$alto2" output "Alto2/${srcfile/.pdf/}-Alto2.pdf";
         pdftk "$srcfile" cat "$tenor2" output "Tenor2/${srcfile/.pdf/}-Tenor2.pdf";
         open "Alto2/${srcfile/.pdf/}-Alto2.pdf" "Tenor2/${srcfile/.pdf/}-Tenor2.pdf";
-        mv "$srcfile" extracted/;
+        mv "$srcfile" "${srcfile/.pdf/-full-score.pdf}";
     fi
 }
 

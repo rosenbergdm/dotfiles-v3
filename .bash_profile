@@ -32,9 +32,6 @@ export LUNARVIM_CACHE_DIR="${LUNARVIM_CACHE_DIR:-"/Users/dmr/.cache/lvim"}"
 export VIMINIT="$LUNARVIM_RUNTIME_DIR/lvim/init.lua"
 export DENO_INSTALL="/Users/dmr/.deno"
 export PATH="$DENO_INSTALL/bin:$PATH"
-export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init --path)"
 
 # export PATH="$HOME/.poetry/bin:$PATH"
 
@@ -49,20 +46,22 @@ export BASH_PROFILE_RUN DEBUG_STARTUP BASHRC_RUN
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/opt/homebrew/Caskroom/miniforge/base/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
+__conda_setup="$('/opt/homebrew/Caskroom/miniforge/base/bin/conda' 'shell.bash' 'hook' 2>/dev/null)"
 if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
+  eval "$__conda_setup"
 else
-    if [ -f "/opt/homebrew/Caskroom/miniforge/base/etc/profile.d/conda.sh" ]; then
-        . "/opt/homebrew/Caskroom/miniforge/base/etc/profile.d/conda.sh"
-    else
-        export PATH="/opt/homebrew/Caskroom/miniforge/base/bin:$PATH"
-    fi
+  if [ -f "/opt/homebrew/Caskroom/miniforge/base/etc/profile.d/conda.sh" ]; then
+    . "/opt/homebrew/Caskroom/miniforge/base/etc/profile.d/conda.sh"
+  else
+    export PATH="/opt/homebrew/Caskroom/miniforge/base/bin:$PATH"
+  fi
 fi
 unset __conda_setup
 # <<< conda initialize <<<
 
-
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init --path)"
 
 # Added by Toolbox App
 export PATH="$PATH:/Users/dmr/Library/Application Support/JetBrains/Toolbox/scripts"
