@@ -15,6 +15,7 @@ PATH=$PATH:$HOME/edirect
 PATH=$PATH:$HOME/go/bin:/usr/local/go/bin
 PATH=$PATH:$HOME/src/flutter/bin
 PATH=$PATH:/Library/Frameworks/R.framework/Versions/Current/Resources/bin
+PATH=$PATH:/Applications/Julia-1.8.app/Contents/Resources/julia/bin
 # PATH=$HOMEBREW_PREFIX/Cellar/python@3.10/3.10.2/bin:$PATH
 # [[ -e /opt/homebrew/bin ]] && PATH=/opt/homebrew/bin:$PATH
 PATH=$HOMEBREW_PREFIX/bin:$HOMEBREW_PREFIX/sbin:$PATH

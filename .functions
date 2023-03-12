@@ -443,17 +443,17 @@ if [[ $SYSTYPE == "OSX" ]]; then
     greadlink "$@"
   }
 fi
-winedit ()
-{
-    alacritty -e /opt/homebrew/bin/bash -c "$HOME/.local/bin/lvim $@" & !
-}
+# winedit ()
+# {
+    # alacritty -e /opt/homebrew/bin/bash -c "$HOME/.local/bin/lvim $@" &!
+# }
 
 mypushd () {
-  command pushd "$@" >/dev/null
+  command pushd "$@" >/dev/null || exit
 }
 
 mypopd () {
-  command popd "$@" >/dev/null
+  command popd "$@" >/dev/null || exit
 }
 
 mycd () {
@@ -491,7 +491,7 @@ editfun ()
 adoc2pdf() {
   themefile="$HOME/.config/asciidoctor/dmrsmall.yml"
 
-  if [ -a ${1/.adoc/.pdf} ]; then
+  if [ -a "${1/.adoc/.pdf}" ]; then
     if [[ $2 != "-f" ]]; then
       echo "File exists.  Use -f to override"
       return 1
@@ -592,5 +592,7 @@ EOF
         mv "$srcfile" "${srcfile/.pdf/-full-score.pdf}";
     fi
 }
+
+complete -f -X '!*.pdf' extract_alto_tenor
 
 # vim: ft=sh

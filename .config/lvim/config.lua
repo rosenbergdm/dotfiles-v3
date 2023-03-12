@@ -1,39 +1,30 @@
 --[[
-lvim is the global options object
---]]
+ THESE ARE EXAMPLE CONFIGS FEEL FREE TO CHANGE TO WHATEVER YOU WANT
+ `lvim` is the global options object
+]]
+-- vim options
+vim.opt.shiftwidth = 2
+vim.opt.tabstop = 2
+vim.opt.relativenumber = true
 
 -- general
+lvim.log.level = "info"
+lvim.format_on_save = {
+  enabled = true,
+  pattern = "*.lua",
+  timeout = 1000,
+}
+-- to disable icons and use a minimalist setup, uncomment the following
+-- lvim.use_icons = false
 
-lvim.log.level = "debug"
-lvim.format_on_save = true
+-- lvim.format_on_save = true
 lvim.lint_on_save = true
 lvim.colorscheme = "onedarker"
 lvim.builtin.sell_soul_to_devel = true
 
-lvim.myhelp = {}
-
--- keymappings [view all the defaults by pressing <leader>Lk]
-lvim.leader = "space"
-
---[[
-CMD-c copying in insert / visual mode hack
-For this to work the way I want,
-  1.) iTerm2 is set to emit the escape sequence \[eC (esc-c) for CMD-c
-  2.) Readline is configured (via .inputrc) to map as follows:
-     set key map vi-insert
-     $if Bash
-       "^[c": "\C-yii"
-     $else
-     ...
-  3.) The visual map lvim.keys.visual_mode["<M-c>"] = "y"
---]]
-lvim.keys.normal_mode["<C-s>"] = ":w<cr>"
-lvim.keys.normal_mode["<M-c>"] = "y"
-lvim.keys.visual_mode["<M-c>"] = "y"
-lvim.keys.visual_block_mode["<M-c>"] = "y"
-lvim.keys.insert_mode["√"] = "<esc>:PasteImg<CR>o"
-
+---@diagnostic disable-next-line: unused-local
 local M = {}
+---@diagnostic disable-next-line: unused-local
 M.load_options = function()
   local LVIM_CACHE_DIR = os.getenv "HOME" .. "/.cache/lvim"
   local myopts = {
@@ -60,14 +51,16 @@ M.load_options = function()
     list = true,
     modelines = 5,
     number = true,
+    wildmode = "longest,list",
+    wildignore = "*/.idea/*",
   }
-  vim.cmd "set wildmode=longest,list"
-  vim.cmd "set wildignore+=*/.idea/*"
-  vim.cmd "set wildignore+=*/.git/*"
-  vim.cmd "set wildignore+=*/.svn/*"
-  vim.cmd "set wildignore+=*/vendor/*"
-  vim.cmd "set wildignore+=*/node_modules/*"
-  vim.cmd "set wildmode=longest,list"
+  -- vim.opt("set wildmode=longest,list")
+  -- vim.cmd "set wildignore+=*/.idea/*"
+  -- vim.cmd "set wildignore+=*/.git/*"
+  -- vim.cmd "set wildignore+=*/.svn/*"
+  -- vim.cmd "set wildignore+=*/vendor/*"
+  -- vim.cmd "set wildignore+=*/node_modules/*"
+  -- vim.cmd "set wildmode=longest,list"
   vim.g.python3_host_prog = "/Users/dmr/.pyenv/versions/3.10.2/bin/python3.10"
   -- vim.cmd "let R_assign=0"
 
@@ -76,9 +69,16 @@ M.load_options = function()
   end
 end
 
-M.load_options()
+lvim.myhelp = {}
 
+-- keymappings [view all the defaults by pressing <leader>Lk]
 lvim.leader = "space"
+-- add your own keymapping
+lvim.keys.normal_mode["<C-s>"] = ":w<cr>"
+lvim.keys.normal_mode["<M-c>"] = "y"
+lvim.keys.visual_mode["<M-c>"] = "y"
+lvim.keys.visual_block_mode["<M-c>"] = "y"
+lvim.keys.insert_mode["√"] = "<esc>:PasteImg<CR>o"
 
 lvim.keys.normal_mode["<C-s>"] = ":w<cr>"
 lvim.keys.normal_mode[";"] = ":"
@@ -94,8 +94,13 @@ vim.cmd "xmap <C-S-c> y"
 vim.cmd "vmap <M-c> y"
 vim.cmd "xmap <M-c> y"
 
--- Change Telescope navigation to use j and k for navigation and n and p for history in both input and normal mode.
--- we use protected-mode (pcall) just in case the plugin wasn't loaded yet.
+lvim.keys.normal_mode["<S-l>"] = ":BufferLineCycleNext<CR>"
+lvim.keys.normal_mode["<S-h>"] = ":BufferLineCyclePrev<CR>"
+
+-- -- Use which-key to add extra bindings with the leader-key prefix
+lvim.builtin.which_key.mappings["W"] = { "<cmd>noautocmd w<cr>", "Save without formatting" }
+lvim.builtin.which_key.mappings["P"] = { "<cmd>Telescope projects<CR>", "Projects" }
+
 local _, actions = pcall(require, "telescope.actions")
 lvim.builtin.telescope.defaults.mappings = {
   -- for input mode
@@ -129,11 +134,15 @@ lvim.builtin.which_key.mappings["S"] = {
   l = { "<cmd>lua require('persistence').load({ last = true })<cr>", "Restore last session" },
   Q = { "<cmd>lua require('persistence').stop()<cr>", "Quit without saving session" },
 }
+-- -- Change theme settings
+lvim.colorscheme = "lunar"
 
--- TODO: User Config for predefined plugins
--- After changing plugin config exit and reopen LunarVim, Run :PackerInstall :PackerCompile
--- lvim.builtin.dashboard.active = true
--- lvim.builtin.notify.active = true
+lvim.builtin.alpha.active = true
+lvim.builtin.alpha.mode = "dashboard"
+lvim.builtin.terminal.active = true
+lvim.builtin.nvimtree.setup.view.side = "left"
+lvim.builtin.nvimtree.setup.renderer.icons.show.git = false
+
 lvim.builtin.terminal.active = true
 lvim.builtin.nvimtree.setup.view.side = "left"
 -- lvim.builtin.nvimtree.setup.renderer.icons.show.git = false
@@ -143,7 +152,9 @@ lvim.builtin.nvimtree.setup.update_cwd = false
 lvim.builtin.cmp.formatting.source_names["copilot"] = "(Copilot)"
 table.insert(lvim.builtin.cmp.sources, 1, { name = "copilot" })
 
--- if you don't want all the parsers change this to a table of the ones you want
+-- Automatically install missing parsers when entering buffer
+lvim.builtin.treesitter.auto_install = true
+
 lvim.builtin.treesitter.ensure_installed = {
   "bash",
   "c",
@@ -171,35 +182,66 @@ lvim.builtin.project.manual_mode = true
 
 lvim.lsp.diagnostics.virtual_text = true
 lvim.lsp.code_lens_refresh = true
+-- lvim.builtin.treesitter.ignore_install = { "haskell" }
 
--- ---@usage disable automatic installation of servers
--- lvim.lsp.automatic_servers_installation = true
+-- -- always installed on startup, useful for parsers without a strict filetype
+-- lvim.builtin.treesitter.ensure_installed = { "comment", "markdown_inline", "regex" }
 
--- vim.list_extend(lvim.lsp.automatic_configuration.skipped_servers, { "pyright" })
--- require("lvim.lsp.manager").setup("pylsp", {})
+-- -- generic LSP settings <https://www.lunarvim.org/docs/languages#lsp-support>
 
--- ---configure a server manually. !!Requires `:LvimCacheReset` to take effect!!
--- ---see the full default list `:lua print(vim.inspect(lvim.lsp.automatic_configuration.skipped_servers))`
+-- --- disable automatic installation of servers
+-- lvim.lsp.installer.setup.automatic_installation = false
+
+-- ---configure a server manually. IMPORTANT: Requires `:LvimCacheReset` to take effect
+-- ---see the full default list `:lua =lvim.lsp.automatic_configuration.skipped_servers`
 -- vim.list_extend(lvim.lsp.automatic_configuration.skipped_servers, { "pyright" })
 -- local opts = {} -- check the lspconfig documentation for a list of all possible options
 -- require("lvim.lsp.manager").setup("pyright", opts)
 
--- ---remove a server from the skipped list, e.g. eslint, or emmet_ls. !!Requires `:LvimCacheReset` to take effect!!
--- ---`:LvimInfo` lists which server(s) are skiipped for the current filetype
--- vim.tbl_map(function(server)
+-- ---remove a server from the skipped list, e.g. eslint, or emmet_ls. IMPORTANT: Requires `:LvimCacheReset` to take effect
+-- ---`:LvimInfo` lists which server(s) are skipped for the current filetype
+-- lvim.lsp.automatic_configuration.skipped_servers = vim.tbl_filter(function(server)
 --   return server ~= "emmet_ls"
 -- end, lvim.lsp.automatic_configuration.skipped_servers)
 
 -- -- you can set a custom on_attach function that will be used for all the language servers
 -- -- See <https://github.com/neovim/nvim-lspconfig#keybindings-and-completion>
-lvim.lsp.on_attach_callback = function(_, bufnr)
-  local function buf_set_option(...)
-    vim.api.nvim_buf_set_option(bufnr, ...)
-  end
+-- lvim.lsp.on_attach_callback = function(client, bufnr)
+--   local function buf_set_option(...)
+--     vim.api.nvim_buf_set_option(bufnr, ...)
+--   end
+--   --Enable completion triggered by <c-x><c-o>
+--   buf_set_option("omnifunc", "v:lua.vim.lsp.omnifunc")
+-- end
 
-  --Enable completion triggered by <c-x><c-o>
-  buf_set_option("omnifunc", "v:lua.vim.lsp.omnifunc")
-end
+-- -- linters and formatters <https://www.lunarvim.org/docs/languages#lintingformatting>
+-- local formatters = require "lvim.lsp.null-ls.formatters"
+-- formatters.setup {
+--   { command = "stylua" },
+--   {
+--     command = "prettier",
+--     extra_args = { "--print-width", "100" },
+--     filetypes = { "typescript", "typescriptreact" },
+--   },
+-- }
+-- local linters = require "lvim.lsp.null-ls.linters"
+-- linters.setup {
+--   { command = "flake8", filetypes = { "python" } },
+--   {
+--     command = "shellcheck",
+--     args = { "--severity", "warning" },
+--   },
+-- }
+
+-- -- Additional Plugins <https://www.lunarvim.org/docs/plugins#user-plugins>
+-- lvim.lsp.on_attach_callback = function(_, bufnr)
+--   local function buf_set_option(...)
+--     vim.api.nvim_buf_set_option(bufnr, ...)
+--   end
+
+--   --Enable completion triggered by <c-x><c-o>
+--   buf_set_option("omnifunc", "v:lua.vim.lsp.omnifunc")
+-- end
 
 -- set additional linters
 local linters = require "lvim.lsp.null-ls.linters"
@@ -250,13 +292,14 @@ lvim.plugins = {
   { "folke/tokyonight.nvim", rocks = { "see" } },
   -- {
   --   "goolord/alpha-nvim",
-  --   requires = { "kyazdani42/nvim-web-devicons" },
+  --   -- dependencies = { "kyazdani42/nvim-web-devicons" },
   --   config = function()
   --     require("alpha").setup(require("alpha.themes.startify").config)
   --   end,
   -- },
   {
     "folke/trouble.nvim",
+    rocks = { "see" },
     cmd = "TroubleToggle",
   },
   { "oberblastmeister/neuron.nvim" },
@@ -299,31 +342,29 @@ lvim.plugins = {
   },
   {
     "vim-scripts/dbext.vim",
-    opt = true,
+    lazy = true,
   },
 
   {
     "glacambre/firenvim",
-    run = function()
+    build = function()
       vim.fn["firenvim#install"](0)
     end,
   },
   {
     "zbirenbaum/copilot.lua",
-    event = { "VimEnter" },
+    event = { "InsertEnter" },
+    cmd = "Copilot",
     config = function()
-      vim.defer_fn(function()
-        require("copilot").setup {
-          ---@diagnostic disable-next-line: undefined-global
-          plugin_manager_path = get_runtime_dir() .. "/site/pack/packer",
-        }
-      end, 100)
+      vim.schedule(function()
+        require("copilot").setup()
+      end)
     end,
   },
   { "zbirenbaum/copilot-cmp", after = { "copilot.lua", "nvim-cmp" } },
   {
     "ekickx/clipboard-image.nvim",
-    disable = false,
+    enable = true,
     config = function()
       require("clipboard-image").setup {
         -- Default configuration for all filetype
@@ -348,14 +389,14 @@ lvim.plugins = {
       }
     end,
   },
-  -- {
-  --   "shuntaka9576/preview-asciidoc.nvim",
-  --   config = function()
-  --     vim.g.padoc_node_path = "/Users/dmr/.nvm/versions/node/v16.10.0/bin/node"
-  --     vim.g.padoc_build_command = "/Users/dmr/.rvm/gems/ruby-3.0.2/bin/asciidoctor"
-  --   end,
-  --   run = "yarn install",
-  -- },
+  {
+    "shuntaka9576/preview-asciidoc.nvim",
+    config = function()
+      vim.g.padoc_node_path = "/Users/dmr/.nvm/versions/node/v16.10.0/bin/node"
+      vim.g.padoc_build_command = "/Users/dmr/.rvm/gems/ruby-3.0.2/bin/asciidoctor"
+    end,
+    build = "yarn install",
+  },
   {
     "ray-x/lsp_signature.nvim",
     config = function()
@@ -365,7 +406,7 @@ lvim.plugins = {
   },
   {
     "iamcco/markdown-preview.nvim",
-    run = "cd app && npm install",
+    build = "cd app && npm install",
     ft = "markdown",
     config = function()
       vim.g.mkdp_auto_start = 1
@@ -373,20 +414,20 @@ lvim.plugins = {
   },
   {
     "jalvesaq/Nvim-R",
-    opt = true,
+    lazy = true,
     event = "BufEnter *.R",
   },
-  {
-    "rcarriga/nvim-dap-ui",
-    requires = {
-      "mfussenegger/nvim-dap-python",
-    },
-  },
+  -- {
+  --   "rcarriga/nvim-dap-ui",
+  --   dependencies = {
+  --     "mfussenegger/nvim-dap-python",
+  --   },
+  -- },
 
   {
     "kosayoda/nvim-lightbulb",
-    opt = true,
-    disable = true,
+    lazy = true,
+    enable = false,
     -- This plugin seems to make the cursor problematic
     -- config = function()
     --   vim.cmd [[autocmd CursorHold,CursorHoldI * lua require'nvim-lightbulb'.update_lightbulb()]]
@@ -394,11 +435,11 @@ lvim.plugins = {
   },
   {
     "p00f/nvim-ts-rainbow",
-    requires = {
+    dependencies = {
       "nvim-treesitter/nvim-treesitter",
     },
-    disable = false,
-    opt = false,
+    enable = true,
+    lazy = false,
   },
   {
     "jghauser/kitty-runner.nvim",
@@ -410,7 +451,7 @@ lvim.plugins = {
   {
     "npxbr/glow.nvim",
     ft = { "markdown" },
-    run = "yay -S glow",
+    build = "yay -S glow",
   },
   {
     "edluffy/hologram.nvim",
@@ -420,11 +461,11 @@ lvim.plugins = {
   },
   {
     "ray-x/navigator.lua",
-    requires = { "ray-x/guihua.lua", run = "cd lua/fzy && make " },
+    dependencies = { "ray-x/guihua.lua", build = "cd lua/fzy && make " },
   },
   {
     "sudormrfbin/cheatsheet.nvim",
-    requires = {
+    dependencies = {
       { "nvim-telescope/telescope.nvim" },
 
       { "nvim-lua/popup.nvim" },
@@ -436,13 +477,16 @@ lvim.plugins = {
   },
   -- Colorschemes
   { "tiagovla/tokyodark.nvim" },
-  { "tjdevries/gruvbuddy.nvim", requires = { "tjdevries/colorbuddy.vim" } },
+  { "tjdevries/gruvbuddy.nvim", dependencies = { "tjdevries/colorbuddy.vim" } },
   {
     "windwp/nvim-ts-autotag",
     event = "InsertEnter",
     config = function()
       require("nvim-ts-autotag").setup()
     end,
+  },
+  {
+    "JuliaEditorSupport/julia-vim",
   },
 
   {
@@ -523,14 +567,22 @@ vim.cmd "let g:firenvim_config = {'globalSettings': { }, 'localSettings': {'.*':
 --   print(vim.inspect(varname))
 -- end
 
--- P = function(varname)
---   print(vim.inspect(varname))
+lvim.P = function(varname)
+  print(vim.inspect(varname))
+end
 -- You can print with :lua =XXXX
 --   or use :lua =lvim.see(xxxx)
 
-lvim.packer = require "packer"
+-- -- Autocommands (`:help autocmd`) <https://neovim.io/doc/user/autocmd.html>
+-- vim.api.nvim_create_autocmd("FileType", {
+--   pattern = "zsh",
+--   callback = function()
+--     -- let treesitter use bash highlight for zsh files as well
+--     require("nvim-treesitter.highlight").attach(0, "bash")
+--   end,
+-- })
 require("lspconfig").tsserver.setup {
-  on_attach = function(client, bufnr)
+  on_attach = function(client, _)
     client.server_capabilities.documentFormattingProvider = true
     client.server_capabilities.documentRangeFormattingProvider = true
     -- on_attach(client, bufnr)

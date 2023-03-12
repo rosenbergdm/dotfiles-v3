@@ -66,7 +66,7 @@ docopt_get_help_string() {
         # display result and format output
         END {
             for(i=0; i<l; i++) {
-                # remove comment (see issue #47) 
+                # remove comment (see issue #47)
                 sub("^# ", "", usage[i])
                 sub("^#", "", usage[i])
                 print usage[i]

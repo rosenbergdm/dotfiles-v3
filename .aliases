@@ -56,4 +56,5 @@ alias tailscale=/Applications/Tailscale.app/Contents/MacOS/Tailscale
 alias R=/Library/Frameworks/R.framework/Versions/Current/Resources/bin/R
 alias warp=open\ /Applications/Warp.app
 alias rdp="open /Applications/Microsoft Remote Desktop.app"
+alias cat=bat
 # vim: ft=sh
