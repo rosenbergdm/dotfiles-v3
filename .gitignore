@@ -14,3 +14,6 @@ __pycache*
 .config/secure_keys
 node_modules
 .config/litecli/log
+.config/github-copilot/hosts.json
+.config/_github-copilot/hosts.json
+.config/_github_token
