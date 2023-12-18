@@ -180,7 +180,9 @@ lvim.builtin.project.manual_mode = true
 
 -- generic LSP settings
 
-lvim.lsp.diagnostics.virtual_text = true
+-- lvim.lsp.diagnostics.virtual_text = true
+-- vim.diagnostic.config { "virtual_text", true }
+
 lvim.lsp.code_lens_refresh = true
 -- lvim.builtin.treesitter.ignore_install = { "haskell" }
 
@@ -353,15 +355,22 @@ lvim.plugins = {
   },
   {
     "zbirenbaum/copilot.lua",
-    event = { "InsertEnter" },
+    event = "InsertEnter",
     cmd = "Copilot",
     config = function()
-      vim.schedule(function()
-        require("copilot").setup()
-      end)
+      require("copilot").setup {
+        suggestion = { enabled = false },
+        panel = { enabled = false },
+      }
     end,
   },
-  { "zbirenbaum/copilot-cmp", after = { "copilot.lua", "nvim-cmp" } },
+  {
+    "zbirenbaum/copilot-cmp",
+    after = { "copilot.lua" },
+    config = function()
+      require("copilot_cmp").setup()
+    end,
+  },
   {
     "ekickx/clipboard-image.nvim",
     enable = true,
@@ -514,10 +523,10 @@ lvim.plugins = {
 
 -- launch the above scheme with ":lua require('colorbuddy').colorscheme('gruvbuddy')"
 
-vim.api.nvim_create_autocmd("BufWinEnter,BufRead,BufNewFile", {
-  pattern = { "*" },
-  command = "chdir %:p:h",
-})
+-- vim.api.nvim_create_autocmd("BufWinEnter,BufRead,BufNewFile", {
+--   pattern = { "*" },
+--   command = "chdir %:p:h",
+-- })
 vim.api.nvim_create_autocmd("BufWritePost", {
   pattern = { "*.adoc" },
   command = ":!asciidoctor %",
@@ -527,10 +536,10 @@ vim.api.nvim_create_autocmd("BufEnter", {
   -- enable wrap mode for json files only
   command = "setlocal wrap",
 })
-vim.api.nvim_create_autocmd("BufWinEnter,BufRead,BufNewFile", {
-  pattern = { "*" },
-  command = "chdir %:p:h",
-})
+-- vim.api.nvim_create_autocmd("BufWinEnter,BufRead,BufNewFile", {
+--   pattern = { "*" },
+--   command = "chdir %:p:h",
+-- })
 vim.api.nvim_create_autocmd("BufWritePost", {
   pattern = { "*.adoc" },
   command = ":!asciidoctor '%'",

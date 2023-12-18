@@ -2,9 +2,6 @@
 	path = .local/share/lunarvim/lvim
 	url = git@github.com:lunarvim/lunarvim.git
   branch = rolling
-[submodule "packer"]
-	path = .local/share/lunarvim/site/pack/packer/start/packer.nvim
-	url = https://github.com/wbthomason/packer.nvim
 [submodule "nvchad"]
   path = .config/nvim.ch
   url = git@github.com:NvChad/NvChad.git

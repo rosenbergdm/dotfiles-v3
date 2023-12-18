@@ -449,11 +449,11 @@ fi
 # }
 
 mypushd () {
-  command pushd "$@" >/dev/null || exit
+  command pushd "$@" >/dev/null || return
 }
 
 mypopd () {
-  command popd "$@" >/dev/null || exit
+  command popd "$@" >/dev/null || return
 }
 
 mycd () {

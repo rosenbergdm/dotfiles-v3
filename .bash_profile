@@ -65,3 +65,4 @@ eval "$(pyenv init --path)"
 
 # Added by Toolbox App
 export PATH="$PATH:/Users/dmr/Library/Application Support/JetBrains/Toolbox/scripts"
+# [[ -r "/opt/homebrew/etc/profile.d/bash_completion.sh" ]] && . "/opt/homebrew/etc/profile.d/bash_completion.sh"
