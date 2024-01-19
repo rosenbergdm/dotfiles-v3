@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-#
+
 export NVIM_APPNAME="${NVIM_APPNAME:-"lvim"}"
 
 export LUNARVIM_RUNTIME_DIR="${LUNARVIM_RUNTIME_DIR:-"/Users/dmr/.local/share/lunarvim"}"
@@ -8,7 +8,4 @@ export LUNARVIM_CACHE_DIR="${LUNARVIM_CACHE_DIR:-"/Users/dmr/.cache/lvim"}"
 
 export LUNARVIM_BASE_DIR="${LUNARVIM_BASE_DIR:-"/Users/dmr/.local/share/lunarvim/lvim"}"
 
-export VIMINIT="$LUNARVIM_RUNTIME_DIR/lvim/init.lua"
-
-# exec -a "$NVIM_APPNAME" /Users/dmr/Downloads/nvim-macos/bin/nvim -u "$LUNARVIM_BASE_DIR/init.lua" "$@"
 exec -a "$NVIM_APPNAME" /Users/dmr/.local/bin/nvim -u "$LUNARVIM_BASE_DIR/init.lua" "$@"

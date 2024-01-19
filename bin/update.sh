@@ -22,8 +22,8 @@ $brew cleanup
 (cd "$HOME/.local/share/lunarvim/lvim; git pull")
 $Rscript <( ( echo 'devtools::update_packages(upgrade="always", build_opts = c("--with-keep.source", "--with-keep.parse.data", "--example", "--html", "--build-vignettes"), build_vignettes=TRUE)' ) )
 $rustup update
-$lvim --headless +TSUpdate +PackerSync +PackerCompile \
-  +"PackerLoad nvim-lspinstall" +"LspInstall lua" +"LspInstall bash" +'NlspUpdateSettings sumneko_lua' +'NlspUpdateSettings bashls' \
-  +messages +quit
+# $lvim --headless +TSUpdate +PackerSync +PackerCompile \
+#   +"PackerLoad nvim-lspinstall" +"LspInstall lua" +"LspInstall bash" +'NlspUpdateSettings sumneko_lua' +'NlspUpdateSettings bashls' \
+#   +messages +quit
 
 

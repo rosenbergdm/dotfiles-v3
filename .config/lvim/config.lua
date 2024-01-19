@@ -18,11 +18,12 @@ lvim.format_on_save = {
 -- lvim.use_icons = false
 
 -- lvim.format_on_save = true
+lvim.guifont = "DroidSansMono Nerd Font Mono:h14"
 lvim.lint_on_save = true
 lvim.colorscheme = "onedarker"
 lvim.builtin.sell_soul_to_devel = true
 
----@diagnostic disable-next-line: unused-local
+---@diagnostic disable-next-line: unused-local, 241
 local M = {}
 ---@diagnostic disable-next-line: unused-local
 M.load_options = function()

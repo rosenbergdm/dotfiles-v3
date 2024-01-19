@@ -6,4 +6,4 @@ export NVCHAD_RUNTIME_DIR="/Users/dmr/.local/share/nvim.ch"
 # exec nvim -u "$HOME/.config/nvim.ch/init.lua" "$@"
 # exec /usr/local/bin/nvim -u "$HOME/.config/nvchadInit.lua" "$@"
 #
-exec -a "nvcvim" /Users/dmr/Downloads/nvim-macos/bin/nvim  -u "$HOME/.config/nvchadInit.lua" "$@"
+exec "/Users/dmr/.local/bin/nvim" -u "$HOME/.config/nvchadInit.lua" "$@"

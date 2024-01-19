@@ -1,7 +1,10 @@
-#!/bin/sh
+#!/usr/bin/env bash
+
+export NVIM_EXE="$HOME/.local/bin/nvim"
+
 
 export DRVIM_CONFIG_PATH="$HOME/.config/drvim"
 export DRVIM_DATA_PATH="$HOME/.cache/drvim"
 export DRVIM_RUNTIME_PATH="$HOME/.local/share/drvim"
 
-exec nvim -u "$DRVIM_CONFIG_PATH/init.lua"
+exec "$NVIM_EXE" -u "$DRVIM_CONFIG_PATH/init.lua" "$@"
