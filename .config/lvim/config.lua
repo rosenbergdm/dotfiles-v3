@@ -4,8 +4,6 @@
 ]]
 -- vim options
 vim.opt.shiftwidth = 2
-vim.opt.tabstop = 2
-vim.opt.relativenumber = true
 
 -- general
 lvim.log.level = "info"
@@ -25,49 +23,46 @@ lvim.builtin.sell_soul_to_devel = true
 
 ---@diagnostic disable-next-line: unused-local, 241
 local M = {}
----@diagnostic disable-next-line: unused-local
-M.load_options = function()
-  local LVIM_CACHE_DIR = os.getenv "HOME" .. "/.cache/lvim"
-  local myopts = {
-    completeopt = { "menuone", "noselect" },
-    hlsearch = false,
-    autochdir = true,
-    backupdir = LVIM_CACHE_DIR .. "/backup",
-    undodir = LVIM_CACHE_DIR .. "/undo",
-    undofile = true,
-    directory = LVIM_CACHE_DIR .. "/swap",
-    writebackup = true,
-    spell = true,
-    foldmethod = "marker",
-    wrap = true,
-    cmdheight = 4,
-    swapfile = true,
-    backup = true,
-    -- guifont = "Monaco:h14",
-    guifont = "DroidSansMono Nerd Font Mono:h14",
-    -- guifont = "ProFontIIx Nerd Font Mono:h14",
-    -- guifont = "Inconsolata Nerd Font Mono:h14",
-    foldenable = false,
-    modeline = true,
-    list = true,
-    modelines = 5,
-    number = true,
-    wildmode = "longest,list",
-    wildignore = "*/.idea/*",
-  }
-  -- vim.opt("set wildmode=longest,list")
-  -- vim.cmd "set wildignore+=*/.idea/*"
-  -- vim.cmd "set wildignore+=*/.git/*"
-  -- vim.cmd "set wildignore+=*/.svn/*"
-  -- vim.cmd "set wildignore+=*/vendor/*"
-  -- vim.cmd "set wildignore+=*/node_modules/*"
-  -- vim.cmd "set wildmode=longest,list"
-  vim.g.python3_host_prog = "/Users/dmr/.pyenv/versions/3.10.2/bin/python3.10"
-  -- vim.cmd "let R_assign=0"
+local LVIM_CACHE_DIR = os.getenv "HOME" .. "/.cache/lvim"
+local myopts = {
+  completeopt = { "menuone", "noselect" },
+  hlsearch = false,
+  autochdir = true,
+  backupdir = LVIM_CACHE_DIR .. "/backup",
+  undodir = LVIM_CACHE_DIR .. "/undo",
+  undofile = true,
+  directory = LVIM_CACHE_DIR .. "/swap",
+  writebackup = true,
+  spell = true,
+  foldmethod = "marker",
+  wrap = true,
+  cmdheight = 4,
+  swapfile = true,
+  backup = true,
+  -- guifont = "Monaco:h14",
+  guifont = "DroidSansMono Nerd Font Mono:h14",
+  -- guifont = "ProFontIIx Nerd Font Mono:h14",
+  -- guifont = "Inconsolata Nerd Font Mono:h14",
+  foldenable = false,
+  modeline = true,
+  list = true,
+  modelines = 5,
+  number = true,
+  wildmode = "longest,list",
+  wildignore = "*/.idea/*",
+}
+-- vim.opt("set wildmode=longest,list")
+-- vim.cmd "set wildignore+=*/.idea/*"
+-- vim.cmd "set wildignore+=*/.git/*"
+-- vim.cmd "set wildignore+=*/.svn/*"
+-- vim.cmd "set wildignore+=*/vendor/*"
+-- vim.cmd "set wildignore+=*/node_modules/*"
+-- vim.cmd "set wildmode=longest,list"
+vim.g.python3_host_prog = "/Users/dmr/.pyenv/versions/3.10.2/bin/python3.10"
+-- vim.cmd "let R_assign=0"
 
-  for k, v in pairs(myopts) do
-    vim.opt[k] = v
-  end
+for k, v in pairs(myopts) do
+  vim.opt[k] = v
 end
 
 lvim.myhelp = {}

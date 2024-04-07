@@ -97,5 +97,5 @@ fi
 
 [[ $TERM_PROGRAM == WarpTerminal ]] && unset PROMPT_COMMAND
 eval "$(starship init bash)"
-
+starship config command_timeout 1000
 # vim: ft=sh

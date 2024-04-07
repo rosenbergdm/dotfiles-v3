@@ -25,5 +25,3 @@ $rustup update
 # $lvim --headless +TSUpdate +PackerSync +PackerCompile \
 #   +"PackerLoad nvim-lspinstall" +"LspInstall lua" +"LspInstall bash" +'NlspUpdateSettings sumneko_lua' +'NlspUpdateSettings bashls' \
 #   +messages +quit
-
-

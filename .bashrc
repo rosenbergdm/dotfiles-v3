@@ -254,3 +254,4 @@ __atuin_history() {
   READLINE_POINT=${#READLINE_LINE}
 }
 bind -x '"\C-r": __atuin_history'
+defaults write com.apple.loginwindow DisableScreenLockImmediate -bool yes
